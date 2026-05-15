@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Plataforma Educativa Inteligente</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #f2f4f7;
+  color: #1f2937;
+}
+
+/* CONTENEDOR GENERAL */
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* ENCABEZADO */
+.header {
+  background-color: #0b5ed7;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+/* TARJETAS */
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* INGRESO */
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0b5ed7;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:hover {
+  background-color: #084298;
+}
+
+/* PESTAÑAS */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.tabs button {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+.tabs button.active {
+  background-color: #0b5ed7;
+  color: white;
+}
+
+/* CHAT */
+#chat {
+  height: 280px;
+  border: 1px solid #d1d5db;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #f9fafb;
+  border-radius: 5px;
+}
+
+.msg-user {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.msg-ai {
+  margin-bottom: 15px;
+  color: #374151;
+}
+
+/* OCULTAR */
+.hidden {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- ENCABEZADO -->
+  <div class="header">
+    <h1>Plataforma Educativa Inteligente del Colegio</h1>
+  </div>
+
+  <!-- INGRESO -->
+  <div class="card" id="login">
+    <h3>Ingreso al aula digital</h3>
+    <input placeholder="Código de sección">
+    <input placeholder="Nombre del estudiante">
+    <button onclick="ingresar()">Ingresar</button>
+  </div>
+
+  <!-- TUTOR -->
+  <div class="card hidden" id="tutor">
+
+    <div class="tabs">
+      <button class="active" onclick="cambiarArea(this,'Ciencia y Tecnología')">Ciencia y Tecnología</button>
+      <button onclick="cambiarArea(this,'Matemática')">Matemática</button>
+      <button onclick="cambiarArea(this,'Comunicación')">Comunicación</button>
+    </div>
+
+    <p><strong>Área:</strong> <span id="area">Ciencia y Tecnología</span></p>
+
+    <div id="chat"></div>
+
+    <input id="mensaje" placeholder="Escribe tu consulta">
+    <button onclick="enviar()">Enviar</button>
+  </div>
+
+</div>
+
+<script>
+function ingresar() {
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("tutor").classList.remove("hidden");
+}
+
+function cambiarArea(btn, area) {
+  document.getElementById("area").innerText = area;
+  document.querySelectorAll(".tabs button").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+}
+
+function enviar() {
+  const msg = document.getElementById("mensaje").value;
+  const chat = document.getElementById("chat");
+
+  chat.innerHTML += `<div class="msg-user">Estudiante: ${msg}</div>`;
+  chat.innerHTML += `<div class="msg-ai">Tutor: Estoy guiándote paso a paso en este tema.</div>`;
+
+  document.getElementById("mensaje").value = "";
+}
+</script>
+
+</body>
+</html>
