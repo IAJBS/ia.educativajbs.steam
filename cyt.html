@@ -14,38 +14,44 @@
 
 <main class="contenedor">
 
-  <section class="bienvenida">
-    <h2>¿Cómo te ayudará este tutor?</h2>
-    <p>
-      Este tutor con Inteligencia Artificial está diseñado para ayudarte
-      a comprender los temas de Ciencia y Tecnología paso a paso.
-      No te dará respuestas finales, sino que te guiará con preguntas,
-      explicaciones y ejemplos.
-    </p>
+  <!-- MENSAJE DE RETORNO -->
+  <section class="bienvenida" id="retorno" style="display:none;">
+    <h2>Continuemos tu aprendizaje</h2>
+    <p id="mensajeRetorno"></p>
   </section>
 
-  <section class="bienvenida">
-    <h2>Antes de empezar</h2>
-    <p>
-      Cuando trabajes con este tutor:
-    </p>
-    <ul>
-      <li>Explica lo que entiendes, aunque no sea perfecto</li>
-      <li>Responde las preguntas que te haga la IA</li>
-      <li>Al final reflexiona sobre lo que aprendiste</li>
-    </ul>
-  </section>
+  <!-- INICIO -->
+  <section class="bienvenida" id="inicio">
+    <h2>Inicio de sesión de aprendizaje</h2>
+    <p>Escribe el tema que deseas trabajar hoy:</p>
 
-  <section class="bienvenida">
-    <h2>Inicio de sesión (simulado)</h2>
-    <p>
-      Escribe el último tema que trabajaste o el tema que deseas estudiar hoy.
-    </p>
+    <input type="text" id="temaInput" placeholder="Ejemplo: Método científico"
+           style="width:100%; padding:10px; margin-top:10px;">
 
-    <input type="text" placeholder="Ejemplo: Método científico" style="width:100%; padding:10px; margin-top:10px;">
     <br><br>
-    <button style="padding:10px 20px; background:#1e3a8a; color:white; border:none; border-radius:5px;">
-      Iniciar sesión de aprendizaje
+    <button onclick="iniciarSesion()"
+      style="padding:10px 20px; background:#1e3a8a; color:white; border:none; border-radius:5px;">
+      Iniciar
+    </button>
+  </section>
+
+  <!-- METACOGNICIÓN -->
+  <section class="bienvenida" id="metacognicion" style="display:none;">
+    <h2>Reflexiona sobre tu aprendizaje</h2>
+
+    <p>¿Qué aprendiste hoy?</p>
+    <input type="text" id="p1" style="width:100%; padding:8px;">
+
+    <p style="margin-top:10px;">¿Qué paso te resultó difícil?</p>
+    <input type="text" id="p2" style="width:100%; padding:8px;">
+
+    <p style="margin-top:10px;">¿Crees que podrías hacerlo solo la próxima vez?</p>
+    <input type="text" id="p3" style="width:100%; padding:8px;">
+
+    <br><br>
+    <button onclick="guardarMetacognicion()"
+      style="padding:10px 20px; background:#15803d; color:white; border:none; border-radius:5px;">
+      Guardar reflexión y cerrar sesión
     </button>
   </section>
 
@@ -54,6 +60,53 @@
 <footer class="footer">
   <p>Tutor IA – Área de Ciencia y Tecnología</p>
 </footer>
+
+<script>
+  const ultimoTema = localStorage.getItem("cyt_tema");
+  const reflexionPendiente = localStorage.getItem("cyt_reflexion");
+
+  if (ultimoTema && reflexionPendiente === "pendiente") {
+    document.getElementById("inicio").style.display = "none";
+    document.getElementById("retorno").style.display = "block";
+    document.getElementById("mensajeRetorno").innerText =
+      "La última vez trabajaste el tema: '" + ultimoTema +
+      "'. Antes de continuar, debes completar la reflexión.";
+    document.getElementById("metacognicion").style.display = "block";
+  }
+
+  function iniciarSesion() {
+    const tema = document.getElementById("temaInput").value;
+
+    if (tema.trim() === "") {
+      alert("Por favor escribe un tema.");
+      return;
+    }
+
+    localStorage.setItem("cyt_tema", tema);
+    localStorage.setItem("cyt_reflexion", "pendiente");
+
+    alert("Sesión iniciada sobre: " + tema +
+          ". Al finalizar deberás reflexionar.");
+
+    document.getElementById("inicio").style.display = "none";
+    document.getElementById("metacognicion").style.display = "block";
+  }
+
+  function guardarMetacognicion() {
+    if (
+      document.getElementById("p1").value.trim() === "" ||
+      document.getElementById("p2").value.trim() === "" ||
+      document.getElementById("p3").value.trim() === ""
+    ) {
+      alert("Debes responder todas las preguntas.");
+      return;
+    }
+
+    localStorage.setItem("cyt_reflexion", "completa");
+    alert("Reflexión guardada. Sesión cerrada correctamente.");
+    location.reload();
+  }
+</script>
 
 </body>
 </html>
