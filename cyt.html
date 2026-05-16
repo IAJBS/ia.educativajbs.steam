@@ -49,10 +49,13 @@
     <input type="text" id="p3" style="width:100%; padding:8px;">
 
     <br><br>
-    <button onclick="guardarMetacognicion()"
-      style="padding:10px 20px; background:#15803d; color:white; border:none; border-radius:5px;">
-      Guardar reflexión y cerrar sesión
-    </button>
+    <button id="btnGuardar" disabled
+  onclick="guardarMetacognicion()"
+  style="padding:10px 20px; background:#9ca3af; color:white; border:none; border-radius:5px;">
+  Guardar reflexión y cerrar sesión
+</button>
+
+<p id="timer" style="margin-top:10px; color:#555;"></p>
   </section>
 
 </main>
@@ -106,6 +109,21 @@
     alert("Reflexión guardada. Sesión cerrada correctamente.");
     location.reload();
   }
+  // Tiempo mínimo de reflexión
+let segundos = 30;
+const timer = document.getElementById("timer");
+const btn = document.getElementById("btnGuardar");
+
+const intervalo = setInterval(() => {
+  timer.innerText = "Reflexiona al menos " + segundos + " segundos antes de continuar.";
+  segundos--;
+  if (segundos < 0) {
+    clearInterval(intervalo);
+    btn.disabled = false;
+    btn.style.background = "#15803d";
+    timer.innerText = "Ahora puedes guardar tu reflexión.";
+  }
+}, 1000);
 </script>
 
 </body>
