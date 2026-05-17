@@ -173,7 +173,7 @@ body {
 }
 .bienvenida {
     max-width: 900px;
-  margin: 20px auto 15px 10px; /* arriba | lados | abajo */
+  margin: 20px auto 5px auto; /* arriba | lados | abajo */
   padding: 25px 30px;
   background: #f5f7fa;
   border-radius: 16px;
