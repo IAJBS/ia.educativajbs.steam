@@ -73,8 +73,14 @@
 </footer>
 
 <script>
-  const ultimoTema = localStorage.getItem("cyt_tema");
-  const reflexionPendiente = localStorage.getItem("cyt_reflexion");
+  const codigoGuardado = localStorage.getItem("cyt_codigo");
+const seccionGuardada = localStorage.getItem("cyt_seccion");
+
+if (codigoGuardado && seccionGuardada) {
+  const clave = "cyt_" + seccionGuardada + "_" + codigoGuardado;
+  var ultimoTema = localStorage.getItem(clave + "_tema");
+  var reflexionPendiente = localStorage.getItem(clave + "_reflexion");
+}
 
   if (ultimoTema && reflexionPendiente === "pendiente") {
     document.getElementById("inicio").style.display = "none";
@@ -86,21 +92,32 @@
   }
 
   function iniciarSesion() {
-    const tema = document.getElementById("temaInput").value;
+    const codigo = document.getElementById("codigoInput").value;
+const seccion = document.getElementById("seccionInput").value;
+const tema = document.getElementById("temaInput").value;
+
+if (codigo.trim() === "" || seccion.trim() === "" || tema.trim() === "") {
+  alert("Debes completar todos los datos.");
+  return;
+}
 
     if (tema.trim() === "") {
       alert("Por favor escribe un tema.");
       return;
     }
 
-    localStorage.setItem("cyt_tema", tema);
-    localStorage.setItem("cyt_reflexion", "pendiente");
+    const clave = "cyt_" + seccion + "_" + codigo;
+
+localStorage.setItem(clave + "_tema", tema);
+localStorage.setItem(clave + "_reflexion", "pendiente");
 
     alert("Sesión iniciada sobre: " + tema +
           ". Al finalizar deberás reflexionar.");
 
     document.getElementById("inicio").style.display = "none";
     document.getElementById("metacognicion").style.display = "block";
+  localStorage.setItem("cyt_codigo", codigo);
+localStorage.setItem("cyt_seccion", seccion);
   }
 
   function guardarMetacognicion() {
