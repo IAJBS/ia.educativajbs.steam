@@ -5,16 +5,30 @@
   <title>Tutor IA - Ciencia y Tecnología</title>
   <link rel="stylesheet" href="css/cyt.css">
 </head>
+
 <body>
 
+<!-- ======================================================
+     HEADER CYT + ASISTENTE IA
+====================================================== -->
 <header class="header">
-  <h1>Tutor IA de Ciencia y Tecnología</h1>
-  <p>Aprende razonando, no copiando</p>
+  <div class="header-contenido">
+
+    <h1>Tutor IA de Ciencia y Tecnología</h1>
+    <p>Aprende razonando, no copiando</p>
+
+    <!-- ASISTENTE IA (MISMO ESTILO DEL INDEX) -->
+    <div class="ia-cyt">
+      <img src="img/emoji.png" class="avatar-ia" alt="IA">
+      <span id="mensaje-cyt">Explora la ciencia con curiosidad</span>
+    </div>
+
+  </div>
 </header>
 
 <main class="contenedor">
 
-  <!-- MENSAJE DE RETORNO -->
+  <!-- RETORNO -->
   <section class="bienvenida" id="retorno" style="display:none;">
     <h2>Continuemos tu aprendizaje</h2>
     <p id="mensajeRetorno"></p>
@@ -23,23 +37,17 @@
   <!-- INICIO -->
   <section class="bienvenida" id="inicio">
     <h2>Inicio de sesión de aprendizaje</h2>
+
     <p>Código del estudiante:</p>
-<input type="text" id="codigoInput" placeholder="Ejemplo: 2A15"
-       style="width:100%; padding:10px;">
+    <input type="text" id="codigoInput" placeholder="Ejemplo: 2A15">
 
-<p style="margin-top:10px;">Sección:</p>
-<input type="text" id="seccionInput" placeholder="Ejemplo: 2° A"
-       style="width:100%; padding:10px;">
+    <p>Sección:</p>
+    <input type="text" id="seccionInput" placeholder="Ejemplo: 2° A">
 
-<p style="margin-top:10px;">Tema a trabajar:</p>
-<input type="text" id="temaInput" placeholder="Ejemplo: Método científico"
-       style="width:100%; padding:10px;">
+    <p>Tema a trabajar:</p>
+    <input type="text" id="temaInput" placeholder="Ejemplo: Método científico">
 
-    <br><br>
-    <button onclick="iniciarSesion()"
-      style="padding:10px 20px; background:#1e3a8a; color:white; border:none; border-radius:5px;">
-      Iniciar
-    </button>
+    <button onclick="iniciarSesion()">Iniciar</button>
   </section>
 
   <!-- METACOGNICIÓN -->
@@ -47,105 +55,73 @@
     <h2>Reflexiona sobre tu aprendizaje</h2>
 
     <p>¿Qué aprendiste hoy?</p>
-    <input type="text" id="p1" style="width:100%; padding:8px;">
+    <input type="text" id="p1">
 
-    <p style="margin-top:10px;">¿Qué paso te resultó difícil?</p>
-    <input type="text" id="p2" style="width:100%; padding:8px;">
+    <p>¿Qué fue difícil?</p>
+    <input type="text" id="p2">
 
-    <p style="margin-top:10px;">¿Crees que podrías hacerlo solo la próxima vez?</p>
-    <input type="text" id="p3" style="width:100%; padding:8px;">
+    <p>¿Podrías hacerlo solo la próxima vez?</p>
+    <input type="text" id="p3">
 
-    <br><br>
-    <button id="btnGuardar" disabled
-  onclick="guardarMetacognicion()"
-  style="padding:10px 20px; background:#9ca3af; color:white; border:none; border-radius:5px;">
-  Guardar reflexión y cerrar sesión
-</button>
+    <button id="btnGuardar" disabled onclick="guardarMetacognicion()">
+      Guardar reflexión
+    </button>
 
-<p id="timer" style="margin-top:10px; color:#555;"></p>
+    <p id="timer"></p>
   </section>
 
 </main>
 
 <footer class="footer">
-  <p>Tutor IA – Área de Ciencia y Tecnología</p>
+  <p>Tutor IA – Ciencia y Tecnología</p>
 </footer>
 
+<!-- ======================================================
+     SCRIPT IA + LÓGICA
+====================================================== -->
 <script>
-  const codigoGuardado = localStorage.getItem("cyt_codigo");
-const seccionGuardada = localStorage.getItem("cyt_seccion");
+const mensaje = document.getElementById("mensaje-cyt");
 
-if (codigoGuardado && seccionGuardada) {
-  const clave = "cyt_" + seccionGuardada + "_" + codigoGuardado;
-  var ultimoTema = localStorage.getItem(clave + "_tema");
-  var reflexionPendiente = localStorage.getItem(clave + "_reflexion");
-}
+function iniciarSesion() {
+  const codigo = document.getElementById("codigoInput").value;
+  const seccion = document.getElementById("seccionInput").value;
+  const tema = document.getElementById("temaInput").value;
 
-  if (ultimoTema && reflexionPendiente === "pendiente") {
-    document.getElementById("inicio").style.display = "none";
-    document.getElementById("retorno").style.display = "block";
-    document.getElementById("mensajeRetorno").innerText =
-      "La última vez trabajaste el tema: '" + ultimoTema +
-      "'. Antes de continuar, debes completar la reflexión.";
-    document.getElementById("metacognicion").style.display = "block";
+  if (!codigo || !seccion || !tema) {
+    alert("Completa todos los campos");
+    return;
   }
 
-  function iniciarSesion() {
-    const codigo = document.getElementById("codigoInput").value;
-const seccion = document.getElementById("seccionInput").value;
-const tema = document.getElementById("temaInput").value;
+  const clave = "cyt_" + seccion + "_" + codigo;
 
-if (codigo.trim() === "" || seccion.trim() === "" || tema.trim() === "") {
-  alert("Debes completar todos los datos.");
-  return;
-}
+  localStorage.setItem(clave + "_tema", tema);
+  localStorage.setItem(clave + "_reflexion", "pendiente");
 
-    if (tema.trim() === "") {
-      alert("Por favor escribe un tema.");
-      return;
-    }
-
-    const clave = "cyt_" + seccion + "_" + codigo;
-
-localStorage.setItem(clave + "_tema", tema);
-localStorage.setItem(clave + "_reflexion", "pendiente");
-
-    alert("Sesión iniciada sobre: " + tema +
-          ". Al finalizar deberás reflexionar.");
-
-    document.getElementById("inicio").style.display = "none";
-    document.getElementById("metacognicion").style.display = "block";
   localStorage.setItem("cyt_codigo", codigo);
-localStorage.setItem("cyt_seccion", seccion);
-  }
+  localStorage.setItem("cyt_seccion", seccion);
 
-  function guardarMetacognicion() {
-    if (
-      document.getElementById("p1").value.trim() === "" ||
-      document.getElementById("p2").value.trim() === "" ||
-      document.getElementById("p3").value.trim() === ""
-    ) {
-      alert("Debes responder todas las preguntas.");
-      return;
-    }
+  document.getElementById("inicio").style.display = "none";
+  document.getElementById("metacognicion").style.display = "block";
 
-    localStorage.setItem("cyt_reflexion", "completa");
-    alert("Reflexión guardada. Sesión cerrada correctamente.");
-    location.reload();
-  }
-  // Tiempo mínimo de reflexión
-let segundos = 30;
-const timer = document.getElementById("timer");
+  mensaje.textContent = "🧠 Analiza y experimenta el tema: " + tema;
+}
+
+// timer
+let segundos = 20;
 const btn = document.getElementById("btnGuardar");
 
 const intervalo = setInterval(() => {
-  timer.innerText = "Reflexiona al menos " + segundos + " segundos antes de continuar.";
+  document.getElementById("timer").innerText =
+    "Reflexiona al menos " + segundos + " segundos...";
+
   segundos--;
+
   if (segundos < 0) {
     clearInterval(intervalo);
     btn.disabled = false;
     btn.style.background = "#15803d";
-    timer.innerText = "Ahora puedes guardar tu reflexión.";
+    document.getElementById("timer").innerText =
+      "Ahora puedes guardar tu reflexión.";
   }
 }, 1000);
 </script>
