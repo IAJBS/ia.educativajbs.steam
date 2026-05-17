@@ -123,3 +123,51 @@ body {
   padding: 20px;
   color: #6b7280;
 }
+.header {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  color: white;
+  padding: 25px 20px;
+}
+
+.header-contenido {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.insignia {
+  width: 90px;
+  height: auto;
+}
+
+.texto-header h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.texto-header h2 {
+  margin: 5px 0;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.texto-header p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .header-contenido {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .insignia {
+    width: 70px;
+  }
+}
