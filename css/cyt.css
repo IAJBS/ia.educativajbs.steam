@@ -21,45 +21,71 @@ body {
 .header {
   background: linear-gradient(135deg, #1e3a8a, #2563eb);
   color: white;
-  padding: 25px 20px;
+  padding: 20px;
 }
 
+/* distribución correcta */
 .header-contenido {
   max-width: 1100px;
   margin: auto;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
 }
 
+/* INSIGNIA CONTROLADA */
+.insignia {
+  width: 60px;   /* 🔥 clave: evitar que se vea gigante */
+  height: auto;
+}
 
-/* ======================================================
-   IA CYT (MISMA LÓGICA DEL INDEX)
-====================================================== */
+/* TITULO PRINCIPAL CYT */
+.titulo-cyt h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.titulo-cyt p {
+  margin: 2px 0 0 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* TEXTO INSTITUCIONAL */
+.texto-header h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.texto-header p {
+  margin: 2px 0 0 0;
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+/* IA HEADER */
 .ia-cyt {
-  margin-top: 15px;
+  margin-left: auto;
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 10px;
   background: rgba(255,255,255,0.15);
-  padding: 10px 15px;
-  border-radius: 30px;
+  padding: 8px 12px;
+  border-radius: 25px;
 }
 
-/* EMOJI ANIMADO */
 .avatar-ia {
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   animation: flotar 2.5s ease-in-out infinite;
 }
 
 @keyframes flotar {
   0% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+  50% { transform: translateY(-4px); }
   100% { transform: translateY(0); }
 }
-
 /* ======================================================
    CONTENEDOR
 ====================================================== */
