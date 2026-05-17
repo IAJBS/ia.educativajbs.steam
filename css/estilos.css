@@ -171,3 +171,25 @@ body {
     width: 70px;
   }
 }
+.bienvenida {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 25px 30px;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.bienvenida h2 {
+  margin-bottom: 15px;
+  color: #1f3c88;
+  font-size: 1.6rem;
+}
+
+.bienvenida p {
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
