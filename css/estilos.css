@@ -1,128 +1,26 @@
+/* ======================================================
+   RESET GENERAL
+   Elimina márgenes por defecto y normaliza el modelo
+====================================================== */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* ======================================================
+   ESTILOS GENERALES DEL BODY
+====================================================== */
 body {
   font-family: Arial, Helvetica, sans-serif;
   background: #f3f4f6;
   color: #1f2937;
 }
 
-/* HEADER */
-.header {
-  background: linear-gradient(135deg, #111827, #1f2937);
-  color: white;
-  text-align: center;
-  padding: 50px 20px;
-}
-
-.header h1 {
-  font-size: 2.2em;
-}
-
-.header p {
-  margin-top: 10px;
-  opacity: 0.85;
-}
-
-/* CONTENEDOR */
-.contenedor {
-  max-width: 1100px;
-  margin: auto;
-  padding: 40px 20px;
-}
-
-/* INTRO */
-.intro {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.intro h2 {
-  font-size: 1.8em;
-  margin-bottom: 15px;
-}
-
-.intro p {
-  max-width: 700px;
-  margin: auto;
-  color: #4b5563;
-}
-
-/* ÁREAS */
-.areas {
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/* TARJETA */
-.area-card {
-  background: white;
-  width: 300px;
-  padding: 30px;
-  border-radius: 18px;
-  text-align: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.area-card:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-}
-
-.area-card h2 {
-  margin-bottom: 15px;
-}
-
-.area-card p {
-  color: #4b5563;
-}
-
-/* COLORES */
-.cyt {
-  border-top: 6px solid #1e3a8a;
-}
-
-.mate {
-  border-top: 6px solid #15803d;
-}
-
-.comu {
-  border-top: 6px solid #7e22ce;
-}
-
-/* BOTÓN */
-.btn {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 12px 28px;
-  background: #1e3a8a;
-  color: white;
-  text-decoration: none;
-  border-radius: 10px;
-  font-weight: bold;
-}
-
-.btn:hover {
-  background: #1e40af;
-}
-
-.btn.disabled {
-  background: #9ca3af;
-  pointer-events: none;
-}
-
-/* FOOTER */
-.footer {
-  text-align: center;
-  padding: 20px;
-  color: #6b7280;
-}
+/* ======================================================
+   HEADER INSTITUCIONAL
+   Incluye insignia + nombre del colegio
+====================================================== */
 .header {
   background: linear-gradient(135deg, #1e3a8a, #2563eb);
   color: white;
@@ -160,20 +58,13 @@ body {
   opacity: 0.9;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .header-contenido {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .insignia {
-    width: 70px;
-  }
-}
+/* ======================================================
+   TARJETA DE BIENVENIDA
+   Presentación general para estudiantes
+====================================================== */
 .bienvenida {
-    max-width: 900px;
-  margin: 20px auto 5px auto; /* arriba | lados | abajo */
+  max-width: 900px;
+  margin: 20px auto 10px auto;
   padding: 25px 30px;
   background: #f5f7fa;
   border-radius: 16px;
@@ -192,4 +83,130 @@ body {
   line-height: 1.6;
   margin-bottom: 10px;
   font-size: 1rem;
+}
+
+/* ======================================================
+   CONTENEDOR PRINCIPAL
+====================================================== */
+.contenedor {
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+/* ======================================================
+   TÍTULO DE SECCIÓN (ÁREAS)
+====================================================== */
+.intro {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.intro h2 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+}
+
+.intro p {
+  max-width: 700px;
+  margin: auto;
+  color: #4b5563;
+}
+
+/* ======================================================
+   SECCIÓN DE ÁREAS (TARJETAS)
+====================================================== */
+.areas {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ======================================================
+   TARJETA GENERAL
+====================================================== */
+.area-card {
+  background: white;
+  width: 300px;
+  padding: 30px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.area-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+.area-card h2 {
+  margin-bottom: 15px;
+}
+
+.area-card p {
+  color: #4b5563;
+}
+
+/* ======================================================
+   COLORES POR ÁREA
+====================================================== */
+.cyt {
+  border-top: 6px solid #1e3a8a;
+}
+
+.mate {
+  border-top: 6px solid #15803d;
+}
+
+.comu {
+  border-top: 6px solid #7e22ce;
+}
+
+/* ======================================================
+   BOTONES
+====================================================== */
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 28px;
+  background: #1e3a8a;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #1e40af;
+}
+
+.btn.disabled {
+  background: #9ca3af;
+  pointer-events: none;
+}
+
+/* ======================================================
+   FOOTER
+====================================================== */
+.footer {
+  text-align: center;
+  padding: 20px;
+  color: #6b7280;
+}
+
+/* ======================================================
+   RESPONSIVE (CELULARES)
+====================================================== */
+@media (max-width: 600px) {
+  .header-contenido {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .insignia {
+    width: 70px;
+  }
 }
