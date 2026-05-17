@@ -29,6 +29,15 @@ body {
   margin: auto;
   text-align: center;
 }
+.header h1 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.header p {
+  margin: 2px 0 0 0;  /* lo acerca al título */
+  opacity: 0.9;
+}
 
 /* ======================================================
    IA CYT (MISMA LÓGICA DEL INDEX)
