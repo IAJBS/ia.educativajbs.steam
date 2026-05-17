@@ -1,0 +1,107 @@
+/* RESET BÁSICO */
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* CUERPO */
+body {
+  margin: 0;
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.header p {
+  margin-top: 8px;
+  opacity: 0.9;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.contenedor {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+/* TARJETAS */
+.bienvenida {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.bienvenida h2 {
+  margin-top: 0;
+  color: #1e3a8a;
+}
+
+/* INPUTS */
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+}
+
+/* BOTONES */
+button {
+  padding: 12px 22px;
+  background: #1e3a8a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.1s;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* TIMER */
+#timer {
+  font-size: 14px;
+  margin-top: 12px;
+  color: #6b7280;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 13px;
+  color: #6b7280;
+}
