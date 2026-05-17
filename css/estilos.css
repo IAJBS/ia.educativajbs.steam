@@ -1,42 +1,40 @@
-/* ===== ESTILOS GENERALES ===== */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   background: #f3f4f6;
   color: #1f2937;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 .header {
   background: linear-gradient(135deg, #111827, #1f2937);
   color: white;
   text-align: center;
-  padding: 40px 20px;
+  padding: 50px 20px;
 }
 
 .header h1 {
-  margin: 0;
   font-size: 2.2em;
 }
 
 .header p {
   margin-top: 10px;
-  font-size: 1.1em;
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
-/* ===== CONTENEDOR ===== */
+/* CONTENEDOR */
 .contenedor {
   max-width: 1100px;
   margin: auto;
   padding: 40px 20px;
 }
 
-/* ===== INTRO ===== */
+/* INTRO */
 .intro {
   text-align: center;
   margin-bottom: 40px;
@@ -44,45 +42,48 @@ body {
 
 .intro h2 {
   font-size: 1.8em;
+  margin-bottom: 15px;
 }
 
 .intro p {
   max-width: 700px;
-  margin: 15px auto;
+  margin: auto;
   color: #4b5563;
 }
 
-/* ===== ÁREAS ===== */
+/* ÁREAS */
 .areas {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  display: flex;
   gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-/* ===== TARJETAS ===== */
+/* TARJETA */
 .area-card {
   background: white;
-  border-radius: 16px;
-  padding: 30px 25px;
+  width: 300px;
+  padding: 30px;
+  border-radius: 18px;
   text-align: center;
-  box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .area-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
 }
 
 .area-card h2 {
-  margin-top: 0;
+  margin-bottom: 15px;
 }
 
 .area-card p {
   color: #4b5563;
 }
 
-/* ===== COLORES POR ÁREA ===== */
+/* COLORES */
 .cyt {
   border-top: 6px solid #1e3a8a;
 }
@@ -95,17 +96,16 @@ body {
   border-top: 6px solid #7e22ce;
 }
 
-/* ===== BOTONES ===== */
+/* BOTÓN */
 .btn {
   display: inline-block;
-  margin-top: 18px;
-  padding: 12px 26px;
+  margin-top: 20px;
+  padding: 12px 28px;
   background: #1e3a8a;
   color: white;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: bold;
-  transition: background 0.3s;
 }
 
 .btn:hover {
@@ -117,10 +117,9 @@ body {
   pointer-events: none;
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 .footer {
   text-align: center;
   padding: 20px;
   color: #6b7280;
-  font-size: 0.9em;
 }
