@@ -1,8 +1,10 @@
 /* ======================================================
-   RESET
+   RESET GENERAL
 ====================================================== */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   font-family: 'Segoe UI', sans-serif;
 }
 
@@ -10,7 +12,6 @@
    BODY
 ====================================================== */
 body {
-  margin: 0;
   background: #f3f4f6;
   color: #1f2937;
 }
@@ -29,7 +30,7 @@ body {
   margin: auto;
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
 }
 
 /* INSIGNIA */
@@ -38,43 +39,26 @@ body {
   height: auto;
 }
 
-/* TITULO CYT */
+/* TITULO INSTITUCIONAL */
 .titulo-cyt h1 {
-  margin: 0;
   font-size: 22px;
+  font-weight: 600;
 }
 
 .titulo-cyt p {
-  margin: 2px 0 0 0;
   font-size: 14px;
   opacity: 0.9;
+  margin-top: 2px;
 }
 
-/* COLEGIO (PEQUEÑO A LA DERECHA) */
-.colegio-mini {
-  font-size: 12px;
-  opacity: 0.85;
-  text-align: right;
-}
-
-.colegio-mini h3 {
-  margin: 0;
-  font-size: 13px;
-}
-
-.colegio-mini span {
-  font-size: 11px;
-  display: block;
-}
-
-/* IA */
+/* IA / AVATAR */
 .ia-cyt {
   margin-left: auto;
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255,255,255,0.15);
-  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 8px 14px;
   border-radius: 25px;
 }
 
@@ -85,45 +69,49 @@ body {
 }
 
 @keyframes flotar {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-4px); }
   100% { transform: translateY(0); }
 }
+
+/* ======================================================
+   TITULO DEL ÁREA
+====================================================== */
 .titulo-area {
   text-align: center;
-  padding: 35px 20px 25px;
+  padding: 18px 20px 10px;
 }
 
 .titulo-area h1 {
-  margin: 0;
   font-size: 30px;
   font-weight: 700;
   color: #1e3a8a;
 }
 
 .titulo-area p {
-  margin-top: 8px;
   font-size: 16px;
   color: #555;
+  margin-top: 6px;
 }
+
 /* ======================================================
-   CONTENEDOR
+   CONTENEDOR PRINCIPAL
 ====================================================== */
 .contenedor {
   max-width: 650px;
-  margin: 30px auto;
+  margin: 15px auto;
   padding: 20px;
 }
 
 /* ======================================================
-   TARJETAS
+   TARJETAS (SECCIONES)
 ====================================================== */
 .bienvenida {
   background: white;
-  padding: 25px;
+  padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  margin-bottom: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  margin-bottom: 15px;
 }
 
 /* ======================================================
@@ -136,6 +124,7 @@ input {
   margin-bottom: 12px;
   border-radius: 8px;
   border: 1px solid #d1d5db;
+  font-size: 14px;
 }
 
 /* ======================================================
@@ -148,7 +137,7 @@ button {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background 0.3s;
 }
 
 button:hover {
@@ -157,6 +146,7 @@ button:hover {
 
 button:disabled {
   background: #9ca3af;
+  cursor: not-allowed;
 }
 
 /* ======================================================
@@ -174,5 +164,6 @@ button:disabled {
 .footer {
   text-align: center;
   padding: 15px;
+  font-size: 13px;
   color: #6b7280;
 }
