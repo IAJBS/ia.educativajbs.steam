@@ -210,3 +210,10 @@ body {
     width: 70px;
   }
 }
+.mensaje-header {
+  margin-left: auto;
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0.85;
+  white-space: nowrap;
+}
