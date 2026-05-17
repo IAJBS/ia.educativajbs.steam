@@ -24,7 +24,6 @@ body {
   padding: 20px;
 }
 
-/* distribución correcta */
 .header-contenido {
   max-width: 1100px;
   margin: auto;
@@ -33,13 +32,13 @@ body {
   gap: 18px;
 }
 
-/* INSIGNIA CONTROLADA */
+/* INSIGNIA */
 .insignia {
-  width: 60px;   /* 🔥 clave: evitar que se vea gigante */
+  width: 60px;
   height: auto;
 }
 
-/* TITULO PRINCIPAL CYT */
+/* TITULO CYT */
 .titulo-cyt h1 {
   margin: 0;
   font-size: 22px;
@@ -51,20 +50,24 @@ body {
   opacity: 0.9;
 }
 
-/* TEXTO INSTITUCIONAL */
-.texto-header h2 {
-  margin: 0;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.texto-header p {
-  margin: 2px 0 0 0;
+/* COLEGIO (PEQUEÑO A LA DERECHA) */
+.colegio-mini {
   font-size: 12px;
   opacity: 0.85;
+  text-align: right;
 }
 
-/* IA HEADER */
+.colegio-mini h3 {
+  margin: 0;
+  font-size: 13px;
+}
+
+.colegio-mini span {
+  font-size: 11px;
+  display: block;
+}
+
+/* IA */
 .ia-cyt {
   margin-left: auto;
   display: flex;
