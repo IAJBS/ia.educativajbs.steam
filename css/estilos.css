@@ -1,6 +1,5 @@
 /* ======================================================
    RESET GENERAL
-   Elimina márgenes por defecto y normaliza el modelo
 ====================================================== */
 * {
   box-sizing: border-box;
@@ -9,7 +8,7 @@
 }
 
 /* ======================================================
-   ESTILOS GENERALES DEL BODY
+   ESTILOS GENERALES
 ====================================================== */
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -18,8 +17,7 @@ body {
 }
 
 /* ======================================================
-   HEADER INSTITUCIONAL
-   Incluye insignia + nombre del colegio
+   HEADER INSTITUCIONAL + IA
 ====================================================== */
 .header {
   background: linear-gradient(135deg, #1e3a8a, #2563eb);
@@ -40,27 +38,64 @@ body {
   height: auto;
 }
 
+/* TEXTO INSTITUCIONAL */
 .texto-header h1 {
-  margin: 0;
   font-size: 26px;
+  margin: 0;
   font-weight: bold;
 }
 
 .texto-header h2 {
-  margin: 5px 0;
   font-size: 18px;
+  margin: 5px 0;
   font-weight: normal;
 }
 
 .texto-header p {
-  margin: 0;
   font-size: 14px;
   opacity: 0.9;
+  margin: 0;
+}
+
+/* ======================================================
+   ASISTENTE IA (EMOJI ANIMADO)
+====================================================== */
+.ia-header {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.15);
+  padding: 10px 16px;
+  border-radius: 30px;
+  backdrop-filter: blur(6px);
+}
+
+/* EMOJI IA */
+.avatar-ia {
+  width: 45px;
+  height: 45px;
+
+  /* animación de vida */
+  animation: flotar 2.5s ease-in-out infinite;
+}
+
+/* animación suave tipo “asistente vivo” */
+@keyframes flotar {
+  0% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-5px) scale(1.05); }
+  100% { transform: translateY(0px) scale(1); }
+}
+
+/* MENSAJE IA */
+#mensaje-ia {
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 /* ======================================================
    TARJETA DE BIENVENIDA
-   Presentación general para estudiantes
 ====================================================== */
 .bienvenida {
   max-width: 900px;
@@ -95,7 +130,7 @@ body {
 }
 
 /* ======================================================
-   TÍTULO DE SECCIÓN (ÁREAS)
+   INTRO / TÍTULO ÁREAS
 ====================================================== */
 .intro {
   text-align: center;
@@ -114,7 +149,7 @@ body {
 }
 
 /* ======================================================
-   SECCIÓN DE ÁREAS (TARJETAS)
+   ÁREAS
 ====================================================== */
 .areas {
   display: flex;
@@ -123,9 +158,7 @@ body {
   flex-wrap: wrap;
 }
 
-/* ======================================================
-   TARJETA GENERAL
-====================================================== */
+/* TARJETAS */
 .area-card {
   background: white;
   width: 300px;
@@ -149,20 +182,10 @@ body {
   color: #4b5563;
 }
 
-/* ======================================================
-   COLORES POR ÁREA
-====================================================== */
-.cyt {
-  border-top: 6px solid #1e3a8a;
-}
-
-.mate {
-  border-top: 6px solid #15803d;
-}
-
-.comu {
-  border-top: 6px solid #7e22ce;
-}
+/* COLORES POR ÁREA */
+.cyt { border-top: 6px solid #1e3a8a; }
+.mate { border-top: 6px solid #15803d; }
+.comu { border-top: 6px solid #7e22ce; }
 
 /* ======================================================
    BOTONES
@@ -198,7 +221,7 @@ body {
 }
 
 /* ======================================================
-   RESPONSIVE (CELULARES)
+   RESPONSIVE
 ====================================================== */
 @media (max-width: 600px) {
   .header-contenido {
@@ -209,11 +232,9 @@ body {
   .insignia {
     width: 70px;
   }
-}
-.mensaje-header {
-  margin-left: auto;
-  font-size: 1.1rem;
-  font-weight: 500;
-  opacity: 0.85;
-  white-space: nowrap;
+
+  .ia-header {
+    margin-left: 0;
+    margin-top: 15px;
+  }
 }
