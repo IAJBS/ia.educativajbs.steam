@@ -5,43 +5,66 @@
   <title>Plataforma Educativa con IA</title>
   <link rel="stylesheet" href="css/estilos.css">
 </head>
+
 <body>
 
+<!-- ======================================================
+     HEADER INSTITUCIONAL + ASISTENTE IA
+====================================================== -->
 <header class="header">
   <div class="header-contenido">
-  <img src="img/insignia.png" alt="Insignia" class="insignia">
 
-  <div class="texto-header">
-    <h1>Institución Educativa</h1>
-    <h2>José Buenaventura Sepúlveda Fernández</h2>
-    <p>Plataforma educativa con inteligencia artificial</p>
-  </div>
+    <!-- INSIGNIA -->
+    <img src="img/insignia.png" alt="Insignia" class="insignia">
 
-  <!-- NUEVO -->
-  <div class="mensaje-header">
-    <p>Explora • Aprende • Pregunta</p>
+    <!-- TEXTO INSTITUCIONAL -->
+    <div class="texto-header">
+      <h1>Institución Educativa</h1>
+      <h2>José Buenaventura Sepúlveda Fernández</h2>
+      <p>Plataforma educativa con inteligencia artificial</p>
+    </div>
+
+    <!-- ASISTENTE IA -->
+    <div class="ia-header">
+
+      <img src="img/emoji.png" alt="Asistente IA" class="avatar-ia">
+
+      <span id="mensaje-ia">Selecciona un área para comenzar</span>
+
+    </div>
+
   </div>
-</div>
 </header>
-  <section class="bienvenida">
+
+<!-- ======================================================
+     BIENVENIDA
+====================================================== -->
+<section class="bienvenida">
   <h2>Bienvenido(a) al Tutor IA Educativo</h2>
+
   <p>
     Esta plataforma ha sido creada para acompañarte en tu aprendizaje,
     ayudarte a entender mejor los temas y desarrollar tu razonamiento,
     no para darte respuestas automáticas.
   </p>
+
   <p>
     Aquí podrás explorar ideas, aclarar dudas y reflexionar sobre lo que aprendes,
     usando la inteligencia artificial como una herramienta de apoyo.
   </p>
+
   <p>
     Recuerda: el protagonista del aprendizaje eres tú.
     La IA te guía, pero pensar, analizar y decidir es tu responsabilidad.
   </p>
 </section>
 
+<!-- ======================================================
+     CONTENIDO PRINCIPAL
+====================================================== -->
 <main class="contenedor">
 
+  <!-- INTRO -->
   <section class="intro">
     <h2>Selecciona un área de aprendizaje</h2>
     <p>
@@ -51,6 +74,7 @@
     </p>
   </section>
 
+  <!-- ÁREAS -->
   <section class="areas">
 
     <!-- CIENCIA Y TECNOLOGÍA -->
@@ -60,7 +84,9 @@
         Investiga, analiza y comprende fenómenos usando el método científico
         y el pensamiento crítico.
       </p>
-      <a href="cyt.html" class="btn">Ingresar</a>
+      <a href="cyt.html" class="btn" onclick="seleccionarArea('cyt')">
+        Ingresar
+      </a>
     </div>
 
     <!-- MATEMÁTICA -->
@@ -70,7 +96,9 @@
         Resuelve problemas paso a paso, comprendiendo los procedimientos
         y razonando cada resultado.
       </p>
-      <a href="#" class="btn disabled">Próximamente</a>
+      <a href="#" class="btn disabled" onclick="seleccionarArea('mate')">
+        Próximamente
+      </a>
     </div>
 
     <!-- COMUNICACIÓN -->
@@ -80,16 +108,43 @@
         Desarrolla comprensión lectora, redacción y argumentación
         con apoyo guiado.
       </p>
-      <a href="#" class="btn disabled">Próximamente</a>
+      <a href="#" class="btn disabled" onclick="seleccionarArea('comu')">
+        Próximamente
+      </a>
     </div>
 
   </section>
 
 </main>
 
+<!-- ======================================================
+     FOOTER
+====================================================== -->
 <footer class="footer">
   <p>Proyecto de Innovación Educativa con IA</p>
 </footer>
+
+<!-- ======================================================
+     SCRIPT IA (MENSAJE DINÁMICO)
+====================================================== -->
+<script>
+function seleccionarArea(area) {
+  localStorage.setItem("areaElegida", area);
+}
+
+const mensajeIA = document.getElementById("mensaje-ia");
+const area = localStorage.getItem("areaElegida");
+
+if (area === "cyt") {
+  mensajeIA.textContent = "🔵 Explora, experimenta y pregunta";
+} 
+else if (area === "mate") {
+  mensajeIA.textContent = "🟢 Resuelve paso a paso con lógica";
+} 
+else if (area === "comu") {
+  mensajeIA.textContent = "🟣 Expresa ideas y mejora tu comunicación";
+}
+</script>
 
 </body>
 </html>
