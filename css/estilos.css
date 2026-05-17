@@ -40,13 +40,13 @@ body {
 
 /* TEXTO INSTITUCIONAL */
 .texto-header h1 {
-  font-size: 50px;
+  font-size: 20px;
   margin: 0;
   font-weight: bold;
 }
 
 .texto-header h2 {
-  font-size: 18px;
+  font-size: 40px;
   margin: 5px 0;
   font-weight: normal;
 }
