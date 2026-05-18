@@ -58,7 +58,21 @@
 
     <button onclick="iniciarSesion()">Iniciar</button>
   </section>
+<!-- ACTIVACIÓN DE IDEAS PREVIAS -->
+<section class="bienvenida" id="activacion" style="display:none;">
+  <h2>Antes de aprender…</h2>
 
+  <p>¿Qué crees que significa este tema?</p>
+  <input type="text" id="idea1" placeholder="Escribe tu idea">
+
+  <p>¿Dónde lo has visto en la vida diaria?</p>
+  <input type="text" id="idea2" placeholder="Ejemplo cotidiano">
+
+  <p>¿Qué te gustaría entender mejor?</p>
+  <input type="text" id="idea3" placeholder="Tu curiosidad">
+
+  <button onclick="continuarTutor()">Continuar</button>
+</section>
   <!-- METACOGNICIÓN -->
   <section class="bienvenida" id="metacognicion" style="display:none;">
     <h2>Reflexiona sobre tu aprendizaje</h2>
@@ -110,11 +124,25 @@ function iniciarSesion() {
   localStorage.setItem("cyt_seccion", seccion);
 
   document.getElementById("inicio").style.display = "none";
-  document.getElementById("metacognicion").style.display = "block";
+document.getElementById("activacion").style.display = "block";
 
   mensaje.textContent = "🧠 Analiza y experimenta el tema: " + tema;
 }
+function continuarTutor() {
+  const idea1 = document.getElementById("idea1").value;
+  const idea2 = document.getElementById("idea2").value;
+  const idea3 = document.getElementById("idea3").value;
 
+  if (!idea1 || !idea2 || !idea3) {
+    alert("Completa todas las preguntas antes de continuar");
+    return;
+  }
+
+  document.getElementById("activacion").style.display = "none";
+  document.getElementById("metacognicion").style.display = "block";
+
+  mensaje.textContent = "🧠 Excelente, ahora reflexiona sobre lo aprendido";
+}
 // timer
 let segundos = 20;
 const btn = document.getElementById("btnGuardar");
