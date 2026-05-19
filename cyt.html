@@ -109,48 +109,75 @@
      SCRIPT LÓGICA GENERAL
 ====================================================== -->
 <script>
+/* ======================================================
+   VARIABLES GENERALES
+====================================================== */
 const mensaje = document.getElementById("mensaje-cyt");
-const temaTexto = document.getElementById("temaDocente");
 
-// 🔹 CARGA CONFIGURACIÓN DOCENTE
+// secciones
+const inicio = document.getElementById("inicio");
+const activacion = document.getElementById("activacion");
+const tutor = document.getElementById("tutor");
+const metacognicion = document.getElementById("metacognicion");
+
+// inputs
+const codigoInput = document.getElementById("codigoInput");
+const idea1 = document.getElementById("idea1");
+const idea2 = document.getElementById("idea2");
+const idea3 = document.getElementById("idea3");
+const respuestaTutor = document.getElementById("respuestaTutor");
+
+// textos
+const textoTutor = document.getElementById("textoTutor");
+const seccionSpan = document.getElementById("seccionActiva");
+const temaSpan = document.getElementById("temaActivo");
+
+/* ======================================================
+   CARGA CONFIGURACIÓN DEL DOCENTE
+====================================================== */
 const seccionActiva = localStorage.getItem("cyt_seccion_activa");
 const temaActivo = localStorage.getItem("cyt_tema_activo");
 
 if (!seccionActiva || !temaActivo) {
-  alert("El docente aún no ha configurado la sesión.");
-  document.getElementById("inicio").style.display = "none";
+  // si el docente no configuró
+  inicio.innerHTML = `
+    <h2>Clase no disponible</h2>
+    <p>El docente aún no ha configurado el tema.</p>
+  `;
 } else {
-  temaTexto.textContent = temaActivo;
+  // mostrar datos configurados
+  seccionSpan.textContent = seccionActiva;
+  temaSpan.textContent = temaActivo;
 }
 
-// ================= INICIO SESIÓN =================
+/* ======================================================
+   INICIO DE SESIÓN DEL ESTUDIANTE
+====================================================== */
 function iniciarSesion() {
   const codigo = codigoInput.value.trim();
-  const seccion = seccionInput.value.trim();
 
-  if (!codigo || !seccion) {
-    alert("Completa todos los campos");
+  if (!codigo) {
+    alert("Ingresa tu código de estudiante");
     return;
   }
 
-  if (seccion !== seccionActiva) {
-    alert("La sección no coincide con la configurada por el docente");
-    return;
-  }
-
+  // guardar datos del estudiante
   localStorage.setItem("cyt_codigo", codigo);
-  localStorage.setItem("cyt_seccion", seccion);
+  localStorage.setItem("cyt_seccion", seccionActiva);
 
+  // pasar a activación
   inicio.style.display = "none";
   activacion.style.display = "block";
 
   mensaje.textContent = "🧠 Hoy trabajaremos: " + temaActivo;
 }
 
-// ================= ACTIVACIÓN =================
+/* ======================================================
+   ACTIVACIÓN DE IDEAS PREVIAS
+====================================================== */
 function continuarTutor() {
   if (!idea1.value || !idea2.value || !idea3.value) {
-    alert("Completa todas las preguntas");
+    alert("Completa todas las preguntas antes de continuar");
     return;
   }
 
@@ -162,32 +189,40 @@ function continuarTutor() {
     ". Razona, analiza y responde con tus propias palabras.";
 }
 
-// ================= METACOGNICIÓN =================
+/* ======================================================
+   PASO A METACOGNICIÓN
+====================================================== */
 function avanzarMetacognicion() {
   if (!respuestaTutor.value) {
-    alert("Responde antes de continuar");
+    alert("Responde la pregunta antes de continuar");
     return;
   }
 
   tutor.style.display = "none";
   metacognicion.style.display = "block";
 
-  mensaje.textContent = "🔍 Reflexiona sobre lo aprendido";
+  mensaje.textContent = "🔍 Ahora reflexiona sobre lo que aprendiste";
 }
 
-// ================= TIMER =================
+/* ======================================================
+   TIMER DE REFLEXIÓN
+====================================================== */
 let segundos = 20;
 const btn = document.getElementById("btnGuardar");
+const timer = document.getElementById("timer");
 
 const intervalo = setInterval(() => {
-  timer.innerText = "Reflexiona al menos " + segundos + " segundos...";
+  timer.innerText =
+    "Reflexiona al menos " + segundos + " segundos...";
+
   segundos--;
 
   if (segundos < 0) {
     clearInterval(intervalo);
     btn.disabled = false;
     btn.style.background = "#15803d";
-    timer.innerText = "Ahora puedes guardar tu reflexión.";
+    timer.innerText =
+      "Ahora puedes guardar tu reflexión.";
   }
 }, 1000);
 </script>
