@@ -8,101 +8,96 @@
 
 <body>
 
-<!-- ======================================================
-     HEADER DOCENTE
-====================================================== -->
 <header class="header">
   <div class="header-contenido">
-
-    <!-- INSIGNIA -->
-    <img src="img/insignia.png" alt="Insignia" class="insignia">
-
-    <!-- COLEGIO -->
+    <img src="img/insignia.png" class="insignia">
     <div class="titulo-colegio">
       <h1>I.E.P. José Buenaventura Sepúlveda Fernández</h1>
-      <p>Panel de configuración docente</p>
+      <p>Panel docente – Ciencia y Tecnología</p>
     </div>
-
-    <!-- ICONO -->
     <div class="docente-icono">👩‍🏫</div>
-
   </div>
 </header>
 
-<!-- ======================================================
-     CONTENIDO
-====================================================== -->
 <main class="contenedor">
 
+  <!-- REGISTRAR SECCIÓN -->
   <section class="card">
-    <h2>Configurar sesión de aprendizaje</h2>
+    <h2>Registrar sección</h2>
+    <input type="text" id="seccionNueva" placeholder="Ejemplo: 2° A">
+    <button onclick="agregarSeccion()">Agregar sección</button>
+  </section>
 
-    <p>Sección:</p>
-    <input type="text" id="seccionDocente" placeholder="Ejemplo: 2° A">
+  <!-- REGISTRAR TEMA -->
+  <section class="card">
+    <h2>Agregar tema</h2>
+    <select id="seccionTema"></select>
+    <input type="text" id="temaNuevo" placeholder="Ejemplo: Método científico">
+    <button onclick="agregarTema()">Agregar tema</button>
+  </section>
 
-    <p>Tema del día:</p>
-    <input type="text" id="temaDocente" placeholder="Ejemplo: Método científico">
-
+  <!-- ACTIVAR CLASE -->
+  <section class="card">
+    <h2>Activar clase del día</h2>
+    <select id="seccionActiva"></select>
+    <select id="temaActivo"></select>
     <button onclick="activarClase()">Activar clase</button>
-    <button class="btn-cerrar" onclick="cerrarClase()">Cerrar clase</button>
-
     <p id="estado" class="estado"></p>
   </section>
 
 </main>
 
 <footer class="footer">
-  <p>Plataforma educativa con Inteligencia Artificial</p>
+  <p>Plataforma educativa con IA</p>
 </footer>
 
-<!-- ======================================================
-     SCRIPT DOCENTE
-====================================================== -->
 <script>
-const seccionInput = document.getElementById("seccionDocente");
-const temaInput = document.getElementById("temaDocente");
-const estado = document.getElementById("estado");
+let data = JSON.parse(localStorage.getItem("cyt_docente")) || {};
 
-// 🔹 CARGAR CONFIGURACIÓN EXISTENTE
-const seccionActiva = localStorage.getItem("cyt_seccion_activa");
-const temaActivo = localStorage.getItem("cyt_tema_activo");
-
-if (seccionActiva && temaActivo) {
-  seccionInput.value = seccionActiva;
-  temaInput.value = temaActivo;
-  estado.textContent =
-    "📘 Clase activa para la sección " + seccionActiva +
-    " con el tema: " + temaActivo;
+function guardar() {
+  localStorage.setItem("cyt_docente", JSON.stringify(data));
+  cargarSelects();
 }
 
-// 🔹 ACTIVAR CLASE
+function agregarSeccion() {
+  const s = seccionNueva.value.trim();
+  if (!s) return alert("Escribe una sección");
+  if (!data[s]) data[s] = [];
+  guardar();
+}
+
+function agregarTema() {
+  const s = seccionTema.value;
+  const t = temaNuevo.value.trim();
+  if (!t) return alert("Escribe un tema");
+  data[s].push(t);
+  guardar();
+}
+
 function activarClase() {
-  const seccion = seccionInput.value.trim();
-  const tema = temaInput.value.trim();
-
-  if (!seccion || !tema) {
-    alert("Completa todos los campos");
-    return;
-  }
-
-  localStorage.setItem("cyt_seccion_activa", seccion);
-  localStorage.setItem("cyt_tema_activo", tema);
-
-  estado.textContent =
-    "✅ Clase activada para la sección " + seccion +
-    " con el tema: " + tema;
+  localStorage.setItem("cyt_seccion_activa", seccionActiva.value);
+  localStorage.setItem("cyt_tema_activo", temaActivo.value);
+  estado.textContent = "✅ Clase activada correctamente";
 }
 
-// 🔹 CERRAR CLASE
-function cerrarClase() {
-  localStorage.removeItem("cyt_seccion_activa");
-  localStorage.removeItem("cyt_tema_activo");
+function cargarSelects() {
+  [seccionTema, seccionActiva].forEach(sel => {
+    sel.innerHTML = "";
+    Object.keys(data).forEach(s => {
+      sel.innerHTML += `<option>${s}</option>`;
+    });
+  });
 
-  seccionInput.value = "";
-  temaInput.value = "";
-
-  estado.textContent = "⛔ No hay clase activa en este momento";
+  seccionActiva.onchange = () => {
+    temaActivo.innerHTML = "";
+    data[seccionActiva.value].forEach(t => {
+      temaActivo.innerHTML += `<option>${t}</option>`;
+    });
+  };
+  seccionActiva.onchange();
 }
+
+cargarSelects();
 </script>
 
 </body>
