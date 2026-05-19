@@ -2,127 +2,81 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Configuración Docente - Ciencia y Tecnología</title>
+  <title>Panel Docente - Ciencia y Tecnología</title>
   <link rel="stylesheet" href="css/docente.css">
 </head>
 
 <body>
 
 <!-- ======================================================
-     HEADER INSTITUCIONAL
+     HEADER DOCENTE
 ====================================================== -->
 <header class="header">
   <div class="header-contenido">
 
-    <img src="img/insignia.png" class="insignia" alt="Insignia">
+    <!-- INSIGNIA -->
+    <img src="img/insignia.png" alt="Insignia" class="insignia">
 
+    <!-- COLEGIO -->
     <div class="titulo-colegio">
       <h1>I.E.P. José Buenaventura Sepúlveda Fernández</h1>
-      <p>Configuración docente – Ciencia y Tecnología</p>
+      <p>Panel de configuración docente</p>
+    </div>
+
+    <!-- ICONO -->
+    <div class="docente-icono">
+      👩‍🏫
     </div>
 
   </div>
 </header>
 
 <!-- ======================================================
-     TÍTULO
-====================================================== -->
-<section class="titulo-area">
-  <h1>CONFIGURACIÓN DOCENTE</h1>
-  <p>Gestión de secciones y temas de aprendizaje</p>
-</section>
-
-<!-- ======================================================
      CONTENIDO
 ====================================================== -->
 <main class="contenedor">
 
-  <!-- SECCIÓN -->
-  <section class="tarjeta">
-    <h2>1. Sección</h2>
+  <section class="card">
+    <h2>Configurar sesión de aprendizaje</h2>
+
+    <p>Sección:</p>
     <input type="text" id="seccionDocente" placeholder="Ejemplo: 2° A">
-  </section>
 
-  <!-- AGREGAR TEMA -->
-  <section class="tarjeta">
-    <h2>2. Agregar temas del año</h2>
+    <p>Tema del día:</p>
+    <input type="text" id="temaDocente" placeholder="Ejemplo: Método científico">
 
-    <input type="text" id="temaInput" placeholder="Ejemplo: Método científico">
-    <button onclick="agregarTema()">Agregar tema</button>
+    <button onclick="activarClase()">Activar clase</button>
 
-    <ul id="listaTemas"></ul>
-  </section>
-
-  <!-- TEMA ACTIVO -->
-  <section class="tarjeta">
-    <h2>3. Tema activo de hoy</h2>
-    <p>Selecciona el tema que trabajarás en clase</p>
-
-    <ul id="temasActivos"></ul>
-
-    <button onclick="guardarConfiguracion()">Guardar configuración</button>
+    <p id="estado" class="estado"></p>
   </section>
 
 </main>
 
 <footer class="footer">
-  <p>Tutor IA – Ciencia y Tecnología</p>
+  <p>Plataforma educativa con Inteligencia Artificial</p>
 </footer>
 
 <!-- ======================================================
      SCRIPT DOCENTE
 ====================================================== -->
 <script>
-let temas = [];
+function activarClase() {
+  const seccion = document.getElementById("seccionDocente").value.trim();
+  const tema = document.getElementById("temaDocente").value.trim();
+  const estado = document.getElementById("estado");
 
-function agregarTema() {
-  const input = document.getElementById("temaInput");
-  const tema = input.value.trim();
-
-  if (tema === "") return;
-
-  temas.push(tema);
-  input.value = "";
-  renderTemas();
-}
-
-function renderTemas() {
-  const lista = document.getElementById("listaTemas");
-  const activos = document.getElementById("temasActivos");
-
-  lista.innerHTML = "";
-  activos.innerHTML = "";
-
-  temas.forEach((tema, index) => {
-    const li = document.createElement("li");
-    li.textContent = tema;
-    lista.appendChild(li);
-
-    const radio = document.createElement("li");
-    radio.innerHTML = `
-      <label>
-        <input type="radio" name="temaActivo" value="${tema}">
-        ${tema}
-      </label>
-    `;
-    activos.appendChild(radio);
-  });
-}
-
-function guardarConfiguracion() {
-  const seccion = document.getElementById("seccionDocente").value;
-  const seleccionado = document.querySelector('input[name="temaActivo"]:checked');
-
-  if (!seccion || !seleccionado) {
-    alert("Completa la sección y selecciona un tema activo");
+  if (!seccion || !tema) {
+    alert("Completa todos los campos");
     return;
   }
 
+  // CLAVES ÚNICAS DEL SISTEMA
   localStorage.setItem("cyt_seccion_activa", seccion);
-  localStorage.setItem("cyt_temas", JSON.stringify(temas));
-  localStorage.setItem("cyt_tema_activo", seleccionado.value);
+  localStorage.setItem("cyt_tema_activo", tema);
 
-  alert("Configuración guardada correctamente");
+  estado.textContent =
+    "✅ Clase activada para la sección " + seccion +
+    " con el tema: " + tema;
 }
 </script>
 
