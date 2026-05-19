@@ -6,7 +6,22 @@
   <link rel="stylesheet" href="css/cyt.css">
 </head>
 
-<body>
+<body class="bloqueado">
+
+<!-- ======================================================
+     MODAL SELECCIÓN DE ROL
+====================================================== -->
+<div class="modal-rol" id="modalRol">
+  <div class="modal-contenido">
+    <h2>Selecciona tu rol</h2>
+    <p>Indica cómo deseas ingresar al área</p>
+
+    <div class="botones-rol">
+      <button onclick="ingresarComoDocente()">👩‍🏫 Docente</button>
+      <button onclick="ingresarComoEstudiante()">🎓 Estudiante</button>
+    </div>
+  </div>
+</div>
 
 <!-- ======================================================
      HEADER CYT + ASISTENTE IA
@@ -110,24 +125,33 @@
 ====================================================== -->
 <script>
 /* ======================================================
+   CONTROL DE ROL
+====================================================== */
+function ingresarComoDocente() {
+  window.location.href = "docente.html";
+}
+
+function ingresarComoEstudiante() {
+  document.getElementById("modalRol").style.display = "none";
+  document.body.classList.remove("bloqueado");
+}
+
+/* ======================================================
    VARIABLES GENERALES
 ====================================================== */
 const mensaje = document.getElementById("mensaje-cyt");
 
-// secciones
 const inicio = document.getElementById("inicio");
 const activacion = document.getElementById("activacion");
 const tutor = document.getElementById("tutor");
 const metacognicion = document.getElementById("metacognicion");
 
-// inputs
 const codigoInput = document.getElementById("codigoInput");
 const idea1 = document.getElementById("idea1");
 const idea2 = document.getElementById("idea2");
 const idea3 = document.getElementById("idea3");
 const respuestaTutor = document.getElementById("respuestaTutor");
 
-// textos
 const textoTutor = document.getElementById("textoTutor");
 const seccionSpan = document.getElementById("seccionActiva");
 const temaSpan = document.getElementById("temaActivo");
@@ -139,33 +163,28 @@ const seccionActiva = localStorage.getItem("cyt_seccion_activa");
 const temaActivo = localStorage.getItem("cyt_tema_activo");
 
 if (!seccionActiva || !temaActivo) {
-  // si el docente no configuró
   inicio.innerHTML = `
     <h2>Clase no disponible</h2>
     <p>El docente aún no ha configurado el tema.</p>
   `;
 } else {
-  // mostrar datos configurados
   seccionSpan.textContent = seccionActiva;
   temaSpan.textContent = temaActivo;
 }
 
 /* ======================================================
-   INICIO DE SESIÓN DEL ESTUDIANTE
+   INICIO DE SESIÓN
 ====================================================== */
 function iniciarSesion() {
   const codigo = codigoInput.value.trim();
-
   if (!codigo) {
     alert("Ingresa tu código de estudiante");
     return;
   }
 
-  // guardar datos del estudiante
   localStorage.setItem("cyt_codigo", codigo);
   localStorage.setItem("cyt_seccion", seccionActiva);
 
-  // pasar a activación
   inicio.style.display = "none";
   activacion.style.display = "block";
 
@@ -173,7 +192,7 @@ function iniciarSesion() {
 }
 
 /* ======================================================
-   ACTIVACIÓN DE IDEAS PREVIAS
+   ACTIVACIÓN
 ====================================================== */
 function continuarTutor() {
   if (!idea1.value || !idea2.value || !idea3.value) {
@@ -190,7 +209,7 @@ function continuarTutor() {
 }
 
 /* ======================================================
-   PASO A METACOGNICIÓN
+   METACOGNICIÓN
 ====================================================== */
 function avanzarMetacognicion() {
   if (!respuestaTutor.value) {
@@ -205,24 +224,21 @@ function avanzarMetacognicion() {
 }
 
 /* ======================================================
-   TIMER DE REFLEXIÓN
+   TIMER
 ====================================================== */
 let segundos = 20;
 const btn = document.getElementById("btnGuardar");
 const timer = document.getElementById("timer");
 
 const intervalo = setInterval(() => {
-  timer.innerText =
-    "Reflexiona al menos " + segundos + " segundos...";
-
+  timer.innerText = "Reflexiona al menos " + segundos + " segundos...";
   segundos--;
 
   if (segundos < 0) {
     clearInterval(intervalo);
     btn.disabled = false;
     btn.style.background = "#15803d";
-    timer.innerText =
-      "Ahora puedes guardar tu reflexión.";
+    timer.innerText = "Ahora puedes guardar tu reflexión.";
   }
 }, 1000);
 </script>
