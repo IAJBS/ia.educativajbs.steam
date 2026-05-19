@@ -24,9 +24,7 @@
     </div>
 
     <!-- ICONO -->
-    <div class="docente-icono">
-      👩‍🏫
-    </div>
+    <div class="docente-icono">👩‍🏫</div>
 
   </div>
 </header>
@@ -46,6 +44,7 @@
     <input type="text" id="temaDocente" placeholder="Ejemplo: Método científico">
 
     <button onclick="activarClase()">Activar clase</button>
+    <button class="btn-cerrar" onclick="cerrarClase()">Cerrar clase</button>
 
     <p id="estado" class="estado"></p>
   </section>
@@ -60,23 +59,49 @@
      SCRIPT DOCENTE
 ====================================================== -->
 <script>
+const seccionInput = document.getElementById("seccionDocente");
+const temaInput = document.getElementById("temaDocente");
+const estado = document.getElementById("estado");
+
+// 🔹 CARGAR CONFIGURACIÓN EXISTENTE
+const seccionActiva = localStorage.getItem("cyt_seccion_activa");
+const temaActivo = localStorage.getItem("cyt_tema_activo");
+
+if (seccionActiva && temaActivo) {
+  seccionInput.value = seccionActiva;
+  temaInput.value = temaActivo;
+  estado.textContent =
+    "📘 Clase activa para la sección " + seccionActiva +
+    " con el tema: " + temaActivo;
+}
+
+// 🔹 ACTIVAR CLASE
 function activarClase() {
-  const seccion = document.getElementById("seccionDocente").value.trim();
-  const tema = document.getElementById("temaDocente").value.trim();
-  const estado = document.getElementById("estado");
+  const seccion = seccionInput.value.trim();
+  const tema = temaInput.value.trim();
 
   if (!seccion || !tema) {
     alert("Completa todos los campos");
     return;
   }
 
-  // CLAVES ÚNICAS DEL SISTEMA
   localStorage.setItem("cyt_seccion_activa", seccion);
   localStorage.setItem("cyt_tema_activo", tema);
 
   estado.textContent =
     "✅ Clase activada para la sección " + seccion +
     " con el tema: " + tema;
+}
+
+// 🔹 CERRAR CLASE
+function cerrarClase() {
+  localStorage.removeItem("cyt_seccion_activa");
+  localStorage.removeItem("cyt_tema_activo");
+
+  seccionInput.value = "";
+  temaInput.value = "";
+
+  estado.textContent = "⛔ No hay clase activa en este momento";
 }
 </script>
 
