@@ -14,16 +14,13 @@
 <header class="header">
   <div class="header-contenido">
 
-    <!-- IZQUIERDA: INSIGNIA -->
     <img src="img/insignia.png" class="insignia" alt="Insignia">
 
-    <!-- CENTRO: TÍTULO PRINCIPAL (CYT) -->
     <div class="titulo-cyt">
       <h1>I.E.P. Jose Buenaventura Sepúlveda Fernández</h1>
       <p>Plataforma educativa con inteligencia artificial</p>
     </div>
 
-    <!-- IA -->
     <div class="ia-cyt">
       <img src="img/emoji.png" class="avatar-ia" alt="IA">
       <span id="mensaje-cyt">Explora la ciencia con curiosidad</span>
@@ -31,80 +28,77 @@
 
   </div>
 </header>
+
 <section class="titulo-area">
   <h1>CIENCIA Y TECNOLOGÍA</h1>
   <p>Investiga, descubre y aprende</p>
 </section>
+
 <main class="contenedor">
 
-  <!-- RETORNO -->
-  <section class="bienvenida" id="retorno" style="display:none;">
-    <h2>Continuemos tu aprendizaje</h2>
-    <p id="mensajeRetorno"></p>
-  </section>
+<!-- ================= INICIO ================= -->
+<section class="bienvenida" id="inicio">
+  <h2>Inicio de sesión de aprendizaje</h2>
 
-  <!-- INICIO -->
-  <section class="bienvenida" id="inicio">
-    <h2>Inicio de sesión de aprendizaje</h2>
+  <p><strong>Tema del día:</strong></p>
+  <p id="temaDocente" style="color:#1e3a8a;font-weight:600;"></p>
 
-    <p>Código del estudiante:</p>
-    <input type="text" id="codigoInput" placeholder="Ejemplo: 2A15">
+  <p>Código del estudiante:</p>
+  <input type="text" id="codigoInput" placeholder="Ejemplo: 2A15">
 
-    <p>Sección:</p>
-    <input type="text" id="seccionInput" placeholder="Ejemplo: 2° A">
+  <p>Sección:</p>
+  <input type="text" id="seccionInput" placeholder="Ejemplo: 2° A">
 
-    <p>Tema a trabajar:</p>
-    <input type="text" id="temaInput" placeholder="Ejemplo: Método científico">
+  <button onclick="iniciarSesion()">Iniciar</button>
+</section>
 
-    <button onclick="iniciarSesion()">Iniciar</button>
-  </section>
-<!-- ACTIVACIÓN DE IDEAS PREVIAS -->
+<!-- ============ ACTIVACIÓN ============ -->
 <section class="bienvenida" id="activacion" style="display:none;">
   <h2>Antes de aprender…</h2>
 
   <p>¿Qué crees que significa este tema?</p>
-  <input type="text" id="idea1" placeholder="Escribe tu idea">
+  <input type="text" id="idea1">
 
   <p>¿Dónde lo has visto en la vida diaria?</p>
-  <input type="text" id="idea2" placeholder="Ejemplo cotidiano">
+  <input type="text" id="idea2">
 
   <p>¿Qué te gustaría entender mejor?</p>
-  <input type="text" id="idea3" placeholder="Tu curiosidad">
+  <input type="text" id="idea3">
 
   <button onclick="continuarTutor()">Continuar</button>
 </section>
- <!-- TUTOR IA -->
+
+<!-- ============ TUTOR IA ============ -->
 <section class="bienvenida" id="tutor" style="display:none;">
   <h2>Aprendemos con el Tutor IA</h2>
 
-  <p id="textoTutor">
-    Hoy aprenderás paso a paso con ayuda del Tutor IA.
-  </p>
+  <p id="textoTutor"></p>
 
   <p>Responde esta pregunta:</p>
-  <input type="text" id="respuestaTutor" placeholder="Escribe tu respuesta">
+  <input type="text" id="respuestaTutor">
 
   <button onclick="avanzarMetacognicion()">Continuar</button>
-</section> 
-  <!-- METACOGNICIÓN -->
-  <section class="bienvenida" id="metacognicion" style="display:none;">
-    <h2>Reflexiona sobre tu aprendizaje</h2>
+</section>
 
-    <p>¿Qué aprendiste hoy?</p>
-    <input type="text" id="p1">
+<!-- ============ METACOGNICIÓN ============ -->
+<section class="bienvenida" id="metacognicion" style="display:none;">
+  <h2>Reflexiona sobre tu aprendizaje</h2>
 
-    <p>¿Qué fue difícil?</p>
-    <input type="text" id="p2">
+  <p>¿Qué aprendiste hoy?</p>
+  <input type="text" id="p1">
 
-    <p>¿Podrías hacerlo solo la próxima vez?</p>
-    <input type="text" id="p3">
+  <p>¿Qué fue difícil?</p>
+  <input type="text" id="p2">
 
-    <button id="btnGuardar" disabled onclick="guardarMetacognicion()">
-      Guardar reflexión
-    </button>
+  <p>¿Podrías hacerlo solo la próxima vez?</p>
+  <input type="text" id="p3">
 
-    <p id="timer"></p>
-  </section>
+  <button id="btnGuardar" disabled>
+    Guardar reflexión
+  </button>
+
+  <p id="timer"></p>
+</section>
 
 </main>
 
@@ -113,82 +107,88 @@
 </footer>
 
 <!-- ======================================================
-     SCRIPT IA + LÓGICA
+     SCRIPT LÓGICA GENERAL
 ====================================================== -->
 <script>
 const mensaje = document.getElementById("mensaje-cyt");
+const temaTexto = document.getElementById("temaDocente");
 
+// 🔹 CARGA CONFIGURACIÓN DOCENTE
+const seccionActiva = localStorage.getItem("cyt_seccion_activa");
+const temaActivo = localStorage.getItem("cyt_tema_activo");
+
+if (!seccionActiva || !temaActivo) {
+  alert("El docente aún no ha configurado la sesión.");
+  document.getElementById("inicio").style.display = "none";
+} else {
+  temaTexto.textContent = temaActivo;
+}
+
+// ================= INICIO SESIÓN =================
 function iniciarSesion() {
-  const codigo = document.getElementById("codigoInput").value;
-  const seccion = document.getElementById("seccionInput").value;
-  const tema = document.getElementById("temaInput").value;
+  const codigo = codigoInput.value.trim();
+  const seccion = seccionInput.value.trim();
 
-  if (!codigo || !seccion || !tema) {
+  if (!codigo || !seccion) {
     alert("Completa todos los campos");
     return;
   }
 
-  const clave = "cyt_" + seccion + "_" + codigo;
-
-  localStorage.setItem(clave + "_tema", tema);
-  localStorage.setItem(clave + "_reflexion", "pendiente");
+  if (seccion !== seccionActiva) {
+    alert("La sección no coincide con la configurada por el docente");
+    return;
+  }
 
   localStorage.setItem("cyt_codigo", codigo);
   localStorage.setItem("cyt_seccion", seccion);
 
-  document.getElementById("inicio").style.display = "none";
-document.getElementById("activacion").style.display = "block";
+  inicio.style.display = "none";
+  activacion.style.display = "block";
 
-  mensaje.textContent = "🧠 Analiza y experimenta el tema: " + tema;
+  mensaje.textContent = "🧠 Hoy trabajaremos: " + temaActivo;
 }
+
+// ================= ACTIVACIÓN =================
 function continuarTutor() {
-  const idea1 = document.getElementById("idea1").value;
-  const idea2 = document.getElementById("idea2").value;
-  const idea3 = document.getElementById("idea3").value;
-
-  if (!idea1 || !idea2 || !idea3) {
-    alert("Completa todas las preguntas antes de continuar");
+  if (!idea1.value || !idea2.value || !idea3.value) {
+    alert("Completa todas las preguntas");
     return;
   }
 
-  document.getElementById("activacion").style.display = "none";
-  document.getElementById("tutor").style.display = "block";
+  activacion.style.display = "none";
+  tutor.style.display = "block";
 
-  const tema = localStorage.getItem("cyt_tema");
-
-  document.getElementById("textoTutor").textContent =
-    "Vamos a aprender sobre " + tema +
-    ". Piensa con calma y responde la pregunta.";
+  textoTutor.textContent =
+    "Vamos a aprender sobre " + temaActivo +
+    ". Razona, analiza y responde con tus propias palabras.";
 }
+
+// ================= METACOGNICIÓN =================
 function avanzarMetacognicion() {
-  const respuesta = document.getElementById("respuestaTutor").value;
-
-  if (!respuesta) {
-    alert("Responde la pregunta antes de continuar");
+  if (!respuestaTutor.value) {
+    alert("Responde antes de continuar");
     return;
   }
 
-  document.getElementById("tutor").style.display = "none";
-  document.getElementById("metacognicion").style.display = "block";
+  tutor.style.display = "none";
+  metacognicion.style.display = "block";
 
-  mensaje.textContent = "🔍 Ahora reflexiona sobre lo que aprendiste";
+  mensaje.textContent = "🔍 Reflexiona sobre lo aprendido";
 }
-  // timer
+
+// ================= TIMER =================
 let segundos = 20;
 const btn = document.getElementById("btnGuardar");
 
 const intervalo = setInterval(() => {
-  document.getElementById("timer").innerText =
-    "Reflexiona al menos " + segundos + " segundos...";
-
+  timer.innerText = "Reflexiona al menos " + segundos + " segundos...";
   segundos--;
 
   if (segundos < 0) {
     clearInterval(intervalo);
     btn.disabled = false;
     btn.style.background = "#15803d";
-    document.getElementById("timer").innerText =
-      "Ahora puedes guardar tu reflexión.";
+    timer.innerText = "Ahora puedes guardar tu reflexión.";
   }
 }, 1000);
 </script>
