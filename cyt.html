@@ -73,6 +73,19 @@
 
   <button onclick="continuarTutor()">Continuar</button>
 </section>
+ <!-- TUTOR IA -->
+<section class="bienvenida" id="tutor" style="display:none;">
+  <h2>Aprendemos con el Tutor IA</h2>
+
+  <p id="textoTutor">
+    Hoy aprenderás paso a paso con ayuda del Tutor IA.
+  </p>
+
+  <p>Responde esta pregunta:</p>
+  <input type="text" id="respuestaTutor" placeholder="Escribe tu respuesta">
+
+  <button onclick="avanzarMetacognicion()">Continuar</button>
+</section> 
   <!-- METACOGNICIÓN -->
   <section class="bienvenida" id="metacognicion" style="display:none;">
     <h2>Reflexiona sobre tu aprendizaje</h2>
@@ -139,11 +152,28 @@ function continuarTutor() {
   }
 
   document.getElementById("activacion").style.display = "none";
+  document.getElementById("tutor").style.display = "block";
+
+  const tema = localStorage.getItem("cyt_tema");
+
+  document.getElementById("textoTutor").textContent =
+    "Vamos a aprender sobre " + tema +
+    ". Piensa con calma y responde la pregunta.";
+}
+function avanzarMetacognicion() {
+  const respuesta = document.getElementById("respuestaTutor").value;
+
+  if (!respuesta) {
+    alert("Responde la pregunta antes de continuar");
+    return;
+  }
+
+  document.getElementById("tutor").style.display = "none";
   document.getElementById("metacognicion").style.display = "block";
 
-  mensaje.textContent = "🧠 Excelente, ahora reflexiona sobre lo aprendido";
+  mensaje.textContent = "🔍 Ahora reflexiona sobre lo que aprendiste";
 }
-// timer
+  // timer
 let segundos = 20;
 const btn = document.getElementById("btnGuardar");
 
