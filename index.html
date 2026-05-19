@@ -27,7 +27,7 @@
     <!-- ASISTENTE IA -->
     <div class="ia-header">
       <img src="img/emoji.png" alt="Asistente IA" class="avatar-ia">
-      <span id="mensaje-ia">Selecciona cómo deseas ingresar</span>
+      <span id="mensaje-ia">Selecciona un área para comenzar</span>
     </div>
 
   </div>
@@ -50,32 +50,9 @@
 </section>
 
 <!-- ======================================================
-     SELECCIÓN DE ROL (NUEVO)
-====================================================== -->
-<section class="bienvenida" style="max-width:700px;margin:auto;">
-  <h2>¿Cómo deseas ingresar?</h2>
-
-  <div style="display:flex; gap:20px; justify-content:center; margin-top:20px; flex-wrap:wrap;">
-
-    <!-- DOCENTE -->
-    <a href="docente.html" class="btn"
-       onclick="seleccionarRol('docente')">
-      👩‍🏫 Ingresar como Docente
-    </a>
-
-    <!-- ESTUDIANTE -->
-    <a href="#areas" class="btn"
-       onclick="seleccionarRol('estudiante')">
-      🧑‍🎓 Ingresar como Estudiante
-    </a>
-
-  </div>
-</section>
-
-<!-- ======================================================
      CONTENIDO PRINCIPAL
 ====================================================== -->
-<main class="contenedor" id="areas">
+<main class="contenedor">
 
   <!-- INTRO -->
   <section class="intro">
@@ -136,21 +113,15 @@
      SCRIPT
 ====================================================== -->
 <script>
-function seleccionarRol(rol) {
-  localStorage.setItem("rol", rol);
-}
-
 function seleccionarArea(area) {
   localStorage.setItem("areaElegida", area);
 }
 
 const mensajeIA = document.getElementById("mensaje-ia");
-const rol = localStorage.getItem("rol");
+const area = localStorage.getItem("areaElegida");
 
-if (rol === "docente") {
-  mensajeIA.textContent = "👩‍🏫 Acceso al panel docente";
-} else if (rol === "estudiante") {
-  mensajeIA.textContent = "🧑‍🎓 Selecciona un área para aprender";
+if (area === "cyt") {
+  mensajeIA.textContent = "🔵 Explora, experimenta y pregunta";
 }
 </script>
 
