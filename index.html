@@ -26,11 +26,8 @@
 
     <!-- ASISTENTE IA -->
     <div class="ia-header">
-
       <img src="img/emoji.png" alt="Asistente IA" class="avatar-ia">
-
-      <span id="mensaje-ia">Selecciona un área para comenzar</span>
-
+      <span id="mensaje-ia">Selecciona cómo deseas ingresar</span>
     </div>
 
   </div>
@@ -44,33 +41,47 @@
 
   <p>
     Esta plataforma ha sido creada para acompañarte en tu aprendizaje,
-    ayudarte a entender mejor los temas y desarrollar tu razonamiento,
-    no para darte respuestas automáticas.
+    ayudarte a entender mejor los temas y desarrollar tu razonamiento.
   </p>
 
   <p>
-    Aquí podrás explorar ideas, aclarar dudas y reflexionar sobre lo que aprendes,
-    usando la inteligencia artificial como una herramienta de apoyo.
+    La inteligencia artificial te guía, pero el aprendizaje depende de ti.
   </p>
+</section>
 
-  <p>
-    Recuerda: el protagonista del aprendizaje eres tú.
-    La IA te guía, pero pensar, analizar y decidir es tu responsabilidad.
-  </p>
+<!-- ======================================================
+     SELECCIÓN DE ROL (NUEVO)
+====================================================== -->
+<section class="bienvenida" style="max-width:700px;margin:auto;">
+  <h2>¿Cómo deseas ingresar?</h2>
+
+  <div style="display:flex; gap:20px; justify-content:center; margin-top:20px; flex-wrap:wrap;">
+
+    <!-- DOCENTE -->
+    <a href="docente.html" class="btn"
+       onclick="seleccionarRol('docente')">
+      👩‍🏫 Ingresar como Docente
+    </a>
+
+    <!-- ESTUDIANTE -->
+    <a href="#areas" class="btn"
+       onclick="seleccionarRol('estudiante')">
+      🧑‍🎓 Ingresar como Estudiante
+    </a>
+
+  </div>
 </section>
 
 <!-- ======================================================
      CONTENIDO PRINCIPAL
 ====================================================== -->
-<main class="contenedor">
+<main class="contenedor" id="areas">
 
   <!-- INTRO -->
   <section class="intro">
-    <h2>Selecciona un área de aprendizaje</h2>
+    <h2>Áreas de aprendizaje</h2>
     <p>
-      Esta plataforma utiliza Inteligencia Artificial educativa para acompañarte
-      paso a paso en tu aprendizaje, promoviendo el razonamiento, la reflexión
-      y la metacognición.
+      Selecciona el área en la que deseas trabajar con apoyo del Tutor IA.
     </p>
   </section>
 
@@ -81,8 +92,7 @@
     <div class="area-card cyt">
       <h2>Ciencia y Tecnología</h2>
       <p>
-        Investiga, analiza y comprende fenómenos usando el método científico
-        y el pensamiento crítico.
+        Investiga, analiza y comprende fenómenos usando el método científico.
       </p>
       <a href="cyt.html" class="btn" onclick="seleccionarArea('cyt')">
         Ingresar
@@ -93,10 +103,9 @@
     <div class="area-card mate">
       <h2>Matemática</h2>
       <p>
-        Resuelve problemas paso a paso, comprendiendo los procedimientos
-        y razonando cada resultado.
+        Resuelve problemas razonando cada procedimiento.
       </p>
-      <a href="#" class="btn disabled" onclick="seleccionarArea('mate')">
+      <a href="#" class="btn disabled">
         Próximamente
       </a>
     </div>
@@ -105,10 +114,9 @@
     <div class="area-card comu">
       <h2>Comunicación</h2>
       <p>
-        Desarrolla comprensión lectora, redacción y argumentación
-        con apoyo guiado.
+        Mejora tu comprensión lectora y expresión escrita.
       </p>
-      <a href="#" class="btn disabled" onclick="seleccionarArea('comu')">
+      <a href="#" class="btn disabled">
         Próximamente
       </a>
     </div>
@@ -125,24 +133,24 @@
 </footer>
 
 <!-- ======================================================
-     SCRIPT IA (MENSAJE DINÁMICO)
+     SCRIPT
 ====================================================== -->
 <script>
+function seleccionarRol(rol) {
+  localStorage.setItem("rol", rol);
+}
+
 function seleccionarArea(area) {
   localStorage.setItem("areaElegida", area);
 }
 
 const mensajeIA = document.getElementById("mensaje-ia");
-const area = localStorage.getItem("areaElegida");
+const rol = localStorage.getItem("rol");
 
-if (area === "cyt") {
-  mensajeIA.textContent = "🔵 Explora, experimenta y pregunta";
-} 
-else if (area === "mate") {
-  mensajeIA.textContent = "🟢 Resuelve paso a paso con lógica";
-} 
-else if (area === "comu") {
-  mensajeIA.textContent = "🟣 Expresa ideas y mejora tu comunicación";
+if (rol === "docente") {
+  mensajeIA.textContent = "👩‍🏫 Acceso al panel docente";
+} else if (rol === "estudiante") {
+  mensajeIA.textContent = "🧑‍🎓 Selecciona un área para aprender";
 }
 </script>
 
