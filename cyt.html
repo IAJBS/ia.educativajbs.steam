@@ -40,16 +40,15 @@
 <section class="bienvenida" id="inicio">
   <h2>Inicio de sesión de aprendizaje</h2>
 
-  <p><strong>Tema del día:</strong></p>
-  <p id="temaDocente" style="color:#1e3a8a;font-weight:600;"></p>
+  <p><strong>Sección:</strong> <span id="seccionActiva"></span></p>
+  <p><strong>Tema del día:</strong> <span id="temaActivo"></span></p>
 
   <p>Código del estudiante:</p>
   <input type="text" id="codigoInput" placeholder="Ejemplo: 2A15">
 
-  <p>Sección:</p>
-  <input type="text" id="seccionInput" placeholder="Ejemplo: 2° A">
-
   <button onclick="iniciarSesion()">Iniciar</button>
+
+  <p id="mensajeError" style="color:#b91c1c; margin-top:10px;"></p>
 </section>
 
 <!-- ============ ACTIVACIÓN ============ -->
