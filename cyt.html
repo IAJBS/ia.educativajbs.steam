@@ -12,7 +12,6 @@
 <div class="modal-rol" id="modalRol">
   <div class="modal-contenido">
     <h2>Selecciona tu rol</h2>
-    <p>Indica cómo deseas ingresar</p>
     <div class="botones-rol">
       <button onclick="ingresarComoDocente()">👩‍🏫 Docente</button>
       <button onclick="ingresarComoEstudiante()">🎓 Estudiante</button>
@@ -20,33 +19,25 @@
   </div>
 </div>
 
-<!-- ================= HEADER ================= -->
 <header class="header">
   <div class="header-contenido">
-    <img src="img/insignia.png" class="insignia">
     <div class="titulo-cyt">
-      <h1>I.E.P. José Buenaventura Sepúlveda Fernández</h1>
-      <p>Plataforma educativa con inteligencia artificial</p>
+      <h1>Ciencia y Tecnología</h1>
+      <p>Tutor IA educativo</p>
     </div>
     <div class="ia-cyt">
-      <img src="img/emoji.png" class="avatar-ia">
-      <span id="mensaje-cyt">Explora la ciencia con curiosidad</span>
+      <span id="mensaje-cyt">Listo para aprender</span>
     </div>
   </div>
 </header>
-
-<section class="titulo-area">
-  <h1>CIENCIA Y TECNOLOGÍA</h1>
-  <p>Investiga, descubre y aprende</p>
-</section>
 
 <main class="contenedor">
 
 <!-- ================= INICIO ================= -->
 <section class="bienvenida" id="inicio">
-  <h2>Inicio de sesión</h2>
+  <h2>Inicio</h2>
   <p><strong>Sección:</strong> <span id="seccionActiva"></span></p>
-  <p><strong>Tema del día:</strong> <span id="temaActivo"></span></p>
+  <p><strong>Tema:</strong> <span id="temaActivo"></span></p>
 
   <input type="text" id="codigoInput" placeholder="Código del estudiante">
   <button onclick="iniciarSesion()">Iniciar</button>
@@ -54,15 +45,15 @@
 
 <!-- ================= ACTIVACIÓN ================= -->
 <section class="bienvenida" id="activacion" style="display:none;">
-  <h2>Antes de aprender…</h2>
+  <h2>Conocimientos previos</h2>
 
-  <p>¿Qué crees que significa este tema?</p>
+  <p>¿Qué sabes del tema?</p>
   <input type="text" id="idea1">
 
-  <p>¿Dónde lo has visto en la vida diaria?</p>
+  <p>¿Dónde lo has visto?</p>
   <input type="text" id="idea2">
 
-  <p>¿Qué te gustaría entender mejor?</p>
+  <p>¿Qué te gustaría aprender?</p>
   <input type="text" id="idea3">
 
   <button onclick="continuarTutor()">Continuar</button>
@@ -73,7 +64,7 @@
   <h2>Tutor IA</h2>
   <p id="textoTutor"></p>
 
-  <p><strong>Pregunta del Tutor:</strong></p>
+  <p><strong>Responde:</strong></p>
   <p id="preguntaTutor"></p>
 
   <input type="text" id="respuestaTutor">
@@ -82,26 +73,22 @@
 
 <!-- ================= METACOGNICIÓN ================= -->
 <section class="bienvenida" id="metacognicion" style="display:none;">
-  <h2>Reflexiona</h2>
+  <h2>Metacognición</h2>
 
-  <p>¿Qué aprendiste hoy?</p>
+  <p>¿Qué aprendiste?</p>
   <input type="text" id="p1">
 
   <p>¿Qué fue difícil?</p>
   <input type="text" id="p2">
 
-  <p>¿Podrías hacerlo solo la próxima vez?</p>
+  <p>¿Cómo mejorarías?</p>
   <input type="text" id="p3">
 
-  <button id="btnGuardar" disabled>Guardar reflexión</button>
+  <button id="btnGuardar" disabled onclick="guardarRespuestas()">Guardar</button>
   <p id="timer"></p>
 </section>
 
 </main>
-
-<footer class="footer">
-  <p>Tutor IA – Ciencia y Tecnología</p>
-</footer>
 
 <!-- ================= SCRIPT ================= -->
 <script>
@@ -115,82 +102,95 @@ function ingresarComoEstudiante() {
 }
 
 /* ===== VARIABLES ===== */
+let codigoEstudiante = "";
 const mensaje = document.getElementById("mensaje-cyt");
-const inicio = document.getElementById("inicio");
-const activacion = document.getElementById("activacion");
-const tutor = document.getElementById("tutor");
-const metacognicion = document.getElementById("metacognicion");
 
-const textoTutor = document.getElementById("textoTutor");
-const preguntaTutor = document.getElementById("preguntaTutor");
+const seccion = localStorage.getItem("cyt_seccion_activa") || "—";
+const tema = localStorage.getItem("cyt_tema_activo") || "—";
 
-const seccionSpan = document.getElementById("seccionActiva");
-const temaSpan = document.getElementById("temaActivo");
+document.getElementById("seccionActiva").textContent = seccion;
+document.getElementById("temaActivo").textContent = tema;
 
-/* ===== CONFIG DOCENTE ===== */
-const seccionActiva = localStorage.getItem("cyt_seccion_activa");
-const temaActivo = localStorage.getItem("cyt_tema_activo");
-
-seccionSpan.textContent = seccionActiva || "—";
-temaSpan.textContent = temaActivo || "—";
-
-/* ===== BASE DE CONOCIMIENTO DEL TUTOR ===== */
+/* ===== BASE TUTOR ===== */
 const tutorIA = {
   "Fotosíntesis": {
-    explicacion: "La fotosíntesis es el proceso mediante el cual las plantas producen su alimento usando luz solar, agua y dióxido de carbono.",
-    pregunta: "¿Por qué la fotosíntesis es importante para los seres vivos?"
+    texto: "La fotosíntesis permite a las plantas producir su alimento.",
+    pregunta: "¿Por qué es importante la fotosíntesis?"
   },
   "Energía": {
-    explicacion: "La energía es la capacidad de producir cambios. Puede presentarse como luz, calor, movimiento o electricidad.",
-    pregunta: "¿Qué tipo de energía usas más en tu vida diaria?"
-  },
-  "Célula": {
-    explicacion: "La célula es la unidad básica de los seres vivos. Todos los organismos están formados por células.",
-    pregunta: "¿Qué función cumple la célula en los seres vivos?"
+    texto: "La energía es necesaria para producir cambios.",
+    pregunta: "¿Qué tipo de energía usas más?"
   }
 };
 
-/* ===== INICIO ===== */
+/* ===== FLUJO ===== */
 function iniciarSesion() {
+  codigoEstudiante = document.getElementById("codigoInput").value.trim();
+  if (!codigoEstudiante) return alert("Ingresa tu código");
+
   inicio.style.display = "none";
   activacion.style.display = "block";
-  mensaje.textContent = "🧠 Hoy aprenderás sobre " + temaActivo;
+  mensaje.textContent = "Tema: " + tema;
 }
 
-/* ===== ACTIVACIÓN ===== */
 function continuarTutor() {
   activacion.style.display = "none";
   tutor.style.display = "block";
 
-  const data = tutorIA[temaActivo] || {
-    explicacion: "Este tema nos ayuda a comprender mejor el mundo que nos rodea mediante la ciencia.",
-    pregunta: "¿Qué idea principal puedes rescatar de este tema?"
+  const data = tutorIA[tema] || {
+    texto: "Este tema nos ayuda a comprender mejor la ciencia.",
+    pregunta: "¿Qué aprendiste del tema?"
   };
 
-  textoTutor.textContent = data.explicacion;
+  textoTutor.textContent = data.texto;
   preguntaTutor.textContent = data.pregunta;
 }
 
-/* ===== METACOGNICIÓN ===== */
 function avanzarMetacognicion() {
   tutor.style.display = "none";
   metacognicion.style.display = "block";
-  mensaje.textContent = "🔍 Reflexiona sobre tu aprendizaje";
+}
+
+/* ===== GUARDAR RESPUESTAS ===== */
+function guardarRespuestas() {
+  const registro = {
+    codigo: codigoEstudiante,
+    seccion,
+    tema,
+    activacion: {
+      idea1: idea1.value,
+      idea2: idea2.value,
+      idea3: idea3.value
+    },
+    tutor: respuestaTutor.value,
+    metacognicion: {
+      p1: p1.value,
+      p2: p2.value,
+      p3: p3.value
+    },
+    fecha: new Date().toLocaleString()
+  };
+
+  const datos = JSON.parse(localStorage.getItem("cyt_respuestas")) || [];
+  datos.push(registro);
+  localStorage.setItem("cyt_respuestas", JSON.stringify(datos));
+
+  alert("Respuestas guardadas correctamente");
+  location.reload();
 }
 
 /* ===== TIMER ===== */
-let segundos = 20;
+let segundos = 15;
 const btn = document.getElementById("btnGuardar");
 const timer = document.getElementById("timer");
 
 const intervalo = setInterval(() => {
-  timer.innerText = "Reflexiona al menos " + segundos + " segundos...";
+  timer.textContent = "Reflexiona " + segundos + " segundos...";
   segundos--;
   if (segundos < 0) {
     clearInterval(intervalo);
     btn.disabled = false;
-    btn.style.background = "#15803d";
-    timer.innerText = "Ahora puedes guardar tu reflexión.";
+    timer.textContent = "Ya puedes guardar";
   }
 }, 1000);
 </script>
