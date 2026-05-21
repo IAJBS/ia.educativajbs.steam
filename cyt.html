@@ -8,14 +8,11 @@
 
 <body class="bloqueado">
 
-<!-- ======================================================
-     MODAL SELECCIÓN DE ROL
-====================================================== -->
+<!-- ================= MODAL ROL ================= -->
 <div class="modal-rol" id="modalRol">
   <div class="modal-contenido">
     <h2>Selecciona tu rol</h2>
-    <p>Indica cómo deseas ingresar al área</p>
-
+    <p>Indica cómo deseas ingresar</p>
     <div class="botones-rol">
       <button onclick="ingresarComoDocente()">👩‍🏫 Docente</button>
       <button onclick="ingresarComoEstudiante()">🎓 Estudiante</button>
@@ -23,11 +20,12 @@
   </div>
 </div>
 
+<!-- ================= HEADER ================= -->
 <header class="header">
   <div class="header-contenido">
     <img src="img/insignia.png" class="insignia">
     <div class="titulo-cyt">
-      <h1>I.E.P. Jose Buenaventura Sepúlveda Fernández</h1>
+      <h1>I.E.P. José Buenaventura Sepúlveda Fernández</h1>
       <p>Plataforma educativa con inteligencia artificial</p>
     </div>
     <div class="ia-cyt">
@@ -46,7 +44,7 @@
 
 <!-- ================= INICIO ================= -->
 <section class="bienvenida" id="inicio">
-  <h2>Inicio de sesión de aprendizaje</h2>
+  <h2>Inicio de sesión</h2>
   <p><strong>Sección:</strong> <span id="seccionActiva"></span></p>
   <p><strong>Tema del día:</strong> <span id="temaActivo"></span></p>
 
@@ -54,40 +52,46 @@
   <button onclick="iniciarSesion()">Iniciar</button>
 </section>
 
-<!-- ============ ACTIVACIÓN ============ -->
+<!-- ================= ACTIVACIÓN ================= -->
 <section class="bienvenida" id="activacion" style="display:none;">
   <h2>Antes de aprender…</h2>
 
-  <input id="idea1" placeholder="¿Qué crees que significa este tema?">
-  <input id="idea2" placeholder="¿Dónde lo has visto en la vida diaria?">
-  <input id="idea3" placeholder="¿Qué te gustaría entender mejor?">
+  <p>¿Qué crees que significa este tema?</p>
+  <input type="text" id="idea1">
+
+  <p>¿Dónde lo has visto en la vida diaria?</p>
+  <input type="text" id="idea2">
+
+  <p>¿Qué te gustaría entender mejor?</p>
+  <input type="text" id="idea3">
 
   <button onclick="continuarTutor()">Continuar</button>
 </section>
 
-<!-- ============ TUTOR IA (CHAT) ============ -->
+<!-- ================= TUTOR IA ================= -->
 <section class="bienvenida" id="tutor" style="display:none;">
   <h2>Tutor IA</h2>
+  <p id="textoTutor"></p>
 
-  <div id="chat" style="background:#f9fafb;padding:10px;border-radius:8px;max-height:250px;overflow-y:auto;margin-bottom:10px;">
-    <p><strong>🤖 Tutor IA:</strong> Pensemos juntos sobre el tema.</p>
-  </div>
+  <p><strong>Pregunta del Tutor:</strong></p>
+  <p id="preguntaTutor"></p>
 
-  <input type="text" id="mensajeAlumno" placeholder="Escribe tu respuesta...">
-  <button onclick="enviarMensaje()">Enviar</button>
-
-  <button id="btnContinuar" onclick="avanzarMetacognicion()" disabled style="margin-top:10px;">
-    Continuar
-  </button>
+  <input type="text" id="respuestaTutor">
+  <button onclick="avanzarMetacognicion()">Continuar</button>
 </section>
 
-<!-- ============ METACOGNICIÓN ============ -->
+<!-- ================= METACOGNICIÓN ================= -->
 <section class="bienvenida" id="metacognicion" style="display:none;">
-  <h2>Reflexiona sobre tu aprendizaje</h2>
+  <h2>Reflexiona</h2>
 
-  <input placeholder="¿Qué aprendiste hoy?">
-  <input placeholder="¿Qué fue difícil?">
-  <input placeholder="¿Podrías hacerlo solo la próxima vez?">
+  <p>¿Qué aprendiste hoy?</p>
+  <input type="text" id="p1">
+
+  <p>¿Qué fue difícil?</p>
+  <input type="text" id="p2">
+
+  <p>¿Podrías hacerlo solo la próxima vez?</p>
+  <input type="text" id="p3">
 
   <button id="btnGuardar" disabled>Guardar reflexión</button>
   <p id="timer"></p>
@@ -99,8 +103,9 @@
   <p>Tutor IA – Ciencia y Tecnología</p>
 </footer>
 
+<!-- ================= SCRIPT ================= -->
 <script>
-/* ROL */
+/* ===== ROL ===== */
 function ingresarComoDocente() {
   window.location.href = "docente.html";
 }
@@ -109,69 +114,83 @@ function ingresarComoEstudiante() {
   document.body.classList.remove("bloqueado");
 }
 
-/* VARIABLES */
-const modalRol = document.getElementById("modalRol");
+/* ===== VARIABLES ===== */
 const mensaje = document.getElementById("mensaje-cyt");
 const inicio = document.getElementById("inicio");
 const activacion = document.getElementById("activacion");
 const tutor = document.getElementById("tutor");
 const metacognicion = document.getElementById("metacognicion");
+
+const textoTutor = document.getElementById("textoTutor");
+const preguntaTutor = document.getElementById("preguntaTutor");
+
 const seccionSpan = document.getElementById("seccionActiva");
 const temaSpan = document.getElementById("temaActivo");
 
+/* ===== CONFIG DOCENTE ===== */
 const seccionActiva = localStorage.getItem("cyt_seccion_activa");
 const temaActivo = localStorage.getItem("cyt_tema_activo");
 
-if (!seccionActiva || !temaActivo) {
-  inicio.innerHTML = "<h2>Clase no disponible</h2>";
-} else {
-  seccionSpan.textContent = seccionActiva;
-  temaSpan.textContent = temaActivo;
-}
+seccionSpan.textContent = seccionActiva || "—";
+temaSpan.textContent = temaActivo || "—";
 
-/* FLUJO */
+/* ===== BASE DE CONOCIMIENTO DEL TUTOR ===== */
+const tutorIA = {
+  "Fotosíntesis": {
+    explicacion: "La fotosíntesis es el proceso mediante el cual las plantas producen su alimento usando luz solar, agua y dióxido de carbono.",
+    pregunta: "¿Por qué la fotosíntesis es importante para los seres vivos?"
+  },
+  "Energía": {
+    explicacion: "La energía es la capacidad de producir cambios. Puede presentarse como luz, calor, movimiento o electricidad.",
+    pregunta: "¿Qué tipo de energía usas más en tu vida diaria?"
+  },
+  "Célula": {
+    explicacion: "La célula es la unidad básica de los seres vivos. Todos los organismos están formados por células.",
+    pregunta: "¿Qué función cumple la célula en los seres vivos?"
+  }
+};
+
+/* ===== INICIO ===== */
 function iniciarSesion() {
   inicio.style.display = "none";
   activacion.style.display = "block";
-  mensaje.textContent = "🧠 Hoy trabajaremos: " + temaActivo;
+  mensaje.textContent = "🧠 Hoy aprenderás sobre " + temaActivo;
 }
 
+/* ===== ACTIVACIÓN ===== */
 function continuarTutor() {
   activacion.style.display = "none";
   tutor.style.display = "block";
+
+  const data = tutorIA[temaActivo] || {
+    explicacion: "Este tema nos ayuda a comprender mejor el mundo que nos rodea mediante la ciencia.",
+    pregunta: "¿Qué idea principal puedes rescatar de este tema?"
+  };
+
+  textoTutor.textContent = data.explicacion;
+  preguntaTutor.textContent = data.pregunta;
 }
 
-/* CHAT IA */
-function enviarMensaje() {
-  const input = document.getElementById("mensajeAlumno");
-  const chat = document.getElementById("chat");
-
-  if (!input.value) return;
-
-  chat.innerHTML += `<p><strong>🧑 Estudiante:</strong> ${input.value}</p>`;
-  chat.innerHTML += `<p><strong>🤖 Tutor IA:</strong> Buena idea. ¿Por qué crees que eso ocurre?</p>`;
-
-  input.value = "";
-  document.getElementById("btnContinuar").disabled = false;
-}
-
-/* METACOGNICIÓN */
+/* ===== METACOGNICIÓN ===== */
 function avanzarMetacognicion() {
   tutor.style.display = "none";
   metacognicion.style.display = "block";
+  mensaje.textContent = "🔍 Reflexiona sobre tu aprendizaje";
 }
 
-/* TIMER */
-let s = 15;
+/* ===== TIMER ===== */
+let segundos = 20;
 const btn = document.getElementById("btnGuardar");
 const timer = document.getElementById("timer");
-const i = setInterval(() => {
-  timer.textContent = "Reflexiona " + s + " segundos...";
-  s--;
-  if (s < 0) {
-    clearInterval(i);
+
+const intervalo = setInterval(() => {
+  timer.innerText = "Reflexiona al menos " + segundos + " segundos...";
+  segundos--;
+  if (segundos < 0) {
+    clearInterval(intervalo);
     btn.disabled = false;
-    timer.textContent = "Puedes guardar tu reflexión.";
+    btn.style.background = "#15803d";
+    timer.innerText = "Ahora puedes guardar tu reflexión.";
   }
 }, 1000);
 </script>
