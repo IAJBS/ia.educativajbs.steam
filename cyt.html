@@ -12,22 +12,33 @@
 <div class="modal-rol" id="modalRol">
   <div class="modal-contenido">
     <h2>Selecciona tu rol</h2>
+
     <div class="botones-rol">
-      <button onclick="ingresarComoDocente()">👩‍🏫 Docente</button>
-      <button onclick="ingresarComoEstudiante()">🎓 Estudiante</button>
+      <button onclick="ingresarComoDocente()">
+        👩‍🏫 Docente
+      </button>
+
+      <button onclick="ingresarComoEstudiante()">
+        🎓 Estudiante
+      </button>
     </div>
   </div>
 </div>
 
 <header class="header">
   <div class="header-contenido">
+
     <div class="titulo-cyt">
       <h1>Ciencia y Tecnología</h1>
       <p>Tutor IA educativo</p>
     </div>
+
     <div class="ia-cyt">
-      <span id="mensaje-cyt">Listo para aprender</span>
+      <span id="mensaje-cyt">
+        Listo para aprender
+      </span>
     </div>
+
   </div>
 </header>
 
@@ -35,16 +46,39 @@
 
 <!-- ================= INICIO ================= -->
 <section class="bienvenida" id="inicio">
-  <h2>Inicio</h2>
-  <p><strong>Sección:</strong> <span id="seccionActiva"></span></p>
-  <p><strong>Tema:</strong> <span id="temaActivo"></span></p>
 
-  <input type="text" id="codigoInput" placeholder="Código del estudiante">
-  <button onclick="iniciarSesion()">Iniciar</button>
+  <h2>Inicio</h2>
+
+  <p>
+    <strong>Sección:</strong>
+    <span id="seccionActiva"></span>
+  </p>
+
+  <p>
+    <strong>Tema:</strong>
+    <span id="temaActivo"></span>
+  </p>
+
+  <input
+    type="text"
+    id="codigoInput"
+    placeholder="Código del estudiante"
+  >
+
+  <button onclick="iniciarSesion()">
+    Iniciar
+  </button>
+
 </section>
 
+
 <!-- ================= ACTIVACIÓN ================= -->
-<section class="bienvenida" id="activacion" style="display:none;">
+<section
+  class="bienvenida"
+  id="activacion"
+  style="display:none;"
+>
+
   <h2>Conocimientos previos</h2>
 
   <p>¿Qué sabes del tema?</p>
@@ -56,23 +90,56 @@
   <p>¿Qué te gustaría aprender?</p>
   <input type="text" id="idea3">
 
-  <button onclick="continuarTutor()">Continuar</button>
+  <button onclick="continuarTutor()">
+    Continuar
+  </button>
+
 </section>
+
 
 <!-- ================= TUTOR IA ================= -->
-<section class="bienvenida" id="tutor" style="display:none;">
+<section
+  class="bienvenida"
+  id="tutor"
+  style="display:none;"
+>
+
   <h2>Tutor IA</h2>
-  <p id="textoTutor"></p>
 
-  <p><strong>Responde:</strong></p>
-  <p id="preguntaTutor"></p>
+  <div
+    id="chatTutor"
+    style="
+      max-height:500px;
+      overflow-y:auto;
+      margin-bottom:15px;
+      padding-right:5px;
+    "
+  ></div>
 
-  <input type="text" id="respuestaTutor">
-  <button onclick="avanzarMetacognicion()">Continuar</button>
+  <input
+    type="text"
+    id="respuestaTutor"
+    placeholder="Escribe tu respuesta o haz una pregunta..."
+  >
+
+  <button onclick="responderTutor()">
+    Enviar respuesta
+  </button>
+
+  <button onclick="avanzarMetacognicion()">
+    Ir a metacognición
+  </button>
+
 </section>
 
+
 <!-- ================= METACOGNICIÓN ================= -->
-<section class="bienvenida" id="metacognicion" style="display:none;">
+<section
+  class="bienvenida"
+  id="metacognicion"
+  style="display:none;"
+>
+
   <h2>Metacognición</h2>
 
   <p>¿Qué aprendiste?</p>
@@ -84,115 +151,713 @@
   <p>¿Cómo mejorarías?</p>
   <input type="text" id="p3">
 
-  <button id="btnGuardar" disabled onclick="guardarRespuestas()">Guardar</button>
+  <button
+    id="btnGuardar"
+    disabled
+    onclick="guardarRespuestas()"
+  >
+    Guardar
+  </button>
+
   <p id="timer"></p>
+
 </section>
 
 </main>
 
+
 <!-- ================= SCRIPT ================= -->
 <script>
-/* ===== ROL ===== */
+
+/* ======================================================
+   API KEY
+====================================================== */
+
+const API_KEY =
+"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";
+
+
+/* ======================================================
+   ROL
+====================================================== */
+
 function ingresarComoDocente() {
-  window.location.href = "docente.html";
+
+  window.location.href =
+  "docente.html";
+
 }
+
 function ingresarComoEstudiante() {
+
   modalRol.style.display = "none";
-  document.body.classList.remove("bloqueado");
+
+  document.body.classList.remove(
+    "bloqueado"
+  );
+
 }
 
-/* ===== VARIABLES ===== */
+
+/* ======================================================
+   VARIABLES
+====================================================== */
+
 let codigoEstudiante = "";
-const mensaje = document.getElementById("mensaje-cyt");
 
-const seccion = localStorage.getItem("cyt_seccion_activa") || "—";
-const tema = localStorage.getItem("cyt_tema_activo") || "—";
+let historialChat = [];
 
-document.getElementById("seccionActiva").textContent = seccion;
-document.getElementById("temaActivo").textContent = tema;
+const mensaje =
+document.getElementById(
+  "mensaje-cyt"
+);
 
-/* ===== BASE TUTOR ===== */
-const tutorIA = {
-  "Fotosíntesis": {
-    texto: "La fotosíntesis permite a las plantas producir su alimento.",
-    pregunta: "¿Por qué es importante la fotosíntesis?"
-  },
-  "Energía": {
-    texto: "La energía es necesaria para producir cambios.",
-    pregunta: "¿Qué tipo de energía usas más?"
-  }
-};
+const seccion =
+localStorage.getItem(
+  "cyt_seccion_activa"
+) || "—";
 
-/* ===== FLUJO ===== */
+const tema =
+localStorage.getItem(
+  "cyt_tema_activo"
+) || "—";
+
+document.getElementById(
+  "seccionActiva"
+).textContent = seccion;
+
+document.getElementById(
+  "temaActivo"
+).textContent = tema;
+
+
+/* ======================================================
+   INICIAR SESIÓN
+====================================================== */
+
 function iniciarSesion() {
-  codigoEstudiante = document.getElementById("codigoInput").value.trim();
-  if (!codigoEstudiante) return alert("Ingresa tu código");
+
+  codigoEstudiante =
+  document.getElementById(
+    "codigoInput"
+  ).value.trim();
+
+  if (!codigoEstudiante)
+    return alert(
+      "Ingresa tu código"
+    );
 
   inicio.style.display = "none";
+
   activacion.style.display = "block";
-  mensaje.textContent = "Tema: " + tema;
+
+  mensaje.textContent =
+  "Tema: " + tema;
+
 }
 
-function continuarTutor() {
+
+/* ======================================================
+   INICIAR TUTOR IA
+====================================================== */
+
+async function continuarTutor() {
+
   activacion.style.display = "none";
+
   tutor.style.display = "block";
 
-  const data = tutorIA[tema] || {
-    texto: "Este tema nos ayuda a comprender mejor la ciencia.",
-    pregunta: "¿Qué aprendiste del tema?"
-  };
+  const chat =
+  document.getElementById(
+    "chatTutor"
+  );
 
-  textoTutor.textContent = data.texto;
-  preguntaTutor.textContent = data.pregunta;
+  chat.innerHTML =
+  `
+  <div style="
+    background:linear-gradient(135deg,#dbeafe,#eff6ff);
+    padding:18px;
+    border-radius:18px;
+    border-left:6px solid #2563eb;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    line-height:1.8;
+    font-size:16px;
+    color:#1e293b;
+  ">
+    🤖 La IA está iniciando la tutoría...
+  </div>
+  `;
+
+
+
+  historialChat = [
+
+    {
+
+      role: "system",
+
+      content:
+      `
+      Eres un tutor educativo inteligente
+      de Ciencia y Tecnología.
+
+      Tu trabajo es acompañar al estudiante
+      paso a paso.
+
+      IMPORTANTE:
+
+      - NO respondas como chatbot simple.
+      - NO des respuestas completas.
+      - NO hagas textos aburridos.
+      - NO enseñes como Wikipedia.
+
+      Debes enseñar:
+
+      - paso a paso,
+      - con preguntas,
+      - acompañando,
+      - motivando,
+      - desarrollando pensamiento crítico.
+
+      =================================================
+
+      FORMA DE RESPONDER
+
+      =================================================
+
+      Tus respuestas SIEMPRE deben:
+
+      ✅ verse bonitas
+      ✅ usar emojis
+      ✅ usar títulos
+      ✅ usar espacios
+      ✅ ser fáciles de leer
+      ✅ motivar al estudiante
+
+      =================================================
+
+      SIEMPRE HAZ ESTO
+
+      =================================================
+
+      1. Explica poco a poco.
+      2. Haz una pregunta.
+      3. Espera respuesta.
+      4. Permite preguntas libres.
+      5. Continúa guiando.
+
+      =================================================
+
+      MUY IMPORTANTE
+
+      =================================================
+
+      Después de cada mensaje escribe:
+
+      💬 Puedes responder
+      o hacer una pregunta antes
+      de continuar.
+
+      =================================================
+
+      SI EL ESTUDIANTE SE EQUIVOCA
+
+      =================================================
+
+      NO digas:
+      "Incorrecto"
+
+      Mejor di:
+
+      ✨ Buena idea.
+      Vas por buen camino.
+
+      Luego corrige poco a poco.
+
+      =================================================
+
+      ESTILO
+
+      =================================================
+
+      Habla como un profesor guía,
+      amigable y paciente.
+
+      Usa ejemplos cotidianos.
+
+      Usa preguntas reflexivas.
+
+      Fomenta razonamiento.
+      `
+
+    },
+
+    {
+
+      role: "user",
+
+      content:
+      `
+      Tema: ${tema}
+
+      El estudiante respondió:
+
+      Qué sabe:
+      ${idea1.value}
+
+      Dónde lo ha visto:
+      ${idea2.value}
+
+      Qué quiere aprender:
+      ${idea3.value}
+
+      Inicia la tutoría educativa.
+      `
+
+    }
+
+  ];
+
+
+
+  try {
+
+    const respuesta = await fetch(
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
+
+        method: "POST",
+
+        headers: {
+
+          "Content-Type":
+          "application/json",
+
+          "Authorization":
+          `Bearer ${API_KEY}`
+
+        },
+
+        body: JSON.stringify({
+
+          model:
+          "openai/gpt-oss-120b",
+
+          messages:
+          historialChat,
+
+          temperature: 1,
+
+          max_tokens: 700
+
+        })
+
+      }
+    );
+
+
+
+    const data =
+    await respuesta.json();
+
+
+
+    const mensajeIA =
+    data.choices[0]
+    .message.content;
+
+
+
+    historialChat.push({
+
+      role: "assistant",
+
+      content: mensajeIA
+
+    });
+
+
+
+    chat.innerHTML +=
+    `
+    <div style="
+      background:linear-gradient(135deg,#dbeafe,#eff6ff);
+      padding:18px;
+      border-radius:18px;
+      margin-bottom:15px;
+      border-left:6px solid #2563eb;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+      line-height:1.8;
+      font-size:16px;
+      color:#1e293b;
+    ">
+
+      <div style="
+        font-size:18px;
+        font-weight:bold;
+        margin-bottom:10px;
+        color:#1d4ed8;
+      ">
+        🤖 Tutor IA
+      </div>
+
+      <div>
+        ${mensajeIA
+          .replace(/\n/g,"<br>")
+          .replace(/\*\*(.*?)\*\*/g,"<b>$1</b>")
+        }
+      </div>
+
+    </div>
+    `;
+
+  } catch(error) {
+
+    console.log(error);
+
+    chat.innerHTML =
+    `
+    <div style="
+      background:#fee2e2;
+      padding:15px;
+      border-radius:12px;
+      color:#991b1b;
+    ">
+      Error al conectar con la IA.
+    </div>
+    `;
+
+  }
+
 }
+
+
+/* ======================================================
+   RESPONDER AL TUTOR
+====================================================== */
+
+async function responderTutor() {
+
+  const input =
+  document.getElementById(
+    "respuestaTutor"
+  );
+
+  const respuestaAlumno =
+  input.value;
+
+  if(!respuestaAlumno) return;
+
+  const chat =
+  document.getElementById(
+    "chatTutor"
+  );
+
+
+
+  chat.innerHTML +=
+  `
+  <div style="
+    background:linear-gradient(135deg,#dcfce7,#f0fdf4);
+    padding:16px;
+    border-radius:18px;
+    margin-bottom:15px;
+    text-align:right;
+    border-right:6px solid #16a34a;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+    line-height:1.7;
+    font-size:16px;
+  ">
+
+    <strong style="
+      color:#15803d;
+      font-size:17px;
+    ">
+      🎓 Tú
+    </strong>
+
+    <br><br>
+
+    ${respuestaAlumno}
+
+  </div>
+  `;
+
+
+
+  historialChat.push({
+
+    role: "user",
+
+    content: respuestaAlumno
+
+  });
+
+
+
+  input.value = "";
+
+
+
+  chat.innerHTML +=
+  `
+  <div id="pensandoIA" style="
+    background:#fef9c3;
+    padding:15px;
+    border-radius:15px;
+    margin-bottom:15px;
+    color:#854d0e;
+    font-weight:bold;
+  ">
+    🤖 La IA está pensando...
+  </div>
+  `;
+
+
+
+  chat.scrollTop =
+  chat.scrollHeight;
+
+
+
+  try {
+
+    const respuesta = await fetch(
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
+
+        method: "POST",
+
+        headers: {
+
+          "Content-Type":
+          "application/json",
+
+          "Authorization":
+          `Bearer ${API_KEY}`
+
+        },
+
+        body: JSON.stringify({
+
+          model:
+          "openai/gpt-oss-120b",
+
+          messages:
+          historialChat,
+
+          temperature: 1,
+
+          max_tokens: 700
+
+        })
+
+      }
+    );
+
+
+
+    document
+    .getElementById(
+      "pensandoIA"
+    )
+    .remove();
+
+
+
+    const data =
+    await respuesta.json();
+
+
+
+    const mensajeIA =
+    data.choices[0]
+    .message.content;
+
+
+
+    historialChat.push({
+
+      role: "assistant",
+
+      content: mensajeIA
+
+    });
+
+
+
+    chat.innerHTML +=
+    `
+    <div style="
+      background:linear-gradient(135deg,#dbeafe,#eff6ff);
+      padding:18px;
+      border-radius:18px;
+      margin-bottom:15px;
+      border-left:6px solid #2563eb;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+      line-height:1.8;
+      font-size:16px;
+      color:#1e293b;
+    ">
+
+      <div style="
+        font-size:18px;
+        font-weight:bold;
+        margin-bottom:10px;
+        color:#1d4ed8;
+      ">
+        🤖 Tutor IA
+      </div>
+
+      <div>
+        ${mensajeIA
+          .replace(/\n/g,"<br>")
+          .replace(/\*\*(.*?)\*\*/g,"<b>$1</b>")
+        }
+      </div>
+
+    </div>
+    `;
+
+
+
+    chat.scrollTop =
+    chat.scrollHeight;
+
+
+
+  } catch(error) {
+
+    console.log(error);
+
+  }
+
+}
+
+
+/* ======================================================
+   METACOGNICIÓN
+====================================================== */
 
 function avanzarMetacognicion() {
+
   tutor.style.display = "none";
-  metacognicion.style.display = "block";
+
+  metacognicion.style.display =
+  "block";
+
 }
 
-/* ===== GUARDAR RESPUESTAS ===== */
+
+/* ======================================================
+   GUARDAR RESPUESTAS
+====================================================== */
+
 function guardarRespuestas() {
+
   const registro = {
-    codigo: codigoEstudiante,
+
+    codigo:
+    codigoEstudiante,
+
     seccion,
+
     tema,
+
     activacion: {
+
       idea1: idea1.value,
       idea2: idea2.value,
       idea3: idea3.value
+
     },
-    tutor: respuestaTutor.value,
+
     metacognicion: {
+
       p1: p1.value,
       p2: p2.value,
       p3: p3.value
+
     },
-    fecha: new Date().toLocaleString()
+
+    fecha:
+    new Date()
+    .toLocaleString()
+
   };
 
-  const datos = JSON.parse(localStorage.getItem("cyt_respuestas")) || [];
-  datos.push(registro);
-  localStorage.setItem("cyt_respuestas", JSON.stringify(datos));
 
-  alert("Respuestas guardadas correctamente");
+
+  const datos =
+  JSON.parse(
+    localStorage.getItem(
+      "cyt_respuestas"
+    )
+  ) || [];
+
+
+
+  datos.push(registro);
+
+
+
+  localStorage.setItem(
+    "cyt_respuestas",
+    JSON.stringify(datos)
+  );
+
+
+
+  alert(
+    "Respuestas guardadas correctamente"
+  );
+
+
+
   location.reload();
+
 }
 
-/* ===== TIMER ===== */
-let segundos = 15;
-const btn = document.getElementById("btnGuardar");
-const timer = document.getElementById("timer");
 
-const intervalo = setInterval(() => {
-  timer.textContent = "Reflexiona " + segundos + " segundos...";
+/* ======================================================
+   TIMER
+====================================================== */
+
+let segundos = 15;
+
+const btn =
+document.getElementById(
+  "btnGuardar"
+);
+
+const timer =
+document.getElementById(
+  "timer"
+);
+
+const intervalo =
+setInterval(() => {
+
+  timer.textContent =
+  "Reflexiona "
+  + segundos +
+  " segundos...";
+
   segundos--;
+
   if (segundos < 0) {
+
     clearInterval(intervalo);
+
     btn.disabled = false;
-    timer.textContent = "Ya puedes guardar";
+
+    timer.textContent =
+    "Ya puedes guardar";
+
   }
+
 }, 1000);
+
 </script>
 
 </body>
