@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Administrador | Plataforma CYT</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <h1>Panel de Administración</h1>
+  <p>Gestión de Docentes – Plataforma CYT</p>
+</header>
+
+<!-- LOGIN ADMIN -->
+<section id="loginAdmin" class="login">
+  <h2>Acceso Administrador</h2>
+  <input type="password" id="codigoAdmin" placeholder="Ingrese código de acceso">
+  <button onclick="verificarCodigo()">Ingresar</button>
+  <p id="errorLogin"></p>
+</section>
+
+<!-- PANEL ADMIN -->
+<section id="panelAdmin" class="panel oculto">
+
+  <h2>Registrar Docente</h2>
+
+  <div class="formulario">
+    <input type="text" id="dni" placeholder="DNI del docente">
+    <input type="text" id="nombre" placeholder="Nombres y apellidos">
+    <input type="text" id="especialidad" placeholder="Especialidad">
+    <input type="email" id="correo" placeholder="Correo institucional">
+    <button onclick="registrarDocente()">Registrar</button>
+  </div>
+
+  <h2>Docentes Registrados</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>DNI</th>
+        <th>Nombre</th>
+        <th>Especialidad</th>
+        <th>Correo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="tablaDocentes"></tbody>
+  </table>
+
+</section>
+
+<script src="js/admin.js"></script>
+</body>
+</html>
