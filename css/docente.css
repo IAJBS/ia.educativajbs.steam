@@ -1,3 +1,65 @@
+/* ================= HEADER DOCENTE ================= */
+
+.header {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  padding: 18px 0;
+  color: white;
+}
+
+.header-contenido {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 20px;
+}
+
+.insignia {
+  width: 65px;
+}
+
+.texto-header h1 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.texto-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.texto-header p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+/* ================= IA HEADER ================= */
+
+.ia-header {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar-ia {
+  width: 45px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.avatar-ia:hover {
+  transform: scale(1.1);
+}
+
+#mensaje-ia {
+  font-size: 13px;
+  max-width: 180px;
+}
 * {
   box-sizing: border-box;
   font-family: 'Segoe UI', sans-serif;
