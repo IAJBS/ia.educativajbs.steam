@@ -11,7 +11,9 @@ function loginDocente() {
   const user = usuario.value.trim();
   const pass = clave.value.trim();
 
-  const docente = docentes.find(d => d.dni === user && d.clave === pass);
+  const docente = docentes.find(
+  d => d.usuario === user && d.password === pass
+);
   if (!docente) {
     errorLogin.textContent = "Usuario o contraseña incorrectos";
     return;
