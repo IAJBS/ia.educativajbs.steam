@@ -112,3 +112,22 @@ input, select, textarea {
 
 .mensaje { color: #6b7280; }
 .error { color: #dc2626; }
+/* ===== CERRAR SESIÓN ===== */
+.acciones-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.btn-cerrar {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-cerrar:hover {
+  background: #b91c1c;
+}
