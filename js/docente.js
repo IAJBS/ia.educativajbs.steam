@@ -12,8 +12,9 @@ function loginDocente() {
   const pass = clave.value.trim();
 
   const docente = docentes.find(
-  d => d.usuario === user && d.password === pass
-);
+    d => d.usuario === user && d.password === pass
+  );
+
   if (!docente) {
     errorLogin.textContent = "Usuario o contraseña incorrectos";
     return;
@@ -27,6 +28,12 @@ if (docenteActivo) {
   loginBox.classList.add("oculto");
   panel.classList.remove("oculto");
   saludo.textContent = `Bienvenido, ${docenteActivo.nombre}`;
+}
+
+// ================= CERRAR SESIÓN =================
+function cerrarSesion() {
+  localStorage.removeItem("docenteActivo");
+  location.reload();
 }
 
 // ================= CLASES =================
@@ -47,17 +54,28 @@ function volverATabla() {
 }
 
 function guardarClase() {
-  if (!grado.value || !seccion.value || !titulo.value) return;
+  if (!grado.value || !seccion.value || !tema.value || !titulo.value) {
+    alert("Completa grado, sección, tema y título");
+    return;
+  }
 
   clases.push({
     grado: grado.value,
     seccion: seccion.value,
+    tema: tema.value,
     titulo: titulo.value,
     estado: "Registrada"
   });
 
   localStorage.setItem("clases_docente", JSON.stringify(clases));
-  form.reset();
+
+  grado.value = "";
+  seccion.value = "";
+  tema.value = "";
+  titulo.value = "";
+  proposito.value = "";
+  criterios.value = "";
+
   volverATabla();
   renderTabla();
 }
@@ -79,6 +97,7 @@ function renderTabla() {
       <tr>
         <td>${c.grado}</td>
         <td>${c.seccion}</td>
+        <td>${c.tema}</td>
         <td>${c.titulo}</td>
         <td>${c.estado}</td>
         <td class="acciones">
@@ -103,12 +122,3 @@ function eliminar(i) {
 }
 
 renderTabla();
-
-// ================= IA HEADER =================
-const avatarIA = document.querySelector(".avatar-ia");
-const mensajeIA = document.getElementById("mensaje-ia");
-
-avatarIA.addEventListener("click", () => {
-  mensajeIA.textContent =
-    "Aquí puedes registrar, activar y gestionar tus clases.";
-});
