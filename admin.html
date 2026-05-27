@@ -8,13 +8,11 @@
 
 <body>
 
-<!-- ======================================================
-     HEADER (IDÉNTICO AL INDEX)
-====================================================== -->
+<!-- HEADER (IGUAL AL INDEX) -->
 <header class="header">
   <div class="header-contenido">
 
-    <img src="img/insignia.png" alt="Insignia" class="insignia">
+    <img src="img/insignia.png" class="insignia">
 
     <div class="texto-header">
       <h1>Institución Educativa</h1>
@@ -23,16 +21,14 @@
     </div>
 
     <div class="ia-header">
-      <img src="img/emoji.png" alt="Asistente IA" class="avatar-ia">
-      <span id="mensaje-ia">Panel Directivo</span>
+      <img src="img/emoji.png" class="avatar-ia">
+      <span>PANEL DIRECTIVO</span>
     </div>
 
   </div>
 </header>
 
-<!-- ======================================================
-     LOGIN DIRECTIVO
-====================================================== -->
+<!-- LOGIN -->
 <section id="login" class="login-box">
   <h2>PANEL DIRECTIVO</h2>
 
@@ -40,28 +36,53 @@
   <input type="password" id="clave" placeholder="Contraseña">
 
   <button onclick="login()">Ingresar</button>
-
   <p id="error"></p>
 </section>
 
-<!-- ======================================================
-     PANEL ADMINISTRADOR
-====================================================== -->
+<!-- PANEL -->
 <section id="panel" class="panel oculto">
 
   <h2>Gestión de Docentes</h2>
 
-  <!-- FORMULARIO -->
   <div class="formulario">
+
     <input type="text" id="dni" placeholder="DNI">
     <input type="text" id="nombre" placeholder="Nombres">
-    <input type="text" id="especialidad" placeholder="Especialidad">
     <input type="email" id="correo" placeholder="Correo">
+    <input type="text" id="celular" placeholder="Celular">
+
+    <!-- ÁREA -->
+    <select id="area" onchange="verificarEPT()">
+      <option value="">Seleccionar Área</option>
+      <option>Matemática</option>
+      <option>Comunicación</option>
+      <option>Ciencia y Tecnología</option>
+      <option>Ciencias Sociales</option>
+      <option>Tutoría</option>
+      <option>Inglés</option>
+      <option>Educación Religiosa</option>
+      <option>Educación Física</option>
+      <option>Desarrollo Personal, Ciudadanía y Cívica</option>
+      <option>Educación para el Trabajo</option>
+    </select>
+
+    <!-- EPT (OCULTO POR DEFECTO) -->
+    <select id="especialidadEPT" class="oculto">
+      <option value="">Seleccionar Especialidad EPT</option>
+      <option>Computación e Informática</option>
+      <option>Gastronomía</option>
+      <option>Mecánica Automotriz</option>
+      <option>Construcciones Metálicas</option>
+      <option>Carpintería</option>
+      <option>Electricidad</option>
+      <option>Agronomía</option>
+      <option>Contabilidad</option>
+    </select>
 
     <button onclick="agregarDocente()">Registrar Docente</button>
+
   </div>
 
-  <!-- LISTA -->
   <h3>Docentes registrados</h3>
 
   <table>
@@ -69,8 +90,10 @@
       <tr>
         <th>DNI</th>
         <th>Nombre</th>
+        <th>Área</th>
         <th>Especialidad</th>
-        <th>Correo</th>
+        <th>Usuario</th>
+        <th>Contraseña</th>
         <th>Acciones</th>
       </tr>
     </thead>
