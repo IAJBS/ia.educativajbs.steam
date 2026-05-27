@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Panel Docente - Ciencia y Tecnología</title>
+  <title>Panel Docente</title>
   <link rel="stylesheet" href="css/docente.css">
 </head>
 
@@ -13,7 +13,7 @@
     <img src="img/insignia.png" class="insignia">
     <div class="titulo-colegio">
       <h1>I.E.P. José Buenaventura Sepúlveda Fernández</h1>
-      <p>Panel docente – Ciencia y Tecnología</p>
+      <p>Panel Docente</p>
     </div>
     <div class="docente-icono">👩‍🏫</div>
   </div>
@@ -21,28 +21,52 @@
 
 <main class="contenedor">
 
-  <!-- REGISTRAR SECCIÓN -->
   <section class="card">
-    <h2>Registrar sección</h2>
-    <input type="text" id="seccionNueva" placeholder="Ejemplo: 2° A">
-    <button onclick="agregarSeccion()">Agregar sección</button>
+    <h2 id="bienvenida">Bienvenido/a</h2>
   </section>
 
-  <!-- REGISTRAR TEMA -->
+  <!-- FORMULARIO DE CLASE -->
   <section class="card">
-    <h2>Agregar tema</h2>
-    <select id="seccionTema"></select>
-    <input type="text" id="temaNuevo" placeholder="Ejemplo: Método científico">
-    <button onclick="agregarTema()">Agregar tema</button>
+    <h2>Registrar clase</h2>
+
+    <select id="grado">
+      <option value="">Seleccione grado</option>
+      <option>1°</option><option>2°</option><option>3°</option>
+      <option>4°</option><option>5°</option>
+    </select>
+
+    <select id="seccion">
+      <option value="">Seleccione sección</option>
+      <option>A</option><option>B</option><option>C</option>
+      <option>D</option><option>E</option><option>F</option>
+      <option>G</option><option>H</option>
+    </select>
+
+    <input type="text" id="tema" placeholder="Tema">
+    <input type="text" id="titulo" placeholder="Título de la clase">
+    <textarea id="proposito" placeholder="Propósito de la clase"></textarea>
+    <textarea id="criterios" placeholder="Criterios de evaluación"></textarea>
+    <input type="file" id="archivo">
+
+    <button id="guardarClase">Guardar clase</button>
   </section>
 
-  <!-- ACTIVAR CLASE -->
+  <!-- TABLA -->
   <section class="card">
-    <h2>Activar clase del día</h2>
-    <select id="seccionActiva"></select>
-    <select id="temaActivo"></select>
-    <button onclick="activarClase()">Activar clase</button>
-    <p id="estado" class="estado"></p>
+    <h2>Clases registradas</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Grado</th>
+          <th>Sección</th>
+          <th>Título</th>
+          <th>Tema</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tablaClases"></tbody>
+    </table>
   </section>
 
 </main>
@@ -51,54 +75,6 @@
   <p>Plataforma educativa con IA</p>
 </footer>
 
-<script>
-let data = JSON.parse(localStorage.getItem("cyt_docente")) || {};
-
-function guardar() {
-  localStorage.setItem("cyt_docente", JSON.stringify(data));
-  cargarSelects();
-}
-
-function agregarSeccion() {
-  const s = seccionNueva.value.trim();
-  if (!s) return alert("Escribe una sección");
-  if (!data[s]) data[s] = [];
-  guardar();
-}
-
-function agregarTema() {
-  const s = seccionTema.value;
-  const t = temaNuevo.value.trim();
-  if (!t) return alert("Escribe un tema");
-  data[s].push(t);
-  guardar();
-}
-
-function activarClase() {
-  localStorage.setItem("cyt_seccion_activa", seccionActiva.value);
-  localStorage.setItem("cyt_tema_activo", temaActivo.value);
-  estado.textContent = "✅ Clase activada correctamente";
-}
-
-function cargarSelects() {
-  [seccionTema, seccionActiva].forEach(sel => {
-    sel.innerHTML = "";
-    Object.keys(data).forEach(s => {
-      sel.innerHTML += `<option>${s}</option>`;
-    });
-  });
-
-  seccionActiva.onchange = () => {
-    temaActivo.innerHTML = "";
-    data[seccionActiva.value].forEach(t => {
-      temaActivo.innerHTML += `<option>${t}</option>`;
-    });
-  };
-  seccionActiva.onchange();
-}
-
-cargarSelects();
-</script>
-
+<script src="js/docente.js"></script>
 </body>
 </html>
