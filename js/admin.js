@@ -1,66 +1,54 @@
-const CODIGO_ADMIN = "PROYECTOJBS";
+const USUARIO = "DIRECTIVOJBS";
+const CLAVE = "PROYECTOJBS";
+
 let docentes = JSON.parse(localStorage.getItem("docentes")) || [];
 
-function verificarCodigo() {
-  const codigo = document.getElementById("codigoAdmin").value;
+function login() {
+  const u = document.getElementById("usuario").value;
+  const c = document.getElementById("clave").value;
 
-  if (codigo === CODIGO_ADMIN) {
-    document.getElementById("loginAdmin").style.display = "none";
-    document.getElementById("panelAdmin").classList.remove("oculto");
+  if (u === USUARIO && c === CLAVE) {
+    document.getElementById("login").classList.add("oculto");
+    document.getElementById("panel").classList.remove("oculto");
     cargarDocentes();
   } else {
-    document.getElementById("errorLogin").innerText = "Código incorrecto";
+    document.getElementById("error").textContent = "Acceso incorrecto";
   }
 }
 
-function registrarDocente() {
+function agregarDocente() {
   const dni = document.getElementById("dni").value;
   const nombre = document.getElementById("nombre").value;
   const especialidad = document.getElementById("especialidad").value;
   const correo = document.getElementById("correo").value;
 
-  if (!dni || !nombre || !especialidad || !correo) {
-    alert("Complete todos los campos");
-    return;
-  }
-
   docentes.push({ dni, nombre, especialidad, correo });
+
   localStorage.setItem("docentes", JSON.stringify(docentes));
 
-  limpiarFormulario();
   cargarDocentes();
 }
 
 function cargarDocentes() {
-  const tabla = document.getElementById("tablaDocentes");
+  const tabla = document.getElementById("listaDocentes");
+
   tabla.innerHTML = "";
 
-  docentes.forEach((docente, index) => {
+  docentes.forEach((d, i) => {
     tabla.innerHTML += `
       <tr>
-        <td>${docente.dni}</td>
-        <td>${docente.nombre}</td>
-        <td>${docente.especialidad}</td>
-        <td>${docente.correo}</td>
-        <td>
-          <button onclick="eliminarDocente(${index})">Eliminar</button>
-        </td>
+        <td>${d.dni}</td>
+        <td>${d.nombre}</td>
+        <td>${d.especialidad}</td>
+        <td>${d.correo}</td>
+        <td><button onclick="eliminar(${i})">Eliminar</button></td>
       </tr>
     `;
   });
 }
 
-function eliminarDocente(index) {
-  if (confirm("¿Eliminar docente?")) {
-    docentes.splice(index, 1);
-    localStorage.setItem("docentes", JSON.stringify(docentes));
-    cargarDocentes();
-  }
-}
-
-function limpiarFormulario() {
-  document.getElementById("dni").value = "";
-  document.getElementById("nombre").value = "";
-  document.getElementById("especialidad").value = "";
-  document.getElementById("correo").value = "";
+function eliminar(i) {
+  docentes.splice(i, 1);
+  localStorage.setItem("docentes", JSON.stringify(docentes));
+  cargarDocentes();
 }
