@@ -1,48 +1,124 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f9;
+/* RESET */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
+/* FONDO GENERAL */
+body {
+  background: #f3f4f6;
+}
+
+/* ================= HEADER (COPIADO DEL INDEX) ================= */
 .header {
-  background: #0b3c5d;
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
   color: white;
-  padding: 20px;
+  padding: 25px 20px;
+}
+
+.header-contenido {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.insignia {
+  width: 90px;
+}
+
+.texto-header h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.texto-header h2 {
+  font-size: 30px;
+}
+
+.texto-header p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* IA HEADER */
+.ia-header {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.15);
+  padding: 10px 16px;
+  border-radius: 30px;
+}
+
+.avatar-ia {
+  width: 45px;
+  height: 45px;
+}
+
+/* ================= LOGIN ================= */
+.login-box {
+  max-width: 400px;
+  margin: 40px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
   text-align: center;
 }
 
-.login, .panel {
-  max-width: 900px;
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background: #1e3a8a;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* ================= PANEL ================= */
+.panel {
+  max-width: 1000px;
   margin: 30px auto;
   background: white;
   padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 12px;
 }
 
-input {
-  width: 100%;
+/* FORM */
+.formulario {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.formulario input {
   padding: 10px;
-  margin: 8px 0;
 }
 
+/* BOTÓN */
 button {
-  background: #1f7a8c;
+  background: #1e3a8a;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px;
   cursor: pointer;
-  border-radius: 4px;
 }
 
-button:hover {
-  background: #145c6e;
-}
-
+/* TABLA */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 15px;
 }
 
 th, td {
@@ -52,14 +128,17 @@ th, td {
 }
 
 th {
-  background: #eaeaea;
+  background: #1e3a8a;
+  color: white;
 }
 
+/* OCULTAR */
 .oculto {
   display: none;
 }
 
-#errorLogin {
+/* ERROR */
+#error {
   color: red;
   margin-top: 10px;
 }
