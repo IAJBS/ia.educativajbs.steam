@@ -1,32 +1,62 @@
-const docente = JSON.parse(localStorage.getItem("docente_logueado")) || {
-  nombre: "Docente"
-};
+// ================= LOGIN =================
+const docentes = JSON.parse(localStorage.getItem("docentes")) || [];
+let docenteActivo = JSON.parse(localStorage.getItem("docenteActivo"));
 
-const clases = JSON.parse(localStorage.getItem("clases_docente")) || [];
-
+const loginBox = document.getElementById("loginDocente");
+const panel = document.getElementById("panelDocente");
 const saludo = document.getElementById("saludo");
+const errorLogin = document.getElementById("errorLogin");
+
+function loginDocente() {
+  const user = usuario.value.trim();
+  const pass = clave.value.trim();
+
+  const docente = docentes.find(d => d.dni === user && d.clave === pass);
+  if (!docente) {
+    errorLogin.textContent = "Usuario o contraseña incorrectos";
+    return;
+  }
+
+  localStorage.setItem("docenteActivo", JSON.stringify(docente));
+  location.reload();
+}
+
+if (docenteActivo) {
+  loginBox.classList.add("oculto");
+  panel.classList.remove("oculto");
+  saludo.textContent = `Bienvenido, ${docenteActivo.nombre}`;
+}
+
+// ================= CLASES =================
+const clases = JSON.parse(localStorage.getItem("clases_docente")) || [];
 const tabla = document.getElementById("tablaClases");
 const tbody = tabla.querySelector("tbody");
 const sinClases = document.getElementById("sinClases");
-
-saludo.textContent = `Bienvenido, ${docente.nombre}`;
+const form = document.getElementById("formularioClase");
 
 function mostrarFormulario() {
-  document.getElementById("formularioClase").classList.toggle("oculto");
+  form.classList.remove("oculto");
+  tabla.parentElement.classList.add("oculto");
+}
+
+function volverATabla() {
+  form.classList.add("oculto");
+  tabla.parentElement.classList.remove("oculto");
 }
 
 function guardarClase() {
-  const clase = {
+  if (!grado.value || !seccion.value || !titulo.value) return;
+
+  clases.push({
     grado: grado.value,
     seccion: seccion.value,
     titulo: titulo.value,
     estado: "Registrada"
-  };
+  });
 
-  clases.push(clase);
   localStorage.setItem("clases_docente", JSON.stringify(clases));
-
-  document.getElementById("formularioClase").reset;
+  form.reset();
+  volverATabla();
   renderTabla();
 }
 
@@ -43,29 +73,24 @@ function renderTabla() {
   tabla.classList.remove("oculto");
 
   clases.forEach((c, i) => {
-    const fila = document.createElement("tr");
-    fila.innerHTML = `
-      <td>${c.grado}</td>
-      <td>${c.seccion}</td>
-      <td>${c.titulo}</td>
-      <td>${c.estado}</td>
-      <td class="acciones">
-        <button class="activar" onclick="activar(${i})">Activar</button>
-        <button class="desarrollada" onclick="desarrollar(${i})">✔</button>
-        <button class="eliminar" onclick="eliminar(${i})">✖</button>
-      </td>
-    `;
-    tbody.appendChild(fila);
+    tbody.innerHTML += `
+      <tr>
+        <td>${c.grado}</td>
+        <td>${c.seccion}</td>
+        <td>${c.titulo}</td>
+        <td>${c.estado}</td>
+        <td class="acciones">
+          <button class="activar" onclick="cambiarEstado(${i},'Activa')">Activar</button>
+          <button class="desarrollada" onclick="cambiarEstado(${i},'Desarrollada')">✔</button>
+          <button class="eliminar" onclick="eliminar(${i})">✖</button>
+        </td>
+      </tr>`;
   });
 }
 
-function activar(i) {
-  clases[i].estado = "Activa";
-  renderTabla();
-}
-
-function desarrollar(i) {
-  clases[i].estado = "Desarrollada";
+function cambiarEstado(i, estado) {
+  clases[i].estado = estado;
+  localStorage.setItem("clases_docente", JSON.stringify(clases));
   renderTabla();
 }
 
@@ -76,14 +101,12 @@ function eliminar(i) {
 }
 
 renderTabla();
-// ================= IA HEADER DOCENTE =================
 
+// ================= IA HEADER =================
 const avatarIA = document.querySelector(".avatar-ia");
 const mensajeIA = document.getElementById("mensaje-ia");
 
-if (avatarIA && mensajeIA) {
-  avatarIA.addEventListener("click", () => {
-    mensajeIA.textContent =
-      "Aquí puedes registrar, activar y gestionar tus clases.";
-  });
-}
+avatarIA.addEventListener("click", () => {
+  mensajeIA.textContent =
+    "Aquí puedes registrar, activar y gestionar tus clases.";
+});
