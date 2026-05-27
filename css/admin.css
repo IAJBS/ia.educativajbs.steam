@@ -142,3 +142,15 @@ th {
   color: red;
   margin-top: 10px;
 }
+
+/* OCULTAR ELEMENTOS */
+.oculto {
+  display: none;
+}
+
+/* SELECTS */
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+}
