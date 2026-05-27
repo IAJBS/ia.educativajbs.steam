@@ -1,72 +1,78 @@
-let clases = JSON.parse(localStorage.getItem("clases_docente")) || [];
+const docente = JSON.parse(localStorage.getItem("docente_logueado")) || {
+  nombre: "Docente"
+};
 
+const clases = JSON.parse(localStorage.getItem("clases_docente")) || [];
+
+const saludo = document.getElementById("saludo");
 const tabla = document.getElementById("tablaClases");
-const btnGuardar = document.getElementById("guardarClase");
+const tbody = tabla.querySelector("tbody");
+const sinClases = document.getElementById("sinClases");
 
-btnGuardar.addEventListener("click", () => {
+saludo.textContent = `Bienvenido, ${docente.nombre}`;
+
+function mostrarFormulario() {
+  document.getElementById("formularioClase").classList.toggle("oculto");
+}
+
+function guardarClase() {
   const clase = {
     grado: grado.value,
     seccion: seccion.value,
-    tema: tema.value,
     titulo: titulo.value,
-    proposito: proposito.value,
-    criterios: criterios.value,
-    estado: "Inactiva"
+    estado: "Registrada"
   };
-
-  if (!clase.grado || !clase.seccion || !clase.titulo) {
-    alert("Complete los campos obligatorios");
-    return;
-  }
 
   clases.push(clase);
   localStorage.setItem("clases_docente", JSON.stringify(clases));
-  limpiarFormulario();
-  renderizar();
-});
 
-function renderizar() {
-  tabla.innerHTML = "";
+  document.getElementById("formularioClase").reset;
+  renderTabla();
+}
+
+function renderTabla() {
+  tbody.innerHTML = "";
+
+  if (clases.length === 0) {
+    sinClases.textContent = "Aún no tienes clases registradas.";
+    tabla.classList.add("oculto");
+    return;
+  }
+
+  sinClases.textContent = "";
+  tabla.classList.remove("oculto");
+
   clases.forEach((c, i) => {
-    tabla.innerHTML += `
-      <tr>
-        <td>${c.grado}</td>
-        <td>${c.seccion}</td>
-        <td>${c.titulo}</td>
-        <td>${c.tema}</td>
-        <td>${c.estado}</td>
-        <td>
-          <button onclick="activar(${i})">Activar</button>
-          <button onclick="desarrollada(${i})">✔</button>
-          <button onclick="eliminar(${i})">🗑</button>
-        </td>
-      </tr>`;
+    const fila = document.createElement("tr");
+    fila.innerHTML = `
+      <td>${c.grado}</td>
+      <td>${c.seccion}</td>
+      <td>${c.titulo}</td>
+      <td>${c.estado}</td>
+      <td class="acciones">
+        <button class="activar" onclick="activar(${i})">Activar</button>
+        <button class="desarrollada" onclick="desarrollar(${i})">✔</button>
+        <button class="eliminar" onclick="eliminar(${i})">✖</button>
+      </td>
+    `;
+    tbody.appendChild(fila);
   });
 }
 
 function activar(i) {
-  clases.forEach(c => c.estado = "Inactiva");
   clases[i].estado = "Activa";
-  guardar();
+  renderTabla();
 }
 
-function desarrollada(i) {
+function desarrollar(i) {
   clases[i].estado = "Desarrollada";
-  guardar();
+  renderTabla();
 }
 
 function eliminar(i) {
   clases.splice(i, 1);
-  guardar();
-}
-
-function guardar() {
   localStorage.setItem("clases_docente", JSON.stringify(clases));
-  renderizar();
+  renderTabla();
 }
 
-function limpiarFormulario() {
-  document.querySelectorAll("input, textarea, select").forEach(e => e.value = "");
-}
-
-renderizar();
+renderTabla();
