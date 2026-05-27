@@ -76,3 +76,14 @@ function eliminar(i) {
 }
 
 renderTabla();
+// ================= IA HEADER DOCENTE =================
+
+const avatarIA = document.querySelector(".avatar-ia");
+const mensajeIA = document.getElementById("mensaje-ia");
+
+if (avatarIA && mensajeIA) {
+  avatarIA.addEventListener("click", () => {
+    mensajeIA.textContent =
+      "Aquí puedes registrar, activar y gestionar tus clases.";
+  });
+}
