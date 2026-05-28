@@ -1,9 +1,6 @@
-// ================= DATOS =================
+// ================= DATOS BASE =================
 const docentes = JSON.parse(localStorage.getItem("docentes")) || [];
-
-let docenteActivo = null;
-let clases = [];
-let keyClases = "";
+const clases = JSON.parse(localStorage.getItem("clases_docente")) || [];
 
 // ================= ELEMENTOS =================
 const loginBox = document.getElementById("loginDocente");
@@ -17,8 +14,10 @@ const sinClases = document.getElementById("sinClases");
 const form = document.getElementById("formularioClase");
 
 // ================= ESTADO INICIAL =================
+// Siempre mostrar login al cargar
 loginBox.classList.remove("oculto");
 panel.classList.add("oculto");
+localStorage.removeItem("docenteActivo");
 
 // ================= LOGIN =================
 function loginDocente() {
@@ -34,76 +33,61 @@ function loginDocente() {
     return;
   }
 
-  docenteActivo = docente;
-  keyClases = `clases_docente_${docenteActivo.dni}`;
-  clases = JSON.parse(localStorage.getItem(keyClases)) || [];
+  // Guardar sesión
+  localStorage.setItem("docenteActivo", JSON.stringify(docente));
 
-  saludo.textContent = `Bienvenido, ${docenteActivo.nombre}`;
-
-  usuario.value = "";
-  clave.value = "";
-  errorLogin.textContent = "";
-
+  // Mostrar panel
   loginBox.classList.add("oculto");
   panel.classList.remove("oculto");
+  saludo.textContent = `Bienvenido, ${docente.nombre}`;
 
-  ocultarFormulario();
-  renderTabla();
+  errorLogin.textContent = "";
 }
 
 // ================= CERRAR SESIÓN =================
 function cerrarSesion() {
-  docenteActivo = null;
-  clases = [];
-  keyClases = "";
-
-  usuario.value = "";
-  clave.value = "";
-  errorLogin.textContent = "";
-
-  ocultarFormulario();
-
-  panel.classList.add("oculto");
-  loginBox.classList.remove("oculto");
+  localStorage.removeItem("docenteActivo");
+  location.reload();
 }
 
 // ================= FORMULARIO =================
 function mostrarFormulario() {
   form.classList.remove("oculto");
-  tabla.classList.add("oculto");
+  tabla.parentElement.classList.add("oculto");
 }
 
-function ocultarFormulario() {
+function volverATabla() {
   form.classList.add("oculto");
-  tabla.classList.remove("oculto");
+  tabla.parentElement.classList.remove("oculto");
 }
 
 // ================= GUARDAR CLASE =================
 function guardarClase() {
-  if (!docenteActivo) {
-    alert("Sesión inválida");
-    return;
-  }
-
   if (!grado.value || !seccion.value || !tema.value || !titulo.value) {
     alert("Completa grado, sección, tema y título");
     return;
   }
 
-  clases.push({
+  const nuevaClase = {
     grado: grado.value,
     seccion: seccion.value,
     tema: tema.value,
     titulo: titulo.value,
-    proposito: proposito.value,
-    criterios: criterios.value,
     estado: "Registrada"
-  });
+  };
 
-  localStorage.setItem(keyClases, JSON.stringify(clases));
+  clases.push(nuevaClase);
+  localStorage.setItem("clases_docente", JSON.stringify(clases));
 
-  form.reset();
-  ocultarFormulario();
+  // Limpiar formulario
+  grado.value = "";
+  seccion.value = "";
+  tema.value = "";
+  titulo.value = "";
+  proposito.value = "";
+  criterios.value = "";
+
+  volverATabla();
   renderTabla();
 }
 
@@ -121,45 +105,34 @@ function renderTabla() {
   tabla.classList.remove("oculto");
 
   clases.forEach((c, i) => {
-    tbody.innerHTML += `
-      <tr>
-        <td>${c.grado}</td>
-        <td>${c.seccion}</td>
-        <td>${c.tema}</td>
-        <td>${c.titulo}</td>
-        <td>${c.estado}</td>
-        <td class="acciones">
-          <button onclick="verDetalle(${i})">👁</button>
-          <button class="activar" onclick="cambiarEstado(${i},'Activa')">▶</button>
-          <button class="desarrollada" onclick="cambiarEstado(${i},'Desarrollada')">✔</button>
-          <button class="eliminar" onclick="eliminar(${i})">✖</button>
-        </td>
-      </tr>
+    const fila = document.createElement("tr");
+    fila.innerHTML = `
+      <td>${c.grado}</td>
+      <td>${c.seccion}</td>
+      <td>${c.tema}</td>
+      <td>${c.titulo}</td>
+      <td>${c.estado}</td>
+      <td class="acciones">
+        <button class="activar" onclick="cambiarEstado(${i}, 'Activa')">Activar</button>
+        <button class="desarrollada" onclick="cambiarEstado(${i}, 'Desarrollada')">✔</button>
+        <button class="eliminar" onclick="eliminar(${i})">✖</button>
+      </td>
     `;
+    tbody.appendChild(fila);
   });
 }
 
-// ================= DETALLE =================
-function verDetalle(i) {
-  const c = clases[i];
-  alert(
-    `TEMA: ${c.tema}\n\n` +
-    `TÍTULO: ${c.titulo}\n\n` +
-    `PROPÓSITO:\n${c.proposito}\n\n` +
-    `CRITERIOS:\n${c.criterios}`
-  );
-}
-
-// ================= ACCIONES =================
 function cambiarEstado(i, estado) {
   clases[i].estado = estado;
-  localStorage.setItem(keyClases, JSON.stringify(clases));
+  localStorage.setItem("clases_docente", JSON.stringify(clases));
   renderTabla();
 }
 
 function eliminar(i) {
-  if (!confirm("¿Eliminar esta clase?")) return;
   clases.splice(i, 1);
-  localStorage.setItem(keyClases, JSON.stringify(clases));
+  localStorage.setItem("clases_docente", JSON.stringify(clases));
   renderTabla();
 }
+
+// ================= INICIAL =================
+renderTabla();
