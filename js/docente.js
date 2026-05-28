@@ -171,3 +171,9 @@ if (avatarIA && mensajeIA) {
       "Aquí puedes registrar, activar y gestionar tus clases.";
   });
 }
+// ================= LIMPIEZA DE LOGIN AL CARGAR =================
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof usuario !== "undefined") usuario.value = "";
+  if (typeof clave !== "undefined") clave.value = "";
+  if (errorLogin) errorLogin.textContent = "";
+});
