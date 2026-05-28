@@ -1,5 +1,6 @@
 // ================= DATOS =================
 const docentes = JSON.parse(localStorage.getItem("docentes")) || [];
+
 let docenteActivo = null;
 let clases = [];
 let keyClases = "";
@@ -16,7 +17,6 @@ const sinClases = document.getElementById("sinClases");
 const form = document.getElementById("formularioClase");
 
 // ================= ESTADO INICIAL =================
-// SIEMPRE pedir login
 loginBox.classList.remove("oculto");
 panel.classList.add("oculto");
 
@@ -40,9 +40,14 @@ function loginDocente() {
 
   saludo.textContent = `Bienvenido, ${docenteActivo.nombre}`;
 
+  usuario.value = "";
+  clave.value = "";
+  errorLogin.textContent = "";
+
   loginBox.classList.add("oculto");
   panel.classList.remove("oculto");
 
+  ocultarFormulario();
   renderTabla();
 }
 
@@ -52,25 +57,31 @@ function cerrarSesion() {
   clases = [];
   keyClases = "";
 
-  loginBox.classList.remove("oculto");
+  usuario.value = "";
+  clave.value = "";
+  errorLogin.textContent = "";
+
+  ocultarFormulario();
+
   panel.classList.add("oculto");
+  loginBox.classList.remove("oculto");
 }
 
 // ================= FORMULARIO =================
 function mostrarFormulario() {
   form.classList.remove("oculto");
-  tabla.parentElement.classList.add("oculto");
+  tabla.classList.add("oculto");
 }
 
-function volverATabla() {
+function ocultarFormulario() {
   form.classList.add("oculto");
-  tabla.parentElement.classList.remove("oculto");
+  tabla.classList.remove("oculto");
 }
 
 // ================= GUARDAR CLASE =================
 function guardarClase() {
   if (!docenteActivo) {
-    alert("Sesión no válida");
+    alert("Sesión inválida");
     return;
   }
 
@@ -92,7 +103,7 @@ function guardarClase() {
   localStorage.setItem(keyClases, JSON.stringify(clases));
 
   form.reset();
-  volverATabla();
+  ocultarFormulario();
   renderTabla();
 }
 
@@ -123,7 +134,8 @@ function renderTabla() {
           <button class="desarrollada" onclick="cambiarEstado(${i},'Desarrollada')">✔</button>
           <button class="eliminar" onclick="eliminar(${i})">✖</button>
         </td>
-      </tr>`;
+      </tr>
+    `;
   });
 }
 
