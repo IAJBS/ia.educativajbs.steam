@@ -28,8 +28,11 @@
   <!-- LOGIN -->
   <section id="loginDocente" class="card">
     <h3>Ingreso docente</h3>
-    <input id="usuario" placeholder="Usuario (DNI)">
-    <input id="clave" type="password" placeholder="Contraseña">
+
+    <!-- 👇 ÚNICO CAMBIO REALIZADO -->
+    <input type="text" id="usuario" placeholder="Usuario (DNI)" autocomplete="off">
+    <input type="password" id="clave" placeholder="Contraseña" autocomplete="off">
+
     <button onclick="loginDocente()">Ingresar</button>
     <p id="errorLogin" class="mensaje error"></p>
   </section>
@@ -89,9 +92,10 @@
         </thead>
         <tbody></tbody>
       </table>
+
       <div class="acciones-footer">
-  <button class="btn-cerrar" onclick="cerrarSesion()">Cerrar sesión</button>
-</div>
+        <button class="btn-cerrar" onclick="cerrarSesion()">Cerrar sesión</button>
+      </div>
     </section>
 
   </section>
