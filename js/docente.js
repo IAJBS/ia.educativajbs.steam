@@ -1,6 +1,8 @@
-// ================= DATOS BASE =================
+// ================= DATOS =================
 const docentes = JSON.parse(localStorage.getItem("docentes")) || [];
-let docenteActivo = JSON.parse(localStorage.getItem("docenteActivo"));
+let docenteActivo = null;
+let clases = [];
+let keyClases = "";
 
 // ================= ELEMENTOS =================
 const loginBox = document.getElementById("loginDocente");
@@ -13,9 +15,10 @@ const tbody = tabla.querySelector("tbody");
 const sinClases = document.getElementById("sinClases");
 const form = document.getElementById("formularioClase");
 
-// ================= ESTADO =================
-let clases = [];
-let keyClases = "";
+// ================= ESTADO INICIAL =================
+// SIEMPRE pedir login
+loginBox.classList.remove("oculto");
+panel.classList.add("oculto");
 
 // ================= LOGIN =================
 function loginDocente() {
@@ -31,29 +34,26 @@ function loginDocente() {
     return;
   }
 
-  localStorage.setItem("docenteActivo", JSON.stringify(docente));
-  location.reload();
-}
-
-// ================= SESIÓN =================
-if (docenteActivo) {
-  loginBox.classList.add("oculto");
-  panel.classList.remove("oculto");
-  saludo.textContent = `Bienvenido, ${docenteActivo.nombre}`;
-
+  docenteActivo = docente;
   keyClases = `clases_docente_${docenteActivo.dni}`;
   clases = JSON.parse(localStorage.getItem(keyClases)) || [];
 
+  saludo.textContent = `Bienvenido, ${docenteActivo.nombre}`;
+
+  loginBox.classList.add("oculto");
+  panel.classList.remove("oculto");
+
   renderTabla();
-} else {
-  loginBox.classList.remove("oculto");
-  panel.classList.add("oculto");
 }
 
 // ================= CERRAR SESIÓN =================
 function cerrarSesion() {
-  localStorage.removeItem("docenteActivo");
-  location.reload();
+  docenteActivo = null;
+  clases = [];
+  keyClases = "";
+
+  loginBox.classList.remove("oculto");
+  panel.classList.add("oculto");
 }
 
 // ================= FORMULARIO =================
@@ -69,6 +69,11 @@ function volverATabla() {
 
 // ================= GUARDAR CLASE =================
 function guardarClase() {
+  if (!docenteActivo) {
+    alert("Sesión no válida");
+    return;
+  }
+
   if (!grado.value || !seccion.value || !tema.value || !titulo.value) {
     alert("Completa grado, sección, tema y título");
     return;
