@@ -1,118 +1,70 @@
-/* RESET */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, sans-serif;
 }
 
-/* FONDO GENERAL */
 body {
-  background: #f3f4f6;
+  margin: 0;
+  background: #f4f6f9;
 }
 
-/* ================= HEADER (COPIADO DEL INDEX) ================= */
-.header {
-  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+/* HEADER */
+.top-bar {
+  background: #1e3a8a;
   color: white;
-  padding: 25px 20px;
-}
-
-.header-contenido {
-  max-width: 1100px;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.insignia {
-  width: 90px;
-}
-
-.texto-header h1 {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.texto-header h2 {
-  font-size: 30px;
-}
-
-.texto-header p {
-  font-size: 14px;
-  opacity: 0.9;
-}
-
-/* IA HEADER */
-.ia-header {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(255,255,255,0.15);
-  padding: 10px 16px;
-  border-radius: 30px;
-}
-
-.avatar-ia {
-  width: 45px;
-  height: 45px;
-}
-
-/* ================= LOGIN ================= */
-.login-box {
-  max-width: 400px;
-  margin: 40px auto;
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  padding: 15px;
   text-align: center;
 }
 
-.login-box input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
+/* CONTENEDOR */
+.contenedor {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
 }
 
-.login-box button {
-  width: 100%;
-  padding: 10px;
-  background: #1e3a8a;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-/* ================= PANEL ================= */
+/* PANEL */
 .panel {
-  max-width: 1000px;
-  margin: 30px auto;
   background: white;
+  width: 100%;
+  max-width: 900px;
   padding: 25px;
-  border-radius: 12px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* FORM */
-.formulario {
-  display: grid;
-  gap: 10px;
-  margin-bottom: 20px;
+.panel h2 {
+  margin-top: 0;
+  text-align: center;
+  color: #1e3a8a;
 }
 
-.formulario input {
+/* INPUTS */
+input, select {
+  width: 100%;
   padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
-/* BOTÓN */
+/* BOTONES */
 button {
   background: #1e3a8a;
   color: white;
-  border: none;
   padding: 10px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+}
+
+button:hover {
+  background: #163172;
+}
+
+/* FORMULARIO */
+.formulario {
+  margin-bottom: 20px;
 }
 
 /* TABLA */
@@ -123,7 +75,7 @@ table {
 
 th, td {
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 8px;
   text-align: center;
 }
 
@@ -132,25 +84,12 @@ th {
   color: white;
 }
 
-/* OCULTAR */
+/* UTILIDADES */
 .oculto {
   display: none;
 }
 
-/* ERROR */
-#error {
+.error {
   color: red;
-  margin-top: 10px;
-}
-
-/* OCULTAR ELEMENTOS */
-.oculto {
-  display: none;
-}
-
-/* SELECTS */
-select {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
+  text-align: center;
 }
