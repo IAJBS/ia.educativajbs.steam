@@ -2,107 +2,81 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Panel Directivo</title>
-  <link rel="stylesheet" href="css/admin.css">
+  <title>Panel Admin – Proyecto JBS</title>
+  <link rel="stylesheet" href="docente.css">
 </head>
-
 <body>
 
-<!-- HEADER (IGUAL AL INDEX) -->
-<header class="header">
-  <div class="header-contenido">
+  <!-- HEADER -->
+  <header class="top-bar">
+    <h1>Proyecto JBS</h1>
+  </header>
 
-    <img src="img/insignia.png" class="insignia">
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="contenedor">
 
-    <div class="texto-header">
-      <h1>Institución Educativa</h1>
-      <h2>José Buenaventura Sepúlveda Fernández</h2>
-      <p>Plataforma educativa con inteligencia artificial</p>
-    </div>
+    <!-- LOGIN ADMIN -->
+    <section id="login" class="panel">
+      <h2>Iniciar sesión</h2>
 
-    <div class="ia-header">
-      <img src="img/emoji.png" class="avatar-ia">
-      <span>PANEL DIRECTIVO</span>
-    </div>
+      <input type="text" id="usuario" placeholder="Usuario">
+      <input type="password" id="clave" placeholder="Contraseña">
 
-  </div>
-</header>
+      <button onclick="login()">Ingresar</button>
+      <p id="error" class="error"></p>
+    </section>
 
-<!-- LOGIN -->
-<section id="login" class="login-box">
-  <h2>PANEL DIRECTIVO</h2>
+    <!-- PANEL ADMIN -->
+    <section id="panel" class="panel oculto">
 
-  <input type="text" id="usuario" placeholder="Usuario">
-  <input type="password" id="clave" placeholder="Contraseña">
+      <h2>Gestión de Docentes</h2>
 
-  <button onclick="login()">Ingresar</button>
-  <p id="error"></p>
-</section>
+      <!-- FORMULARIO -->
+      <div class="formulario">
+        <input type="text" id="dni" placeholder="DNI">
+        <input type="text" id="nombre" placeholder="Nombre completo">
+        <input type="email" id="correo" placeholder="Correo">
+        <input type="text" id="celular" placeholder="Celular">
 
-<!-- PANEL -->
-<section id="panel" class="panel oculto">
+        <select id="area" onchange="verificarEPT()">
+          <option value="">Seleccione área</option>
+          <option value="Educación para el Trabajo">Educación para el Trabajo</option>
+          <option value="Comunicación">Comunicación</option>
+          <option value="Matemática">Matemática</option>
+        </select>
 
-  <h2>Gestión de Docentes</h2>
+        <select id="especialidadEPT" class="oculto">
+          <option value="">Especialidad EPT</option>
+          <option value="Computación">Computación</option>
+          <option value="Electricidad">Electricidad</option>
+          <option value="Mecánica">Mecánica</option>
+        </select>
 
-  <div class="formulario">
+        <button onclick="agregarDocente()">Registrar docente</button>
+      </div>
 
-    <input type="text" id="dni" placeholder="DNI">
-    <input type="text" id="nombre" placeholder="Nombres">
-    <input type="email" id="correo" placeholder="Correo">
-    <input type="text" id="celular" placeholder="Celular">
+      <!-- TABLA -->
+      <table>
+        <thead>
+          <tr>
+            <th>DNI</th>
+            <th>Nombre</th>
+            <th>Área</th>
+            <th>Especialidad</th>
+            <th>Usuario</th>
+            <th>Clave</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody id="listaDocentes"></tbody>
+      </table>
 
-    <!-- ÁREA -->
-    <select id="area" onchange="verificarEPT()">
-      <option value="">Seleccionar Área</option>
-      <option>Matemática</option>
-      <option>Comunicación</option>
-      <option>Ciencia y Tecnología</option>
-      <option>Ciencias Sociales</option>
-      <option>Tutoría</option>
-      <option>Inglés</option>
-      <option>Educación Religiosa</option>
-      <option>Educación Física</option>
-      <option>Desarrollo Personal, Ciudadanía y Cívica</option>
-      <option>Educación para el Trabajo</option>
-    </select>
+    </section>
 
-    <!-- EPT (OCULTO POR DEFECTO) -->
-    <select id="especialidadEPT" class="oculto">
-      <option value="">Seleccionar Especialidad EPT</option>
-      <option>Computación e Informática</option>
-      <option>Gastronomía</option>
-      <option>Mecánica Automotriz</option>
-      <option>Construcciones Metálicas</option>
-      <option>Carpintería</option>
-      <option>Electricidad</option>
-      <option>Agronomía</option>
-      <option>Contabilidad</option>
-    </select>
+  </main>
 
-    <button onclick="agregarDocente()">Registrar Docente</button>
+  <!-- JS ADMIN (NO SE TOCA) -->
+  <script src="admin.js"></script>
 
-  </div>
-
-  <h3>Docentes registrados</h3>
-
-  <table>
-    <thead>
-      <tr>
-        <th>DNI</th>
-        <th>Nombre</th>
-        <th>Área</th>
-        <th>Especialidad</th>
-        <th>Usuario</th>
-        <th>Contraseña</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-
-    <tbody id="listaDocentes"></tbody>
-  </table>
-
-</section>
-
-<script src="js/admin.js"></script>
 </body>
 </html>
