@@ -2,61 +2,97 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Panel Admin – Proyecto JBS</title>
+  <title>Panel Directivo</title>
   <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="top-bar">
-    <h1>Proyecto JBS</h1>
-  </header>
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-contenido">
+    <img src="img/insignia.png" class="insignia">
 
-  <!-- CONTENEDOR PRINCIPAL -->
-  <main class="contenedor">
+    <div class="texto-header">
+      <h1>Institución Educativa</h1>
+      <h2>José Buenaventura Sepúlveda Fernández</h2>
+      <p>Plataforma educativa con inteligencia artificial</p>
+    </div>
 
-    <!-- LOGIN ADMIN -->
-    <section id="login" class="panel">
-      <h2>Iniciar sesión</h2>
+    <div class="ia-header">
+      <img src="img/emoji.png" class="avatar-ia">
+      <span id="mensaje-ia">Panel directivo activo</span>
+    </div>
+  </div>
+</header>
 
-      <input type="text" id="usuario" placeholder="Usuario">
-      <input type="password" id="clave" placeholder="Contraseña">
+<main class="contenedor">
 
-      <button onclick="login()">Ingresar</button>
-      <p id="error" class="error"></p>
+  <!-- LOGIN -->
+  <section id="loginAdmin" class="card">
+    <h3>Ingreso directivo</h3>
+
+    <input type="text" id="usuario" placeholder="Usuario" autocomplete="off">
+    <input type="password" id="clave" placeholder="Contraseña" autocomplete="off">
+
+    <button onclick="login()">Ingresar</button>
+    <p id="error" class="mensaje error"></p>
+  </section>
+
+  <!-- PANEL -->
+  <section id="panelAdmin" class="oculto">
+
+    <section class="bienvenida">
+      <h2 id="saludo">Bienvenido, Directivo</h2>
+      <p>Desde este panel podrás registrar y gestionar a los docentes.</p>
     </section>
 
-    <!-- PANEL ADMIN -->
-    <section id="panel" class="panel oculto">
+    <button class="btn-principal" onclick="mostrarFormulario()">Registrar docente</button>
 
-      <h2>Gestión de Docentes</h2>
+    <!-- FORMULARIO -->
+    <section id="formularioDocente" class="card oculto">
+      <h3>Registro de docente</h3>
 
-      <!-- FORMULARIO -->
-      <div class="formulario">
-        <input type="text" id="dni" placeholder="DNI">
-        <input type="text" id="nombre" placeholder="Nombre completo">
-        <input type="email" id="correo" placeholder="Correo">
-        <input type="text" id="celular" placeholder="Celular">
+      <input type="text" id="dni" placeholder="DNI">
+      <input type="text" id="nombre" placeholder="Nombres">
+      <input type="email" id="correo" placeholder="Correo">
+      <input type="text" id="celular" placeholder="Celular">
 
-        <select id="area" onchange="verificarEPT()">
-          <option value="">Seleccione área</option>
-          <option value="Educación para el Trabajo">Educación para el Trabajo</option>
-          <option value="Comunicación">Comunicación</option>
-          <option value="Matemática">Matemática</option>
-        </select>
+      <select id="area" onchange="verificarEPT()">
+        <option value="">Seleccionar área</option>
+        <option>Matemática</option>
+        <option>Comunicación</option>
+        <option>Ciencia y Tecnología</option>
+        <option>Ciencias Sociales</option>
+        <option>Tutoría</option>
+        <option>Inglés</option>
+        <option>Educación Religiosa</option>
+        <option>Educación Física</option>
+        <option>Desarrollo Personal, Ciudadanía y Cívica</option>
+        <option>Educación para el Trabajo</option>
+      </select>
 
-        <select id="especialidadEPT" class="oculto">
-          <option value="">Especialidad EPT</option>
-          <option value="Computación">Computación</option>
-          <option value="Electricidad">Electricidad</option>
-          <option value="Mecánica">Mecánica</option>
-        </select>
+      <select id="especialidadEPT" class="oculto">
+        <option value="">Especialidad EPT</option>
+        <option>Computación e Informática</option>
+        <option>Gastronomía</option>
+        <option>Mecánica Automotriz</option>
+        <option>Construcciones Metálicas</option>
+        <option>Carpintería</option>
+        <option>Electricidad</option>
+        <option>Agronomía</option>
+        <option>Contabilidad</option>
+      </select>
 
-        <button onclick="agregarDocente()">Registrar docente</button>
-      </div>
+      <button onclick="agregarDocente()">Guardar docente</button>
+      <button class="btn-secundario" onclick="volverATabla()">Volver</button>
+    </section>
 
-      <!-- TABLA -->
-      <table>
+    <!-- TABLA -->
+    <section class="card">
+      <h3>Docentes registrados</h3>
+      <p id="sinDocentes" class="mensaje"></p>
+
+      <table id="tablaDocentes" class="tabla oculto">
         <thead>
           <tr>
             <th>DNI</th>
@@ -64,19 +100,21 @@
             <th>Área</th>
             <th>Especialidad</th>
             <th>Usuario</th>
-            <th>Clave</th>
-            <th>Acción</th>
+            <th>Contraseña</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody id="listaDocentes"></tbody>
       </table>
 
+      <div class="acciones-footer">
+        <button class="btn-cerrar" onclick="cerrarSesion()">Cerrar sesión</button>
+      </div>
     </section>
 
-  </main>
+  </section>
+</main>
 
-  <!-- JS ADMIN (NO SE TOCA) -->
-  <script src="js/admin.js"></script>
-
+<script src="js/admin.js"></script>
 </body>
 </html>
