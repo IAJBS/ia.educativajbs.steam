@@ -1,95 +1,133 @@
 * {
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 body {
   margin: 0;
-  background: #f4f6f9;
+  background: #f3f4f6;
+  color: #1f2937;
 }
 
-/* HEADER */
-.top-bar {
-  background: #1e3a8a;
+/* ===== HEADER ===== */
+.header {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  padding: 18px 0;
   color: white;
-  padding: 15px;
-  text-align: center;
 }
 
-/* CONTENEDOR */
-.contenedor {
+.header-contenido {
+  max-width: 1200px;
+  margin: auto;
   display: flex;
-  justify-content: center;
-  padding: 30px;
+  align-items: center;
+  gap: 18px;
+  padding: 0 20px;
 }
 
-/* PANEL */
-.panel {
-  background: white;
-  width: 100%;
-  max-width: 900px;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+.insignia { width: 65px; }
+
+.texto-header h1 { font-size: 14px; margin: 0; }
+.texto-header h2 { font-size: 20px; margin: 0; }
+.texto-header p { font-size: 13px; margin: 4px 0 0; opacity: .9; }
+
+.ia-header {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.panel h2 {
-  margin-top: 0;
-  text-align: center;
-  color: #1e3a8a;
-}
-
-/* INPUTS */
-input, select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 12px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-/* BOTONES */
-button {
-  background: #1e3a8a;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
+.avatar-ia {
+  width: 45px;
   cursor: pointer;
 }
 
-button:hover {
-  background: #163172;
+/* ===== CONTENIDO ===== */
+.contenedor {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
 }
 
-/* FORMULARIO */
-.formulario {
+.card, .bienvenida {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
   margin-bottom: 20px;
 }
 
-/* TABLA */
-table {
+.btn-principal {
+  background: #1e3a8a;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.btn-secundario {
+  background: #6b7280;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+.tabla {
   width: 100%;
   border-collapse: collapse;
 }
 
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
+.tabla th, .tabla td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
   text-align: center;
 }
 
-th {
-  background: #1e3a8a;
+.acciones button {
+  margin: 0 4px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.activar { background: #2563eb; color: white; }
+.desarrollada { background: #16a34a; color: white; }
+.eliminar { background: #dc2626; color: white; }
+
+.oculto { display: none; }
+
+.mensaje { color: #6b7280; }
+.error { color: #dc2626; }
+/* ===== CERRAR SESIÓN ===== */
+.acciones-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.btn-cerrar {
+  background: #dc2626;
   color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-/* UTILIDADES */
-.oculto {
-  display: none;
-}
-
-.error {
-  color: red;
-  text-align: center;
+.btn-cerrar:hover {
+  background: #b91c1c;
 }
