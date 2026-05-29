@@ -1,10 +1,10 @@
-// ================= ESTADO INICIAL =================
-loginBox.classList.remove("oculto");
-panel.classList.add("oculto");
-
 // ================= CREDENCIALES =================
 const USUARIO_ADMIN = "DIRECTIVOJBS";
 const CLAVE_ADMIN = "PROYECTOJBS";
+
+// ================= ESTADO INICIAL =================
+loginBox.classList.remove("oculto");
+panel.classList.add("oculto");
 
 // ================= DATOS =================
 let docentes = JSON.parse(localStorage.getItem("docentes")) || [];
