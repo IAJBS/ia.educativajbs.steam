@@ -2,6 +2,7 @@
 const USUARIO_ADMIN = "DIRECTIVOJBS";
 const CLAVE_ADMIN = "PROYECTOJBS";
 
+// ================= DATOS =================
 let docentes = JSON.parse(localStorage.getItem("docentes")) || [];
 
 // ================= ELEMENTOS =================
@@ -15,10 +16,21 @@ const tbody = document.getElementById("listaDocentes");
 const sinDocentes = document.getElementById("sinDocentes");
 const form = document.getElementById("formularioDocente");
 
+// Inputs
+const usuarioInput = document.getElementById("usuario");
+const claveInput = document.getElementById("clave");
+
+const dniInput = document.getElementById("dni");
+const nombreInput = document.getElementById("nombre");
+const correoInput = document.getElementById("correo");
+const celularInput = document.getElementById("celular");
+const areaInput = document.getElementById("area");
+const especialidadEPT = document.getElementById("especialidadEPT");
+
 // ================= SESIÓN =================
 function login() {
-  const u = usuario.value.trim();
-  const c = clave.value.trim();
+  const u = usuarioInput.value.trim();
+  const c = claveInput.value.trim();
 
   if (u === USUARIO_ADMIN && c === CLAVE_ADMIN) {
     localStorage.setItem("adminActivo", "true");
@@ -37,10 +49,12 @@ function iniciarSesion() {
 
 function cerrarSesion() {
   localStorage.removeItem("adminActivo");
+  usuarioInput.value = "";
+  claveInput.value = "";
   location.reload();
 }
 
-// ================= INICIAL =================
+// ================= ESTADO INICIAL =================
 if (localStorage.getItem("adminActivo")) {
   iniciarSesion();
 }
@@ -58,49 +72,47 @@ function volverATabla() {
 
 // ================= EPT =================
 function verificarEPT() {
-  const area = document.getElementById("area").value;
-  const ept = document.getElementById("especialidadEPT");
-
-  if (area === "Educación para el Trabajo") {
-    ept.classList.remove("oculto");
+  if (areaInput.value === "Educación para el Trabajo") {
+    especialidadEPT.classList.remove("oculto");
   } else {
-    ept.classList.add("oculto");
-    ept.value = "";
+    especialidadEPT.classList.add("oculto");
+    especialidadEPT.value = "";
   }
 }
 
-// ================= REGISTRAR =================
+// ================= REGISTRAR DOCENTE =================
 function agregarDocente() {
-  const dni = dniInput.value || dni.value;
-  const nombreDoc = nombre.value;
-  const correoDoc = correo.value;
-  const celularDoc = celular.value;
-  const areaDoc = area.value;
+  const dni = dniInput.value.trim();
+  const nombre = nombreInput.value.trim();
+  const correo = correoInput.value.trim();
+  const celular = celularInput.value.trim();
+  const area = areaInput.value;
   const especialidad = especialidadEPT.value;
 
-  if (!dni || !nombreDoc || !correoDoc || !celularDoc || !areaDoc) {
+  if (!dni || !nombre || !correo || !celular || !area) {
     alert("Completa todos los campos");
     return;
   }
 
-  if (areaDoc === "Educación para el Trabajo" && !especialidad) {
+  if (area === "Educación para el Trabajo" && !especialidad) {
     alert("Selecciona especialidad EPT");
     return;
   }
 
   docentes.push({
     dni,
-    nombre: nombreDoc,
-    correo: correoDoc,
-    celular: celularDoc,
-    area: areaDoc,
-    especialidad: areaDoc === "Educación para el Trabajo" ? especialidad : "-",
+    nombre,
+    correo,
+    celular,
+    area,
+    especialidad: area === "Educación para el Trabajo" ? especialidad : "-",
     usuario: dni,
     password: dni + "JBS"
   });
 
   localStorage.setItem("docentes", JSON.stringify(docentes));
-  limpiar();
+
+  limpiarFormulario();
   volverATabla();
   cargarDocentes();
 }
@@ -119,35 +131,35 @@ function cargarDocentes() {
   tabla.classList.remove("oculto");
 
   docentes.forEach((d, i) => {
-    tbody.innerHTML += `
-      <tr>
-        <td>${d.dni}</td>
-        <td>${d.nombre}</td>
-        <td>${d.area}</td>
-        <td>${d.especialidad}</td>
-        <td>${d.usuario}</td>
-        <td>${d.password}</td>
-        <td>
-          <button class="eliminar" onclick="eliminar(${i})">✖</button>
-        </td>
-      </tr>
+    const fila = document.createElement("tr");
+    fila.innerHTML = `
+      <td>${d.dni}</td>
+      <td>${d.nombre}</td>
+      <td>${d.area}</td>
+      <td>${d.especialidad}</td>
+      <td>${d.usuario}</td>
+      <td>${d.password}</td>
+      <td>
+        <button class="eliminar" onclick="eliminarDocente(${i})">✖</button>
+      </td>
     `;
+    tbody.appendChild(fila);
   });
 }
 
-function eliminar(i) {
+function eliminarDocente(i) {
   docentes.splice(i, 1);
   localStorage.setItem("docentes", JSON.stringify(docentes));
   cargarDocentes();
 }
 
 // ================= LIMPIAR =================
-function limpiar() {
-  dni.value = "";
-  nombre.value = "";
-  correo.value = "";
-  celular.value = "";
-  area.value = "";
+function limpiarFormulario() {
+  dniInput.value = "";
+  nombreInput.value = "";
+  correoInput.value = "";
+  celularInput.value = "";
+  areaInput.value = "";
   especialidadEPT.value = "";
   especialidadEPT.classList.add("oculto");
 }
