@@ -1,3 +1,8 @@
+// ================= ESTADO INICIAL =================
+loginBox.classList.remove("oculto");
+panel.classList.add("oculto");
+localStorage.removeItem("adminActivo");
+
 // ================= CREDENCIALES =================
 const USUARIO_ADMIN = "DIRECTIVOJBS";
 const CLAVE_ADMIN = "PROYECTOJBS";
@@ -53,12 +58,6 @@ function cerrarSesion() {
   claveInput.value = "";
   location.reload();
 }
-
-// ================= ESTADO INICIAL =================
-if (localStorage.getItem("adminActivo")) {
-  iniciarSesion();
-}
-
 // ================= FORMULARIO =================
 function mostrarFormulario() {
   form.classList.remove("oculto");
