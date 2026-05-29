@@ -1,7 +1,6 @@
 // ================= ESTADO INICIAL =================
 loginBox.classList.remove("oculto");
 panel.classList.add("oculto");
-localStorage.removeItem("adminActivo");
 
 // ================= CREDENCIALES =================
 const USUARIO_ADMIN = "DIRECTIVOJBS";
