@@ -28,8 +28,8 @@ const celularInput = document.getElementById("celular");
 const areaInput = document.getElementById("area");
 const especialidadEPT = document.getElementById("especialidadEPT");
 
-// ================= ESTADO INICIAL (CORREGIDO) =================
-if (localStorage.getItem("adminActivo")) {
+// ================= ESTADO INICIAL (SEGURO) =================
+if (sessionStorage.getItem("adminActivo")) {
   iniciarSesion();
 } else {
   loginBox.classList.remove("oculto");
@@ -42,7 +42,7 @@ function login() {
   const c = claveInput.value.trim();
 
   if (u === USUARIO_ADMIN && c === CLAVE_ADMIN) {
-    localStorage.setItem("adminActivo", "true");
+    sessionStorage.setItem("adminActivo", "true");
     iniciarSesion();
   } else {
     error.textContent = "Acceso incorrecto";
@@ -57,7 +57,7 @@ function iniciarSesion() {
 }
 
 function cerrarSesion() {
-  localStorage.removeItem("adminActivo");
+  sessionStorage.removeItem("adminActivo");
   usuarioInput.value = "";
   claveInput.value = "";
   location.reload();
