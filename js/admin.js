@@ -2,10 +2,6 @@
 const USUARIO_ADMIN = "DIRECTIVOJBS";
 const CLAVE_ADMIN = "PROYECTOJBS";
 
-// ================= ESTADO INICIAL =================
-loginBox.classList.remove("oculto");
-panel.classList.add("oculto");
-
 // ================= DATOS =================
 let docentes = JSON.parse(localStorage.getItem("docentes")) || [];
 
@@ -20,16 +16,25 @@ const tbody = document.getElementById("listaDocentes");
 const sinDocentes = document.getElementById("sinDocentes");
 const form = document.getElementById("formularioDocente");
 
-// Inputs
+// Inputs login
 const usuarioInput = document.getElementById("usuario");
 const claveInput = document.getElementById("clave");
 
+// Inputs formulario
 const dniInput = document.getElementById("dni");
 const nombreInput = document.getElementById("nombre");
 const correoInput = document.getElementById("correo");
 const celularInput = document.getElementById("celular");
 const areaInput = document.getElementById("area");
 const especialidadEPT = document.getElementById("especialidadEPT");
+
+// ================= ESTADO INICIAL (CORREGIDO) =================
+if (localStorage.getItem("adminActivo")) {
+  iniciarSesion();
+} else {
+  loginBox.classList.remove("oculto");
+  panel.classList.add("oculto");
+}
 
 // ================= SESIÓN =================
 function login() {
@@ -57,6 +62,7 @@ function cerrarSesion() {
   claveInput.value = "";
   location.reload();
 }
+
 // ================= FORMULARIO =================
 function mostrarFormulario() {
   form.classList.remove("oculto");
