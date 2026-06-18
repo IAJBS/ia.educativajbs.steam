@@ -1,0 +1,240 @@
+/* ======================================================
+   RESET GENERAL
+====================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ======================================================
+   ESTILOS GENERALES
+====================================================== */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+/* ======================================================
+   HEADER INSTITUCIONAL + IA
+====================================================== */
+.header {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  color: white;
+  padding: 25px 20px;
+}
+
+.header-contenido {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.insignia {
+  width: 90px;
+  height: auto;
+}
+
+/* TEXTO INSTITUCIONAL */
+.texto-header h1 {
+  font-size: 20px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.texto-header h2 {
+  font-size: 30px;
+  margin: 5px 0;
+  font-weight: normal;
+}
+
+.texto-header p {
+  font-size: 14px;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* ======================================================
+   ASISTENTE IA (EMOJI ANIMADO)
+====================================================== */
+.ia-header {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.15);
+  padding: 10px 16px;
+  border-radius: 30px;
+  backdrop-filter: blur(6px);
+}
+
+/* EMOJI IA */
+.avatar-ia {
+  width: 45px;
+  height: 45px;
+
+  /* animación de vida */
+  animation: flotar 2.5s ease-in-out infinite;
+}
+
+/* animación suave tipo “asistente vivo” */
+@keyframes flotar {
+  0% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-5px) scale(1.05); }
+  100% { transform: translateY(0px) scale(1); }
+}
+
+/* MENSAJE IA */
+#mensaje-ia {
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ======================================================
+   TARJETA DE BIENVENIDA
+====================================================== */
+.bienvenida {
+  max-width: 900px;
+  margin: 20px auto 10px auto;
+  padding: 25px 30px;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.bienvenida h2 {
+  margin-bottom: 15px;
+  color: #1f3c88;
+  font-size: 1.6rem;
+}
+
+.bienvenida p {
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+/* ======================================================
+   CONTENEDOR PRINCIPAL
+====================================================== */
+.contenedor {
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+/* ======================================================
+   INTRO / TÍTULO ÁREAS
+====================================================== */
+.intro {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.intro h2 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+}
+
+.intro p {
+  max-width: 700px;
+  margin: auto;
+  color: #4b5563;
+}
+
+/* ======================================================
+   ÁREAS
+====================================================== */
+.areas {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* TARJETAS */
+.area-card {
+  background: white;
+  width: 300px;
+  padding: 30px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.area-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+.area-card h2 {
+  margin-bottom: 15px;
+}
+
+.area-card p {
+  color: #4b5563;
+}
+
+/* COLORES POR ÁREA */
+.cyt { border-top: 6px solid #1e3a8a; }
+.mate { border-top: 6px solid #15803d; }
+.comu { border-top: 6px solid #7e22ce; }
+
+/* ======================================================
+   BOTONES
+====================================================== */
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 28px;
+  background: #1e3a8a;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #1e40af;
+}
+
+.btn.disabled {
+  background: #9ca3af;
+  pointer-events: none;
+}
+
+/* ======================================================
+   FOOTER
+====================================================== */
+.footer {
+  text-align: center;
+  padding: 20px;
+  color: #6b7280;
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+@media (max-width: 600px) {
+  .header-contenido {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .insignia {
+    width: 70px;
+  }
+
+  .ia-header {
+    margin-left: 0;
+    margin-top: 15px;
+  }
+}

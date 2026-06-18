@@ -1,0 +1,346 @@
+/* ======================================================
+   RESET GENERAL
+====================================================== */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+/* ======================================================
+   BODY
+====================================================== */
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background:#f3f4f6;
+  color:#1f2937;
+}
+
+/* ======================================================
+   HEADER
+====================================================== */
+
+.header{
+  background:linear-gradient(
+    135deg,
+    #15d91b,
+    #048f34
+  );
+  color:white;
+  padding:25px 20px;
+}
+
+.header-contenido{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.insignia{
+  width:90px;
+  height:auto;
+  transform: translateX(-140px);
+}
+
+/* ======================================================
+   TEXTO HEADER
+====================================================== */
+
+
+.texto-header h2{
+  font-size:30px;
+  margin:5px 0;
+  font-weight: arial black;
+  transform: translateX(-130px);
+}
+
+.texto-header p{
+  font-size:14px;
+  opacity:.9;
+   transform: translateX(-130px);
+}
+
+/* ======================================================
+   IA HEADER
+====================================================== */
+
+.ia-header{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  background:rgba(255,255,255,.15);
+
+  padding:10px 16px;
+
+  border-radius:30px;
+
+  backdrop-filter:blur(6px);
+}
+
+.avatar-ia{
+  width:45px;
+  height:45px;
+
+  animation:flotar 2.5s ease-in-out infinite;
+}
+
+@keyframes flotar{
+
+  0%{
+    transform:
+    translateY(0px)
+    scale(1);
+  }
+
+  50%{
+    transform:
+    translateY(-5px)
+    scale(1.05);
+  }
+
+  100%{
+    transform:
+    translateY(0px)
+    scale(1);
+  }
+
+}
+
+#mensaje-ia{
+  font-size:.95rem;
+  font-weight:500;
+}
+
+/* ======================================================
+   BIENVENIDA CYT
+====================================================== */
+
+.bienvenida-cyt{
+
+  max-width:900px;
+
+  margin:25px auto;
+
+  background:white;
+
+  padding:30px;
+
+  border-radius:18px;
+
+  text-align:center;
+
+  box-shadow:
+  0 10px 25px rgba(0,0,0,.08);
+}
+
+.bienvenida-cyt h2{
+
+  color:#1e3a8a;
+
+  margin-bottom:15px;
+
+  font-size:1.8rem;
+}
+
+.bienvenida-cyt p{
+
+  line-height:1.7;
+
+  color:#4b5563;
+}
+
+/* ======================================================
+   CONTENEDOR
+====================================================== */
+
+.contenedor{
+
+  max-width:1100px;
+
+  margin:auto;
+
+  padding:0 20px 40px;
+}
+
+/* ======================================================
+   LISTADO GENERAL
+====================================================== */
+
+.card-listado{
+
+  background:white;
+
+  padding:25px;
+
+  border-radius:18px;
+
+  box-shadow:
+  0 10px 25px rgba(0,0,0,.08);
+}
+
+.card-listado h3{
+
+  text-align:center;
+
+  margin-bottom:25px;
+
+  color:#1e3a8a;
+}
+
+/* ======================================================
+   LISTA DE CLASES
+====================================================== */
+
+#listaClases{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(300px,1fr));
+
+  gap:20px;
+}
+
+/* ======================================================
+   TARJETA CLASE
+====================================================== */
+
+.clase-card{
+
+  background:#ffffff;
+
+  border-top:
+  6px solid #1e3a8a;
+
+  border-radius:16px;
+
+  padding:20px;
+
+  box-shadow:
+  0 8px 18px rgba(0,0,0,.10);
+
+  transition:.3s;
+}
+
+.clase-card:hover{
+
+  transform:
+  translateY(-5px);
+}
+
+.clase-card h4{
+
+  color:#1e3a8a;
+
+  margin-bottom:12px;
+}
+
+.clase-card p{
+
+  margin-bottom:8px;
+
+  color:#374151;
+}
+
+.estado-activa{
+
+  color:#16a34a;
+
+  font-weight:bold;
+}
+
+.estado-registrada{
+
+  color:#6b7280;
+
+  font-weight:bold;
+}
+
+/* ======================================================
+   BOTÓN INGRESAR
+====================================================== */
+
+.btn-ingresar{
+
+  display:inline-block;
+
+  margin-top:15px;
+
+  background:#1e3a8a;
+
+  color:white;
+
+  text-decoration:none;
+
+  padding:10px 20px;
+
+  border-radius:10px;
+
+  font-weight:bold;
+
+  transition:.3s;
+}
+
+.btn-ingresar:hover{
+
+  background:#1e40af;
+}
+
+/* ======================================================
+   MENSAJE VACÍO
+====================================================== */
+
+.sin-clases{
+
+  text-align:center;
+
+  color:#6b7280;
+
+  padding:30px;
+}
+
+/* ======================================================
+   FOOTER
+====================================================== */
+
+.footer{
+
+  text-align:center;
+
+  padding:25px;
+
+  color:#6b7280;
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media(max-width:700px){
+
+  .header-contenido{
+
+    flex-direction:column;
+
+    text-align:center;
+  }
+
+  .ia-header{
+
+    margin-left:0;
+
+    margin-top:15px;
+  }
+
+  .texto-header h2{
+
+    font-size:24px;
+  }
+
+}

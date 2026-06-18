@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tutor IA - Ciencia y Tecnología</title>
+  <link rel="stylesheet" href="css/sesioncyt.css">
+</head>
+
+<body>
+
+<header class="header">
+  <div class="header-contenido">
+
+    <div class="titulo-cyt">
+      <h1>Ciencia y Tecnología</h1>
+      <p>Tutor IA educativo</p>
+    </div>
+
+    <div class="ia-cyt">
+      <span id="mensaje-cyt">
+        Listo para aprender
+      </span>
+    </div>
+
+  </div>
+</header>
+
+<main class="contenedor">
+
+<!-- ================= INICIO ================= -->
+<section class="bienvenida" id="inicio">
+
+  <h2>Ingreso a la sesión</h2>
+
+  <p>
+    <strong>Sección:</strong>
+    <span id="seccionActiva"></span>
+  </p>
+
+  <p>
+    <strong>Tema:</strong>
+    <span id="temaActivo"></span>
+  </p>
+
+  <p>
+    <strong>Docente:</strong>
+    <span id="docenteActivo"></span>
+  </p>
+
+  <input
+    type="text"
+    id="codigoInput"
+    placeholder="Ingrese el código de clase"
+  >
+
+  <button onclick="iniciarSesion()">
+    Ingresar a la sesión
+  </button>
+
+</section>
+
+<!-- ================= ACTIVACIÓN ================= -->
+<section
+  class="bienvenida"
+  id="activacion"
+  style="display:none;"
+>
+
+  <h2>Conocimientos previos</h2>
+
+  <p>¿Qué sabes del tema?</p>
+  <input type="text" id="idea1">
+
+  <p>¿Dónde has visto este tema?</p>
+  <input type="text" id="idea2">
+
+  <p>¿Qué te gustaría aprender hoy?</p>
+  <input type="text" id="idea3">
+
+  <button onclick="continuarTutor()">
+    Continuar
+  </button>
+
+</section>
+
+<!-- ================= TUTOR IA ================= -->
+<section
+  class="bienvenida"
+  id="tutor"
+  style="display:none;"
+>
+
+  <h2>Tutor IA</h2>
+
+  <div
+    id="chatTutor"
+    style="
+      max-height:500px;
+      overflow-y:auto;
+      margin-bottom:15px;
+      padding-right:5px;
+    "
+  ></div>
+
+  <input
+    type="text"
+    id="respuestaTutor"
+    placeholder="Escribe tu respuesta o pregunta..."
+  >
+
+  <button onclick="responderTutor()">
+    Enviar respuesta
+  </button>
+
+  <button onclick="avanzarMetacognicion()">
+    Ir a metacognición
+  </button>
+
+</section>
+
+<!-- ================= METACOGNICIÓN ================= -->
+<section
+  class="bienvenida"
+  id="metacognicion"
+  style="display:none;"
+>
+
+  <h2>Metacognición</h2>
+
+  <p>¿Qué aprendiste durante esta sesión?</p>
+  <input type="text" id="p1">
+
+  <p>¿Qué fue lo más difícil?</p>
+  <input type="text" id="p2">
+
+  <p>¿Cómo podrías mejorar tu aprendizaje?</p>
+  <input type="text" id="p3">
+
+  <button
+    id="btnGuardar"
+    disabled
+    onclick="guardarRespuestas()"
+  >
+    Guardar respuestas
+  </button>
+
+  <p id="timer"></p>
+
+</section>
+
+<!-- ================= REGISTRO FINAL ================= -->
+<section
+  class="bienvenida"
+  id="registroFinal"
+  style="display:none;"
+>
+
+  <h2>Registro de participación</h2>
+
+  <input
+    type="text"
+    id="nombreEstudiante"
+    placeholder="Nombre o código del estudiante"
+  >
+
+  <input
+    type="text"
+    id="gradoEstudiante"
+    placeholder="Grado"
+  >
+
+  <input
+    type="text"
+    id="seccionEstudiante"
+    placeholder="Sección"
+  >
+
+  <button onclick="guardarParticipacion()">
+    Finalizar sesión
+  </button>
+
+</section>
+
+</main>
+
+<script src="js/sesioncyt.js"></script>
+
+</body>
+</html>

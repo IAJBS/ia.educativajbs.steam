@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Plataforma Educativa con IA</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+<!-- ======================================================
+     HEADER INSTITUCIONAL
+====================================================== -->
+<header class="header">
+
+  <div class="header-contenido">
+
+    <!-- INSIGNIA -->
+    <img src="img/insignia.png" alt="Insignia" class="insignia">
+
+    <!-- TEXTO -->
+    <div class="texto-header">
+      <h1>Institución Educativa</h1>
+
+      <h2>
+        José Buenaventura Sepúlveda Fernández
+      </h2>
+
+      <p>
+        Plataforma educativa con inteligencia artificial
+      </p>
+    </div>
+
+    <!-- IA -->
+    <div class="ia-header">
+
+      <img src="img/emoji.png"
+           alt="Asistente IA"
+           class="avatar-ia">
+
+      <span id="mensaje-ia">
+        Bienvenido a la plataforma educativa
+      </span>
+
+    </div>
+
+    <!-- LOGIN -->
+    <button class="btn-login"
+            onclick="abrirModal()">
+
+      Iniciar sesión
+
+    </button>
+
+  </div>
+
+</header>
+
+<!-- ======================================================
+     PORTADA
+====================================================== -->
+<section class="portada">
+
+  <h1>
+    Plataforma Educativa Inteligente
+  </h1>
+
+  <p>
+    Bienvenido(a) a la plataforma educativa institucional con inteligencia artificial.
+    Este entorno ha sido diseñado para fortalecer el aprendizaje,
+    acompañar el trabajo docente y promover el pensamiento crítico
+    mediante herramientas innovadoras.
+  </p>
+
+</section>
+
+<!-- ======================================================
+     MODAL
+====================================================== -->
+<div class="modal" id="modal">
+
+  <div class="modal-contenido">
+
+    <h2>Selecciona tu acceso</h2>
+
+    <p>
+      Elige el tipo de usuario con el que deseas ingresar.
+    </p>
+
+    <div class="roles">
+
+      <button onclick="irAdmin()">
+        👨‍💼 Directivo
+      </button>
+
+      <button onclick="irDocente()">
+        👩‍🏫 Docente
+      </button>
+
+      <button onclick="irEstudiante()">
+        🧑‍🎓 Estudiante
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+<footer class="footer">
+
+  <p>
+    Proyecto de Innovación Educativa con IA
+  </p>
+
+</footer>
+
+<!-- ======================================================
+     SCRIPT
+====================================================== -->
+<script>
+
+  function abrirModal() {
+    document.getElementById("modal").style.display = "flex";
+  }
+
+  function irAdmin() {
+    window.location.href = "admin.html";
+  }
+
+  function irDocente() {
+    window.location.href = "docente.html";
+  }
+
+  function irEstudiante() {
+    window.location.href = "estudiante.html";
+  }
+
+  /* CERRAR MODAL */
+  window.onclick = function(e){
+
+    const modal = document.getElementById("modal");
+
+    if(e.target === modal){
+      modal.style.display = "none";
+    }
+
+  }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,241 @@
+/* ======================================================
+   RESET
+====================================================== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+/* ======================================================
+   BODY
+====================================================== */
+body{
+  font-family:Arial, Helvetica, sans-serif;
+  background:#f3f4f6;
+  color:#1f2937;
+}
+
+/* ======================================================
+   HEADER
+====================================================== */
+.header{
+  background:linear-gradient(135deg,#1e3a8a,#2563eb);
+  color:white;
+  padding:25px 20px;
+}
+
+.header-contenido{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.insignia{
+  width:90px;
+}
+
+/* TEXTO */
+.texto-header h1{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.texto-header h2{
+  font-size:30px;
+  font-weight:normal;
+  margin:5px 0;
+}
+
+.texto-header p{
+  font-size:14px;
+  opacity:0.9;
+}
+
+/* ======================================================
+   IA HEADER
+====================================================== */
+.ia-header{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:rgba(255,255,255,0.15);
+  padding:10px 16px;
+  border-radius:30px;
+  backdrop-filter:blur(6px);
+}
+
+.avatar-ia{
+  width:45px;
+  height:45px;
+  animation:flotar 2.5s ease-in-out infinite;
+}
+
+@keyframes flotar{
+
+  0%{
+    transform:translateY(0px) scale(1);
+  }
+
+  50%{
+    transform:translateY(-5px) scale(1.05);
+  }
+
+  100%{
+    transform:translateY(0px) scale(1);
+  }
+
+}
+
+#mensaje-ia{
+  font-size:0.95rem;
+  font-weight:500;
+  white-space:nowrap;
+}
+
+/* ======================================================
+   BOTÓN LOGIN
+====================================================== */
+.btn-login{
+  background:white;
+  color:#1e3a8a;
+  border:none;
+  padding:12px 22px;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn-login:hover{
+  background:#dbeafe;
+}
+
+/* ======================================================
+   PORTADA
+====================================================== */
+.portada{
+  max-width:1100px;
+  margin:50px auto;
+  padding:40px;
+  text-align:center;
+}
+
+.portada h1{
+  font-size:3rem;
+  color:#1e3a8a;
+  margin-bottom:25px;
+}
+
+.portada p{
+  max-width:850px;
+  margin:auto;
+  font-size:1.2rem;
+  line-height:1.8;
+  color:#374151;
+}
+
+/* ======================================================
+   MODAL
+====================================================== */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.5);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.modal-contenido{
+  background:white;
+  width:90%;
+  max-width:450px;
+  border-radius:18px;
+  padding:35px;
+  text-align:center;
+  animation:aparecer 0.3s ease;
+}
+
+@keyframes aparecer{
+
+  from{
+    transform:scale(0.9);
+    opacity:0;
+  }
+
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+
+}
+
+.modal-contenido h2{
+  color:#1e3a8a;
+  margin-bottom:15px;
+}
+
+.modal-contenido p{
+  color:#4b5563;
+  margin-bottom:25px;
+}
+
+.roles{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.roles button{
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#1e3a8a;
+  color:white;
+  font-size:1rem;
+  cursor:pointer;
+  transition:0.3s;
+  font-weight:bold;
+}
+
+.roles button:hover{
+  background:#2563eb;
+}
+
+/* ======================================================
+   FOOTER
+====================================================== */
+.footer{
+  text-align:center;
+  padding:20px;
+  color:#6b7280;
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+@media(max-width:700px){
+
+  .header-contenido{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .ia-header{
+    margin-left:0;
+  }
+
+  .btn-login{
+    margin-top:15px;
+  }
+
+  .portada h1{
+    font-size:2rem;
+  }
+
+}

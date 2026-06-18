@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel Docente</title>
+  <link rel="stylesheet" href="css/docente.css">
+</head>
+<body>
+
+<!-- ===== HEADER (NO TOCAR) ===== -->
+<header class="header">
+  <div class="header-contenido">
+    <img src="img/insignia.png" class="insignia">
+
+    <div class="texto-header">
+      <h1>Institución Educativa</h1>
+      <h2>José Buenaventura Sepúlveda Fernández</h2>
+      <p>Plataforma educativa con inteligencia artificial</p>
+    </div>
+
+    <div class="ia-header">
+      <img src="img/emoji.png" class="avatar-ia">
+      <span id="mensaje-ia">Panel docente activo</span>
+    </div>
+  </div>
+</header>
+
+<main class="contenedor">
+
+  <!-- LOGIN -->
+  <section id="loginDocente" class="card">
+
+    <h3>Ingreso docente</h3>
+
+    <input
+      type="text"
+      id="usuario"
+      placeholder="Usuario (DNI)"
+      autocomplete="off"
+    >
+
+    <input
+      type="password"
+      id="clave"
+      placeholder="Contraseña"
+      autocomplete="off"
+    >
+
+    <button onclick="loginDocente()">
+      Ingresar
+    </button>
+
+    <p id="errorLogin" class="mensaje error"></p>
+
+  </section>
+
+  <!-- PANEL DOCENTE -->
+  <section id="panelDocente" class="oculto">
+
+    <section class="bienvenida">
+
+      <h2 id="saludo"></h2>
+
+      <p>
+        Desde este panel podrás registrar,
+        activar y gestionar tus clases.
+      </p>
+
+    </section>
+
+    <button
+      class="btn-principal"
+      onclick="mostrarFormulario()"
+    >
+      Registrar clase
+    </button>
+
+    <!-- FORMULARIO -->
+    <section
+      id="formularioClase"
+      class="card oculto"
+    >
+
+      <h3>Registro de clase</h3>
+
+      <select id="grado">
+        <option value="">Grado</option>
+        <option>1°</option>
+        <option>2°</option>
+        <option>3°</option>
+        <option>4°</option>
+        <option>5°</option>
+      </select>
+
+      <select id="seccion">
+        <option value="">Sección</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+        <option>D</option>
+        <option>E</option>
+        <option>F</option>
+        <option>G</option>
+        <option>H</option>
+      </select>
+
+      <input
+        type="text"
+        id="tema"
+        placeholder="Tema de la clase"
+      >
+
+      <input
+        id="titulo"
+        placeholder="Título de la clase"
+      >
+
+      <textarea
+        id="proposito"
+        placeholder="Propósito"
+      ></textarea>
+
+      <textarea
+        id="criterios"
+        placeholder="Criterios de evaluación"
+      ></textarea>
+
+      <input type="file">
+
+      <button onclick="guardarClase()">
+        Guardar clase
+      </button>
+
+      <button
+        class="btn-secundario"
+        onclick="volverATabla()"
+      >
+        Volver
+      </button>
+
+    </section>
+
+    <!-- TABLA DE CLASES -->
+    <section class="card">
+
+      <h3>Clases registradas</h3>
+
+      <p
+        id="sinClases"
+        class="mensaje"
+      ></p>
+
+      <table
+        id="tablaClases"
+        class="tabla oculto"
+      >
+
+        <thead>
+
+          <tr>
+            <th>Grado</th>
+            <th>Sección</th>
+            <th>Tema</th>
+            <th>Título</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+
+        </thead>
+
+        <tbody></tbody>
+
+      </table>
+
+      <!-- BOTONES INFERIORES -->
+      <div class="acciones-footer">
+
+        <button
+          class="btn-principal"
+          onclick="verResultados()"
+        >
+          📊 Ver resultados
+        </button>
+
+        <button
+          class="btn-cerrar"
+          onclick="cerrarSesion()"
+        >
+          Cerrar sesión
+        </button>
+
+      </div>
+
+    </section>
+
+  </section>
+
+  <!-- ======================================================
+       RESULTADOS DE ESTUDIANTES
+  ====================================================== -->
+
+  <section
+    id="panelResultados"
+    class="card oculto"
+  >
+
+    <h3>
+      Participación de estudiantes
+    </h3>
+
+    <table
+      id="tablaResultados"
+      class="tabla"
+    >
+
+      <thead>
+
+        <tr>
+          <th>Estudiante</th>
+          <th>Clase</th>
+          <th>Tema</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+        </tr>
+
+      </thead>
+
+      <tbody></tbody>
+
+    </table>
+
+    <br>
+
+    <button
+      class="btn-secundario"
+      onclick="cerrarResultados()"
+    >
+      Volver
+    </button>
+
+  </section>
+
+</main>
+
+<script src="js/docentes.js"></script>
+
+</body>
+</html>

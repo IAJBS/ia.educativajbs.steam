@@ -1,0 +1,236 @@
+/* ======================================================
+   RESET GENERAL
+====================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ======================================================
+   BODY
+====================================================== */
+body {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+/* BLOQUEO CUANDO MODAL ESTÁ ACTIVO */
+body.bloqueado {
+  overflow: hidden;
+}
+
+/* ======================================================
+   MODAL SELECCIÓN DE ROL
+====================================================== */
+.modal-rol {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-contenido {
+  background: white;
+  padding: 30px 28px;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 360px;
+  width: 90%;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  animation: aparecer 0.35s ease;
+}
+
+.modal-contenido h2 {
+  font-size: 22px;
+  color: #1e3a8a;
+  margin-bottom: 8px;
+}
+
+.modal-contenido p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.botones-rol {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.botones-rol button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ANIMACIÓN MODAL */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ======================================================
+   HEADER CYT
+====================================================== */
+.header {
+  background: linear-gradient(135deg, #10ce1d, #039f1d);
+  color: white;
+  padding: 20px;
+}
+
+.header-contenido {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* INSIGNIA */
+.insignia {
+  width: 60px;
+  height: auto;
+}
+
+/* TITULO INSTITUCIONAL */
+.titulo-cyt h1 {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.titulo-cyt p {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-top: 2px;
+}
+
+/* IA / AVATAR */
+.ia-cyt {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 8px 14px;
+  border-radius: 25px;
+}
+
+.avatar-ia {
+  width: 40px;
+  height: 40px;
+  animation: flotar 2.5s ease-in-out infinite;
+}
+
+@keyframes flotar {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+/* ======================================================
+   TITULO DEL ÁREA
+====================================================== */
+.titulo-area {
+  text-align: center;
+  padding: 18px 20px 10px;
+}
+
+.titulo-area h1 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+.titulo-area p {
+  font-size: 16px;
+  color: #555;
+  margin-top: 6px;
+}
+
+/* ======================================================
+   CONTENEDOR PRINCIPAL
+====================================================== */
+.contenedor {
+  max-width: 650px;
+  margin: 15px auto;
+  padding: 20px;
+}
+
+/* ======================================================
+   TARJETAS (SECCIONES)
+====================================================== */
+.bienvenida {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  margin-bottom: 15px;
+}
+
+/* ======================================================
+   INPUTS
+====================================================== */
+input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+/* ======================================================
+   BOTONES
+====================================================== */
+button {
+  padding: 12px 20px;
+  background: #1e3a8a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* ======================================================
+   TIMER
+====================================================== */
+#timer {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* ======================================================
+   FOOTER
+====================================================== */
+.footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 13px;
+  color: #6b7280;
+}
