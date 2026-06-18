@@ -207,7 +207,7 @@ function seleccionarClase(index) {
 
 // ⚠️ SOLO PARA DESARROLLO / PROTOTIPO
 // Luego se moverá a backend
-const GROQ_API_KEY = "";
+const GROQ_API_KEY = "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";
 
 /* ======================================================
    FUNCIÓN PARA CONSULTAR IA (CYT)
