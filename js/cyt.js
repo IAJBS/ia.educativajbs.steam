@@ -5,6 +5,17 @@
 const AREA_ACTUAL = "CIENCIA Y TECNOLOGÍA";
 
 /* ======================================================
+   NORMALIZAR TEXTO
+====================================================== */
+
+function normalizar(texto) {
+  return texto
+    .toUpperCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+/* ======================================================
    CONTENEDOR
 ====================================================== */
 
@@ -36,7 +47,7 @@ docentes.forEach(docente => {
 
   if (
     docente.area &&
-    docente.area.toUpperCase() !== AREA_ACTUAL
+    normalizar(docente.area) !== normalizar(AREA_ACTUAL)
   ) {
     return;
   }
@@ -61,7 +72,10 @@ docentes.forEach(docente => {
 
       usuario: docente.usuario,
 
-      area: clase.area || docente.area,
+      area:
+        clase.area ||
+        docente.area ||
+        AREA_ACTUAL,
 
       grado: clase.grado,
 
@@ -201,5 +215,3 @@ function seleccionarClase(index) {
   );
 
 }
-/* ======================================================
-
