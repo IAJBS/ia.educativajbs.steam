@@ -1,248 +1,1297 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Panel Docente</title>
-  <link rel="stylesheet" href="css/docente.css">
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Panel Docente | Plataforma Educativa con IA
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/docente.css">
+
 </head>
+
 <body>
 
-<!-- ===== HEADER (NO TOCAR) ===== -->
+<!-- ======================================================
+     HEADER
+====================================================== -->
+
 <header class="header">
-  <div class="header-contenido">
-    <img src="img/insignia.png" class="insignia">
 
-    <div class="texto-header">
-      <h1>Institución Educativa</h1>
-      <h2>José Buenaventura Sepúlveda Fernández</h2>
-      <p>Plataforma educativa con inteligencia artificial</p>
+    <div class="header-contenido">
+
+        <img
+            src="img/insignia.png"
+            class="insignia"
+            alt="Insignia">
+
+        <div class="texto-header">
+
+            <h1>
+                Institución Educativa
+            </h1>
+
+            <h2>
+                José Buenaventura Sepúlveda Fernández
+            </h2>
+
+            <p>
+                Plataforma Educativa con Inteligencia Artificial
+            </p>
+
+        </div>
+
+        <div class="ia-header">
+
+            <img
+                src="img/emoji.png"
+                class="avatar-ia"
+                alt="IA">
+
+            <span id="mensaje-ia">
+
+                Panel Docente
+
+            </span>
+
+        </div>
+
     </div>
 
-    <div class="ia-header">
-      <img src="img/emoji.png" class="avatar-ia">
-      <span id="mensaje-ia">Panel docente activo</span>
-    </div>
-  </div>
 </header>
+
+<!-- ======================================================
+     CONTENIDO GENERAL
+====================================================== -->
 
 <main class="contenedor">
 
-  <!-- LOGIN -->
-  <section id="loginDocente" class="card">
+<!-- ======================================================
+     LOGIN DOCENTE
+====================================================== -->
 
-    <h3>Ingreso docente</h3>
+<section
+id="loginDocente"
+class="card">
+
+<h2>
+
+Ingreso Docente
+
+</h2>
+
+<p>
+
+Ingrese sus credenciales para acceder al
+planificador de experiencias de aprendizaje.
+
+</p>
+
+<input
+type="text"
+id="usuario"
+placeholder="Usuario (DNI)"
+autocomplete="off">
+
+<input
+type="password"
+id="clave"
+placeholder="Contraseña"
+autocomplete="off">
+
+<button
+class="btn-principal"
+onclick="loginDocente()">
+
+Ingresar
+
+</button>
+
+<p
+id="errorLogin"
+class="mensaje error">
+
+</p>
+
+</section>
+
+<!-- ======================================================
+     PANEL DOCENTE
+====================================================== -->
+
+<section
+id="panelDocente"
+class="oculto">
+
+<!-- ======================================================
+     BIENVENIDA
+====================================================== -->
+
+<section class="bienvenida">
+
+<h2 id="saludo">
+
+</h2>
+
+<p>
+
+Bienvenido al Planificador Inteligente de
+Experiencias de Aprendizaje.
+
+Desde este panel podrás diseñar paso a paso
+cada sesión antes de publicarla para tus
+estudiantes.
+
+La Inteligencia Artificial actuará como un
+asistente pedagógico durante la planificación
+y posteriormente como tutor del estudiante.
+
+</p>
+
+</section>
+
+<!-- ======================================================
+     CABECERA DEL PLANIFICADOR
+====================================================== -->
+
+<section class="card">
+
+<div class="planificador-superior">
+
+<div>
+
+<h2>
+
+Nueva Experiencia de Aprendizaje
+
+</h2>
+
+<p>
+
+Complete todos los módulos antes de publicar
+la sesión.
+
+</p>
+
+</div>
+
+<div class="estado-planificacion">
+
+<span class="estado borrador">
+
+BORRADOR
+
+</span>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ======================================================
+     BARRA DE PROGRESO
+====================================================== -->
+
+<section class="card">
+
+<h3>
+
+Avance de la planificación
+
+</h3>
+
+<div class="barra">
+
+<div
+id="avancePlanificacion"
+class="barra-interna">
+
+15%
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ======================================================
+     ÁREA DE TRABAJO
+====================================================== -->
+
+<section class="workspace">
+
+<!-- ======================================================
+     MENÚ LATERAL
+====================================================== -->
+
+<aside class="sidebar">
+
+<button
+class="menu-modulo activo"
+data-modulo="general">
+
+<span>
+
+①
+
+</span>
+
+Información General
+
+</button>
+
+<button
+class="menu-modulo"
+data-modulo="explora">
+
+<span>
+
+②
+
+</span>
+
+Explora
+
+</button>
+
+<button
+class="menu-modulo"
+data-modulo="analiza">
+
+<span>
+
+③
+
+</span>
+
+Analiza
+
+</button>
+
+<button
+class="menu-modulo"
+data-modulo="disena">
+
+<span>
+
+④
+
+</span>
+
+Diseña
+
+</button>
+
+<button
+class="menu-modulo"
+data-modulo="comprueba">
+
+<span>
+
+⑤
+
+</span>
+
+Comprueba
+
+</button>
+
+<button
+class="menu-modulo"
+data-modulo="comunica">
+
+<span>
+
+⑥
+
+</span>
+
+Comunica
+
+</button>
+
+<button
+class="menu-modulo"
+data-modulo="reflexiona">
+
+<span>
+
+⑦
+
+</span>
+
+Reflexiona
+
+</button>
+
+<hr>
+
+<button
+class="menu-modulo"
+data-modulo="vistaprevia">
+
+👁 Vista previa
+
+</button>
+
+<button
+class="menu-modulo"
+data-modulo="publicar">
+
+🚀 Publicar
+
+</button>
+
+</aside>
+
+<!-- ======================================================
+     PANEL DERECHO
+====================================================== -->
+
+<section
+class="panel-planificador">
+
+<!-- ======================================================
+     MÓDULO 1
+====================================================== -->
+
+<section
+id="general"
+class="modulo activo">
+
+<div class="titulo-modulo">
+
+<h2>
+
+Información General
+
+</h2>
+
+<p>
+
+Define la información principal que
+identificará la experiencia de aprendizaje.
+
+</p>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Área Curricular
+
+</label>
+
+<input
+type="text"
+id="area"
+readonly>
+
+</div>
+
+<div class="fila">
+
+<div class="grupo-formulario">
+
+<label>
+
+Grado
+
+</label>
+
+<select id="grado">
+
+<option value="">
+
+Seleccione
+
+</option>
+
+<option>
+
+1°
+
+</option>
+
+<option>
+
+2°
+
+</option>
+
+<option>
+
+3°
+
+</option>
+
+<option>
+
+4°
+
+</option>
+
+<option>
+
+5°
+
+</option>
+
+</select>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Sección
+
+</label>
+
+<select id="seccion">
+
+<option value="">
+
+Seleccione
+
+</option>
+
+<option>A</option>
+<option>B</option>
+<option>C</option>
+<option>D</option>
+<option>E</option>
+<option>F</option>
+<option>G</option>
+<option>H</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Título de la experiencia
+
+</label>
+
+<input
+type="text"
+id="titulo"
+placeholder="Ejemplo: Comprendemos los estados de la materia">
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Tema
+
+</label>
+
+<input
+type="text"
+id="tema"
+placeholder="Tema principal">
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Propósito de aprendizaje
+
+</label>
+
+<textarea
+id="proposito"
+rows="5"
+placeholder="Describe el propósito de la experiencia de aprendizaje."></textarea>
+
+</div>
+<div class="grupo-formulario">
+
+    <label>
+
+        Competencia priorizada
+
+    </label>
+
+    <select id="competenciaPriorizada">
+
+        <option value="">
+            Seleccione una competencia
+        </option>
+
+        <option>
+            Competencia 28 - Se desenvuelve en los entornos virtuales generados por las TIC
+        </option>
+
+    </select>
+
+</div>
+
+<div class="grupo-formulario">
+
+    <label>
+
+        Capacidad de la competencia priorizada
+
+    </label>
+
+    <select id="capacidadPriorizada">
+
+        <option value="">
+            Seleccione una capacidad
+        </option>
+
+        <option>
+            Personaliza entornos virtuales
+        </option>
+
+        <option>
+            Gestiona información del entorno virtual
+        </option>
+
+        <option>
+            Interactúa en entornos virtuales
+        </option>
+
+        <option>
+            Crea objetos virtuales en diversos formatos
+        </option>
+
+    </select>
+
+</div>
+
+<div class="grupo-formulario">
+
+    <label>
+
+        Competencia principal impactada
+
+    </label>
 
     <input
-      type="text"
-      id="usuario"
-      placeholder="Usuario (DNI)"
-      autocomplete="off"
-    >
-
-    <input
-      type="password"
-      id="clave"
-      placeholder="Contraseña"
-      autocomplete="off"
-    >
-
-    <button onclick="loginDocente()">
-      Ingresar
-    </button>
-
-    <p id="errorLogin" class="mensaje error"></p>
-
-  </section>
-
-  <!-- PANEL DOCENTE -->
-  <section id="panelDocente" class="oculto">
-
-    <section class="bienvenida">
-
-      <h2 id="saludo"></h2>
-
-      <p>
-        Desde este panel podrás registrar,
-        activar y gestionar tus clases.
-      </p>
-
-    </section>
-
-    <button
-      class="btn-principal"
-      onclick="mostrarFormulario()"
-    >
-      Registrar clase
-    </button>
-
-    <!-- FORMULARIO -->
-    <section
-      id="formularioClase"
-      class="card oculto"
-    >
-
-      <h3>Registro de clase</h3>
-
-      <select id="grado">
-        <option value="">Grado</option>
-        <option>1°</option>
-        <option>2°</option>
-        <option>3°</option>
-        <option>4°</option>
-        <option>5°</option>
-      </select>
-
-      <select id="seccion">
-        <option value="">Sección</option>
-        <option>A</option>
-        <option>B</option>
-        <option>C</option>
-        <option>D</option>
-        <option>E</option>
-        <option>F</option>
-        <option>G</option>
-        <option>H</option>
-      </select>
-
-      <input
         type="text"
-        id="tema"
-        placeholder="Tema de la clase"
-      >
+        id="competenciaImpactada"
+        value="Gestiona su aprendizaje de manera autónoma"
+        readonly>
 
-      <input
-        id="titulo"
-        placeholder="Título de la clase"
-      >
+</div>
 
-      <textarea
-        id="proposito"
-        placeholder="Propósito"
-      ></textarea>
+<div class="grupo-formulario">
 
-      <textarea
+    <label>
+
+        Capacidad de la competencia impactada
+
+    </label>
+
+    <select id="capacidadImpactada">
+
+        <option value="">
+            Seleccione una capacidad
+        </option>
+
+        <option>
+            Define metas de aprendizaje
+        </option>
+
+        <option>
+            Organiza acciones estratégicas para alcanzar sus metas
+        </option>
+
+        <option>
+            Monitorea y ajusta su desempeño durante el proceso de aprendizaje
+        </option>
+
+    </select>
+
+</div>
+
+<div class="grupo-formulario">
+
+    <label>
+
+        Criterios de evaluación
+
+    </label>
+
+    <textarea
         id="criterios"
-        placeholder="Criterios de evaluación"
-      ></textarea>
+        rows="5"
+        placeholder="Escriba los criterios de evaluación separados por líneas."></textarea>
 
-      <input type="file">
+</div>
 
-      <button onclick="guardarClase()">
-        Guardar clase
-      </button>
+<div class="grupo-formulario">
 
-      <button
-        class="btn-secundario"
-        onclick="volverATabla()"
-      >
-        Volver
-      </button>
+    <label>
 
-    </section>
+        Evidencia de aprendizaje
 
-    <!-- TABLA DE CLASES -->
-    <section class="card">
+    </label>
 
-      <h3>Clases registradas</h3>
+    <textarea
+        id="evidencia"
+        rows="4"
+        placeholder="Producto o evidencia que desarrollará el estudiante."></textarea>
 
-      <p
-        id="sinClases"
-        class="mensaje"
-      ></p>
+</div>
 
-      <table
-        id="tablaClases"
-        class="tabla oculto"
-      >
+<div class="grupo-formulario">
 
-        <thead>
+    <label>
 
-          <tr>
-            <th>Grado</th>
-            <th>Sección</th>
-            <th>Tema</th>
-            <th>Título</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-          </tr>
+        Recursos de aprendizaje
 
-        </thead>
+    </label>
 
-        <tbody></tbody>
+    <textarea
+        id="recursos"
+        rows="4"
+        placeholder="Materiales, enlaces, simuladores, laboratorios virtuales, etc."></textarea>
 
-      </table>
+</div>
 
-      <!-- BOTONES INFERIORES -->
-      <div class="acciones-footer">
+<div class="grupo-formulario">
 
-        <button
-          class="btn-principal"
-          onclick="verResultados()"
-        >
-          📊 Ver resultados
-        </button>
+    <label>
 
-        <button
-          class="btn-cerrar"
-          onclick="cerrarSesion()"
-        >
-          Cerrar sesión
-        </button>
+        Duración
 
-      </div>
+    </label>
 
-    </section>
+    <select id="duracion">
 
-  </section>
+        <option value="45">
+            45 minutos
+        </option>
 
-  <!-- ======================================================
-       RESULTADOS DE ESTUDIANTES
-  ====================================================== -->
+        <option selected value="90">
+            90 minutos
+        </option>
 
-  <section
-    id="panelResultados"
-    class="card oculto"
-  >
+        <option value="135">
+            135 minutos
+        </option>
 
-    <h3>
-      Participación de estudiantes
-    </h3>
+    </select>
 
-    <table
-      id="tablaResultados"
-      class="tabla"
-    >
+</div>
 
-      <thead>
+<div class="grupo-formulario">
 
-        <tr>
-          <th>Estudiante</th>
-          <th>Clase</th>
-          <th>Tema</th>
-          <th>Fecha</th>
-          <th>Estado</th>
-        </tr>
+    <label>
 
-      </thead>
+        Estado de la sesión
 
-      <tbody></tbody>
+    </label>
 
-    </table>
+    <select id="estadoClase">
 
-    <br>
+        <option selected>
+            Borrador
+        </option>
+
+        <option>
+            Registrada
+        </option>
+
+        <option>
+            Activa
+        </option>
+
+    </select>
+
+</div>
+
+<div class="grupo-formulario">
+
+    <label>
+
+        Imagen de portada (opcional)
+
+    </label>
+
+    <input
+        type="file"
+        id="imagenPortada"
+        accept="image/*">
+
+</div>
+
+<div class="acciones-modulo">
 
     <button
-      class="btn-secundario"
-      onclick="cerrarResultados()"
-    >
-      Volver
+        type="button"
+        class="btn-ia">
+
+        🤖 Generar información con IA
+
     </button>
 
-  </section>
+    <button
+        type="button"
+        class="btn-siguiente">
 
-</main>
+        Guardar y continuar →
 
-<script src="js/docentes.js"></script>
+    </button>
 
-</body>
-</html>
+</div>
+
+</section>
+
+<!-- ======================================================
+     MÓDULO 2
+     EXPLORA
+====================================================== -->
+
+<section
+id="explora"
+class="modulo oculto">
+
+<div class="titulo-modulo">
+
+<h2>
+
+Explora
+
+</h2>
+
+<p>
+
+En este módulo se despierta la curiosidad del estudiante
+mediante una situación retadora relacionada con el tema.
+
+</p>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Objetivo del módulo
+
+</label>
+
+<textarea
+id="exploraObjetivo"
+rows="3"
+placeholder="¿Qué se espera lograr durante la fase Explora?"></textarea>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Tipo de recurso
+
+</label>
+
+<select id="exploraTipoRecurso">
+
+<option value="">Seleccione</option>
+
+<option>Imagen</option>
+
+<option>Video</option>
+
+<option>Infografía</option>
+
+<option>Animación</option>
+
+<option>Simulación</option>
+
+<option>Texto</option>
+
+</select>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Título del recurso
+
+</label>
+
+<input
+type="text"
+id="exploraTituloRecurso"
+placeholder="Título del recurso">
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Archivo o enlace
+
+</label>
+
+<input
+type="text"
+id="exploraEnlace"
+placeholder="URL o nombre del archivo">
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Descripción del recurso
+
+</label>
+
+<textarea
+id="exploraDescripcion"
+rows="4"
+placeholder="Describe brevemente el recurso que observará el estudiante."></textarea>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Pregunta reto
+
+</label>
+
+<textarea
+id="exploraPreguntaReto"
+rows="3"
+placeholder="Formula una pregunta que despierte el interés del estudiante."></textarea>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Preguntas guiadas
+
+</label>
+
+<textarea
+id="exploraPreguntas"
+rows="6"
+placeholder="Escriba una pregunta por línea."></textarea>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Conclusión esperada
+
+</label>
+
+<textarea
+id="exploraConclusion"
+rows="4"
+placeholder="¿A qué conclusión se espera que llegue el estudiante?"></textarea>
+
+</div>
+
+<div class="acciones-modulo">
+
+<button
+type="button"
+class="btn-ia">
+
+🤖 Generar módulo Explora con IA
+
+</button>
+
+<button
+type="button"
+class="btn-siguiente">
+
+Guardar y continuar →
+
+</button>
+
+</div>
+
+</section>
+<!-- ======================================================
+     MÓDULO 3
+     ANALIZA
+====================================================== -->
+
+<section
+id="analiza"
+class="modulo oculto">
+
+<div class="titulo-modulo">
+
+<h2>
+
+Analiza
+
+</h2>
+
+<p>
+
+En este módulo el estudiante interpreta la información,
+establece relaciones, formula explicaciones y construye
+sus primeras conclusiones con la mediación de la IA.
+
+</p>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Objetivo del módulo
+
+</label>
+
+<textarea
+id="analizaObjetivo"
+rows="3"
+placeholder="¿Qué aprenderá el estudiante durante este proceso?">
+
+</textarea>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Contenido principal
+
+</label>
+
+<textarea
+id="analizaContenido"
+rows="7"
+placeholder="Escriba el contenido conceptual que utilizará la IA para orientar al estudiante.">
+
+</textarea>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Conceptos clave
+
+</label>
+
+<textarea
+id="analizaConceptos"
+rows="5"
+placeholder="Un concepto por línea.">
+
+</textarea>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Preguntas de análisis
+
+</label>
+
+<textarea
+id="analizaPreguntas"
+rows="8"
+placeholder="Escriba una pregunta por línea.">
+
+</textarea>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Respuesta esperada
+
+</label>
+
+<textarea
+id="analizaRespuesta"
+rows="5"
+placeholder="¿Qué debería comprender el estudiante al finalizar este módulo?">
+
+</textarea>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Estrategia de mediación de la IA
+
+</label>
+
+<select id="analizaIA">
+
+<option value="">
+
+Seleccione
+
+</option>
+
+<option>
+
+Realizar preguntas abiertas
+
+</option>
+
+<option>
+
+Guiar paso a paso
+
+</option>
+
+<option>
+
+Solicitar ejemplos
+
+</option>
+
+<option>
+
+Comparar situaciones
+
+</option>
+
+<option>
+
+Retroalimentar respuestas
+
+</option>
+
+</select>
+
+</div>
+
+<div class="acciones-modulo">
+
+<button
+type="button"
+class="btn-ia">
+
+🤖 Generar módulo Analiza con IA
+
+</button>
+
+<button
+type="button"
+class="btn-siguiente">
+
+Guardar y continuar →
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ======================================================
+     MÓDULO 4
+     DISEÑA
+====================================================== -->
+
+<section
+id="disena"
+class="modulo oculto">
+
+<div class="titulo-modulo">
+
+<h2>
+
+Diseña
+
+</h2>
+
+<p>
+
+El estudiante propone alternativas de solución,
+organiza ideas y planifica la elaboración del
+producto o actividad.
+
+</p>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Objetivo del módulo
+
+</label>
+
+<textarea
+id="disenaObjetivo"
+rows="3"
+placeholder="Objetivo del proceso Diseña.">
+
+</textarea>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Problema o desafío
+
+</label>
+
+<textarea
+id="disenaProblema"
+rows="5"
+placeholder="Describe el reto que resolverá el estudiante.">
+
+</textarea>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Producto esperado
+
+</label>
+
+<textarea
+id="disenaProducto"
+rows="4"
+placeholder="Producto que elaborará el estudiante.">
+
+</textarea>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Pasos sugeridos
+
+</label>
+
+<textarea
+id="disenaPasos"
+rows="7"
+placeholder="Escriba un paso por línea.">
+
+</textarea>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Materiales necesarios
+
+</label>
+
+<textarea
+id="disenaMateriales"
+rows="4"
+placeholder="Materiales, recursos o herramientas.">
+
+</textarea>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Preguntas orientadoras
+
+</label>
+
+<textarea
+id="disenaPreguntas"
+rows="6"
+placeholder="Preguntas que formulará la IA.">
+
+</textarea>
+
+</div>
+
+<div class="grupo-formulario">
+
+<label>
+
+Criterios de éxito
+
+</label>
+
+<textarea
+id="disenaCriterios"
+rows="5"
+placeholder="¿Cómo sabrá el estudiante que realizó correctamente la actividad?">
+
+</textarea>
+
+</div>
+
+<div class="acciones-modulo">
+
+<button
+type="button"
+class="btn-ia">
+
+🤖 Generar módulo Diseña con IA
+
+</button>
+
+<button
+type="button"
+class="btn-siguiente">
+
+Guardar y continuar →
+
+</button>
+
+</div>
+
+</section>
